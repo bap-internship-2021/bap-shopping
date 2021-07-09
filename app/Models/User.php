@@ -18,6 +18,9 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    const ADMIN_ROLE = 1;
+    const USER_ROLE = 2;
+
     /**
      * The attributes that are mass assignable.
      *
