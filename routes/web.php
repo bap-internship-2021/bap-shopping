@@ -30,5 +30,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 Route::namespace('Products')->group(function (){
-    Route::get('products', [ProductController::class, 'listProducts'])->name('listProducts'); // >> list all Products
+    Route::get('products', [ProductController::class, 'listAllProducts'])->name('products.index'); // >> list all Products
+    Route::get('products/{product}', [ProductController::class, 'detailProductInfo'])->name('products.detail');
 });

@@ -9,7 +9,8 @@
                     class="flex flex-col justify-between border-4 border-blue-300 border-opacity-75 rounded-lg transform transition duration-300 ease-liner hover:scale-105 hover:border-pink-300 bg-blue-100">
                     <div>
                         <div>
-                            <img class="p-2 truncate overflow-hidden hover:overflow-visible" src="{{ $product->image_path }}"> 
+                            <img class="p-2 truncate overflow-hidden hover:overflow-visible"
+                                 src="{{ $product->image_path }}">
                         </div>
                         <div>
                             <p class="p-2 truncate overflow-hidden hover:overflow-visible">Tên sản
@@ -24,9 +25,9 @@
                     </div>
 
                     <div class="text-center h-full">
-                        <a class="font-bold text-blue-900"
-                           href="">
-                            Detail
+                        <a class="font-bold text-blue-900 hover:text-gray-800"
+                           href="{{ route('products.detail', ['product' => $product->name]) }}">
+                            Chi tiết sản phẩm
                         </a>
                     </div>
                 </div>
