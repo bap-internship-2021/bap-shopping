@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Products\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,9 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('layouts.master');
 })->name('dashboard');
+
+
+
+Route::namespace('Products')->group(function (){
+    Route::get('products', [ProductController::class, 'listProducts'])->name('listProducts'); // >> list all Products
+});
