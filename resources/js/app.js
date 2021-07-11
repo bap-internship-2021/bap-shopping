@@ -17,3 +17,4 @@ const app = new Vue({
 
 // Set default value of số lượng cần mua
 document.getElementById("quantity").value = 1;
+

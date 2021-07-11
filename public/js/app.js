@@ -1884,7 +1884,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("http://127.0.0.1:8000/api/carts", this.formData).then(function (response) {
         _this.notification = 'Thêm thành công';
       })["catch"](function (error) {
-        _this.notification = 'Xảy ra lỗi, vui lòng kiểm tra kết nối của bạn';
+        _this.notification = 'Xảy ra lỗi, vui lòng thử lại';
       });
     }
   }

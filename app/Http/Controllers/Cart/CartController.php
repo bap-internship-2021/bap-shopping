@@ -17,6 +17,11 @@ class CartController extends Controller
             'quantity' => $data['quantity'],
             'price' => $data['price'] * $data['quantity'],
         ]);
+        dd($request->session()->all());
+//        if (session()->has('cart.products')) { // If exist key products in cart
+//            $cart = session()->get('cart.products');
+//            dd($cart);
+//        }
         return response()->json(['Success' => 'success']);
     }
 

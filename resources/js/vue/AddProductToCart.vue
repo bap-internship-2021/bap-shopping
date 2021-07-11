@@ -25,21 +25,22 @@ export default {
             formData: {
                 name: document.getElementById("product-name").innerHTML,
                 price: document.getElementById("product-price").innerHTML,
-                quantity: 1,
+                quantity: 1
             },
             notification: '',
+
         };
     },
     methods: {
-
         addProductToCart() {
             axios
                 .post("http://127.0.0.1:8000/api/carts", this.formData)
                 .then((response) => {
+
                     this.notification = 'Thêm thành công'
                 })
                 .catch((error) => {
-                    this.notification = 'Xảy ra lỗi, vui lòng kiểm tra kết nối của bạn'
+                    this.notification = 'Xảy ra lỗi, vui lòng thử lại'
                 });
         },
     }

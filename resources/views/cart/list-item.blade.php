@@ -6,7 +6,7 @@
     @if(!empty($cart))
         <div>
             <button
-                class="text-2xl bg-blue-300 mt-5 rounded-sm p-2 hover:bg-blue-200 ring-none focus:bg-gray-100 focus:ring-4 focus:bg-blue-300 ">
+                class="text-2xl bg-blue-500 mt-5 rounded-sm p-2 hover:bg-blue-400 ring-none focus:bg-gray-100 focus:ring-4 focus:bg-blue-400 ">
                 Thanh toán ngay
             </button>
         </div>

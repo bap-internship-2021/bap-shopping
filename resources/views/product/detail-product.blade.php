@@ -17,5 +17,8 @@
 @endsection
 
 @section('js')
+    <script type="text/javascript">
+        window.csrf_token = "{{ csrf_token() }}"
+    </script>
     <script src="{{ mix('js/app.js') }}"></script>
 @endsection
