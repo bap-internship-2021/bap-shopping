@@ -7,12 +7,15 @@
             <img class="shadow-inner rounded-sm" src="{{ $product->image_path }}" alt="Sản phẩm">
         </div>
         <div class="ml-12 font-bold text-2xl">
-            <p class="p-2">{{__('Tên sản phẩm: ')}} {{ $product->name }}</p>
-            <p class="p-2">{{__('Giá: ')}} {{ $product->name }}</p>
-            <p class="p-2">{{__('Số lượng còn lại: ')}} {{ $product->quantity }}</p>
-            <div class="p-2 mt-20">
-                <button class="bg-indigo-300 rounded-lg p-5 hover:bg-indigo-200 transition">Thêm vào giỏ hàng</button>
+            <p class="p-2">{{__('Tên sản phẩm: ')}} <span id="product-name">{{ $product->name }}</span></p>
+            <p class="p-2">{{__('Giá: ')}} <span id="product-price"> {{ $product->price }}</span></p>
+            <div id="app">
+                <app></app>
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="{{ mix('js/app.js') }}"></script>
 @endsection
