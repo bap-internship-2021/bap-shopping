@@ -1,6 +1,6 @@
 <aside class="left-sidebar" data-sidebarbg="skin5">
     <!-- Sidebar scroll-->
-    <div class="scroll-sidebar">
+    <div class="scroll-sidebar" style="margin-top: 100px;">
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
@@ -11,7 +11,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('profile.show')}}" aria-expanded="false">
                         <i class="mdi mdi-account-network"></i>
                         <span class="hide-menu">Profile</span>
                     </a>

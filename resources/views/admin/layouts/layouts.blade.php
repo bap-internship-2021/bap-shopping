@@ -15,6 +15,9 @@
     <link href="{{URL::asset('admin/assets/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{URL::asset('admin/dist/css/style.min.css')}}" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"> -->
+    <!-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> -->
 </head>
 
 <body>
@@ -34,14 +37,14 @@
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-            @include('admin.header')
+            @include('admin.layouts.header')
         <!-- ============================================================== -->
         <!-- End Topbar header -->
 
         <!-- ============================================================== -->
         <!-- ============================================================== -->
-            @include('admin.left-sizebar')
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+            @include('admin.layouts.left-sizebar')
+        <!-- Left Sidebar - styllayouts.e you can find in sidebar.scss  -->
         <!-- ============================================================== -->
         
         <div class="page-wrapper" style="display:block";>
@@ -49,7 +52,7 @@
         </div>
 
         <!-- ============================================================== -->
-            @include('admin.footer')
+            @include('admin.layouts.footer')
         <!-- End footer -->
         <!-- ============================================================== -->
         
