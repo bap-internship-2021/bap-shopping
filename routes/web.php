@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\ProductController as AdminProductController;
-use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Product\ProductController;
@@ -33,11 +29,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('layouts.master');
 })->name('dashboard');
 
-Route::get('/admin/home', [HomeController::class, 'index']);
-Route::get('/admin/profile', [ProfileController::class, 'index'])->name('admin.profile');
-
-Route::resource('admin/products', ProductController::class);
-Route::resource('admin/category', CategoryController::class);
 
 Route::namespace('Product')->group(function () {
     Route::get('products', [ProductController::class, 'listAllProducts'])->name('products.list'); // >> list all Products
