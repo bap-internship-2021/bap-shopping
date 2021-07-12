@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Products;
+namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
@@ -14,9 +14,17 @@ class ProductController extends Controller
         return view('product/list-products', compact(['products']));
     }
 
-    public function detailProductInfo(Product $product)
+    public function detailProductInfo(Product $product, Request $request)
     {
         $product = Product::findOrFail($product->id);
         return view('product.detail-product', compact(['product']));
     }
+
+    public function getProductQuantityAPI($id): \Illuminate\Http\JsonResponse
+    {
+        $product = Product::findOrFail($id);
+        return response()->json($product);
+    }
+
+
 }

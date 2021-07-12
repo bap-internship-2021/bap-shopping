@@ -6,7 +6,7 @@
         @if(!empty($products))
             @foreach ($products as $product)
                 <div
-                    class="flex flex-col justify-between border-4 border-blue-300 border-opacity-75 rounded-lg transform transition duration-300 ease-liner hover:scale-105 hover:border-pink-300 bg-blue-100">
+                    class="flex flex-col justify-between border border-blue-600 ring-0 rounded-lg transform transition duration-300 ease-liner hover:scale-105 hover:ring hover:ring-blue-500 hover:border-blue-300 bg-gray-100">
                     <div>
                         <div>
                             <img class="p-2 truncate overflow-hidden hover:overflow-visible"
