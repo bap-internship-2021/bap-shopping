@@ -15,28 +15,22 @@
                         <i class="mdi mdi-account-network"></i>
                         <span class="hide-menu">Profile</span>
                     </a>
-                    
                 </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
-                        <i class="mdi mdi-border-none"></i>
-                        <span class="hide-menu">Country</span>
-                    </a>
 
-                </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
-                        <i class="mdi mdi-arrange-bring-forward"></i>
-                        <span class="hide-menu">Blog</span>
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products.index')}}" aria-expanded="false">
+                        <i class="mdi mdi-border-none"></i>
+                        <span class="hide-menu">Product</span>
                     </a>
                 </li>
+                
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
-                        <i class="mdi mdi-border-none"></i>
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('category.index')}}" aria-expanded="false">
+                        <i class="mdi mdi-arrange-bring-forward"></i>
                         <span class="hide-menu">Category</span>
                     </a>
-
                 </li>
+                
                 
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
