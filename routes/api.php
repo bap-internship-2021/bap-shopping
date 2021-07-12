@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cart\CartController;
-
+use App\Http\Controllers\Product\ProductController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,6 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::namespace('Cart')->group(function (){
-        Route::post('carts', [CartController::class, 'addProductToCart']);
-    });
+Route::namespace('Product')->group(function () {
+    Route::get('products/{id}', [ProductController::class, 'getProductQuantityAPI']);
+});

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static findOrFail(mixed $id)
+ * @method static paginate(int $int)
+ * @property mixed id
  */
 class Product extends Model
 {

@@ -10,18 +10,15 @@ class CartController extends Controller
 {
     public function addProductToCart(Request $request): JsonResponse
     {
-        $data = $request->only(['name', 'price', 'quantity']);
+        $data = $request->only(['id', 'name', 'price', 'quantity']);
 
         $request->session()->push('cart.products', [
+            'productId' => $data['id'],
             'productName' => $data['name'],
             'quantity' => $data['quantity'],
-            'price' => $data['price'] * $data['quantity'],
+            'price' => $data['price'] * $data['quantity']
         ]);
-        dd($request->session()->all());
-//        if (session()->has('cart.products')) { // If exist key products in cart
-//            $cart = session()->get('cart.products');
-//            dd($cart);
-//        }
+
         return response()->json(['Success' => 'success']);
     }
 
@@ -33,5 +30,11 @@ class CartController extends Controller
         } else {
             return view('cart.list-item');
         }
+    }
+
+    public function deleteAllItemCart(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $request->session()->forget('cart.products');
+        return redirect()->back();
     }
 }

@@ -29,7 +29,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-
 Route::namespace('Product')->group(function () {
     Route::get('products', [ProductController::class, 'listAllProducts'])->name('products.index'); // >> list all Products
     Route::get('products/{product}', [ProductController::class, 'detailProductInfo'])->name('products.detail');
@@ -37,4 +36,7 @@ Route::namespace('Product')->group(function () {
 
 Route::namespace('Cart')->group(function () {
     Route::get('carts/item', [CartController::class, 'listItemInCart'])->name('carts.item');
+    Route::post('carts', [CartController::class, 'addProductToCart']);
+    Route::post('carts/destroy', [CartController::class, 'deleteAllItemCart'])->name('carts.destroy.all');
 });
+

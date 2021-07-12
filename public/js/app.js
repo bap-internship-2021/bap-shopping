@@ -1864,27 +1864,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddProductToCart",
   data: function data() {
     return {
       formData: {
+        id: document.getElementById("product-id").innerHTML,
         name: document.getElementById("product-name").innerHTML,
         price: document.getElementById("product-price").innerHTML,
-        quantity: 1
+        quantity: 1,
+        token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       },
-      notification: ''
+      notification: '',
+      productQuantityResource: 0
     };
+  },
+  created: function created() {
+    this.getProductQuantity();
   },
   methods: {
     addProductToCart: function addProductToCart() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("http://127.0.0.1:8000/api/carts", this.formData).then(function (response) {
-        _this.notification = 'Thêm thành công';
+      if (this.formData.quantity > 0) {
+        if (this.productQuantityResource > this.formData.quantity) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default().post("http://127.0.0.1:8000/carts", this.formData).then(function (response) {
+            console.log(response);
+            _this.notification = 'Thêm vào giỏ thành công';
+          })["catch"](function (error) {
+            _this.notification = 'Xảy ra lỗi, vui lòng thử lại';
+          });
+        } else {
+          console.log('Error add product to cart');
+          this.notification = 'Số lượng đơn hàng lớn hơn trong kho, xin vui lòng nhập lại!';
+        }
+      } else {
+        this.notification = 'Số lượng phải lớn hơn 0';
+      }
+    },
+    getProductQuantity: function getProductQuantity() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("http://127.0.0.1:8000/api/products/" + this.formData.id).then(function (response) {
+        // console.log('detail product', response);
+        _this2.productQuantityResource = response.data.quantity;
       })["catch"](function (error) {
-        _this.notification = 'Xảy ra lỗi, vui lòng thử lại';
+        console.log(error);
       });
     }
   }
@@ -19560,6 +19594,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "p-2 mt-20" }, [
+    _c("pre", [
+      _vm._v("  " + _vm._s(JSON.stringify(_vm.formData, null, 2)) + "\n")
+    ]),
+    _vm._v(" "),
     _c(
       "form",
       {
@@ -19572,6 +19610,48 @@ var render = function() {
         }
       },
       [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.token,
+              expression: "formData.token"
+            }
+          ],
+          attrs: { name: "_token", type: "hidden" },
+          domProps: { value: _vm.formData.token },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "token", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.id,
+              expression: "formData.id"
+            }
+          ],
+          attrs: { type: "hidden" },
+          domProps: { value: _vm.formData.id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "id", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
         _c("input", {
           directives: [
             {
@@ -19616,7 +19696,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "label",
-          { staticClass: "text-red-300", attrs: { for: "quantity" } },
+          { staticClass: "text-blue-900", attrs: { for: "quantity" } },
           [_vm._v("Nhập số lượng cần mua")]
         ),
         _vm._v(" "),
@@ -19624,17 +19704,18 @@ var render = function() {
           directives: [
             {
               name: "model",
-              rawName: "v-model",
+              rawName: "v-model.number",
               value: _vm.formData.quantity,
-              expression: "formData.quantity"
+              expression: "formData.quantity",
+              modifiers: { number: true }
             }
           ],
           staticClass:
-            "border border-green-400 rounded-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50",
+            "my-2 w-2/5 border-2 border-blue-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 p-5",
           attrs: {
             id: "quantity",
-            type: "text",
-            placeholder: "Số lượng cần mua"
+            placeholder: "Số lượng cần mua",
+            type: "text"
           },
           domProps: { value: _vm.formData.quantity },
           on: {
@@ -19642,7 +19723,10 @@ var render = function() {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.formData, "quantity", $event.target.value)
+              _vm.$set(_vm.formData, "quantity", _vm._n($event.target.value))
+            },
+            blur: function($event) {
+              return _vm.$forceUpdate()
             }
           }
         }),
@@ -19651,7 +19735,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "bg-indigo-300 border rounded-lg p-5 hover:bg-indigo-200 transition mt-5"
+              "bg-indigo-300 border rounded-lg p-5 hover:bg-indigo-200 transition mt-5 w-2/5"
           },
           [_vm._v("\n            Thêm vào giỏ hàng\n        ")]
         )
