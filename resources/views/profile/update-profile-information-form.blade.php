@@ -28,7 +28,7 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
+                    <img src="{{ $this->user->profile_photo_url}}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
                 </div>
 
                 <!-- New Profile Photo Preview -->
@@ -64,6 +64,42 @@
             <x-jet-label for="email" value="{{ __('Email') }}" />
             <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
             <x-jet-input-error for="email" class="mt-2" />
+        </div>
+
+        <!-- age -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="age" value="{{ __('Age') }}" />
+            <x-jet-input id="age" type="text" class="mt-1 block w-full" wire:model.defer="state.age" />
+            <x-jet-input-error for="age" class="mt-2" />
+        </div>
+
+        <!-- gender -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="gender" value="{{ __('Gender') }}" />
+            <select id="gender"  class="block mt-1 w-full" name="gender">
+
+                <option value="1" {{ $this->user->gender== '1' ? 'selected' : '' }} >
+                    Male
+                </option>
+                <option value="2" {{ $this->user->gender== '2' ? 'selected' : '' }}>
+                    Female
+                </option>
+
+            </select>
+        </div>
+
+        <!-- phone -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="phone" value="{{ __('Phone') }}" />
+            <x-jet-input id="phone" type="text" class="mt-1 block w-full" wire:model.defer="state.phone" />
+            <x-jet-input-error for="phone" class="mt-2" />
+        </div>
+
+        <!-- address -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="address" value="{{ __('Address') }}" />
+            <x-jet-input id="address" type="text" class="mt-1 block w-full" wire:model.defer="state.address" />
+            <x-jet-input-error for="address" class="mt-2" />
         </div>
     </x-slot>
 
