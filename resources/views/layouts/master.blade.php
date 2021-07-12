@@ -57,7 +57,7 @@
                         </div>
                     </li>
                     <li class="block relative">
-                        <a href="{{ route('products.index') }}" class="flex items-center h-10 leading-10 px-4 rounded cursor-pointer no-underline hover:no-underline transition-colors duration-100 mx-1 hover:bg-gray-100">
+                        <a href="{{ route('products.list') }}" class="flex items-center h-10 leading-10 px-4 rounded cursor-pointer no-underline hover:no-underline transition-colors duration-100 mx-1 hover:bg-gray-100">
                             <span class="mr-3 text-xl"> <i class="mdi mdi-widgets-outline"></i> </span>
                             <span>Sản Phẩm</span>
                         </a>

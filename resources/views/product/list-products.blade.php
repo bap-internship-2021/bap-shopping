@@ -26,7 +26,7 @@
 
                     <div class="text-center h-full">
                         <a class="font-bold text-blue-900 hover:text-gray-800"
-                           href="{{ route('products.detail', ['product' => $product->name]) }}">
+                           href="{{ route('products.detailProduct', ['product' => $product->name]) }}">
                             Chi tiết sản phẩm
                         </a>
                     </div>
