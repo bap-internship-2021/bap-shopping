@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Product\CreateProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use GuzzleHttp\Handler\Proxy;
 
 class ProductController extends Controller
@@ -54,16 +55,18 @@ class ProductController extends Controller
         $data = $request->except(['_method', '_token']);
 
         if ($request->hasFile('file')) {
-            $imageName = time() . $request->file('file')->getClientOriginalName();
-            $targetDir = public_path('admin\images\products');
-            $imagePath = $targetDir .  "\\" . $imageName;
-            if ($request->file('file')->move($targetDir, $imageName)) {
-                $data['image_path'] = $imagePath;
-                Product::create($data);
-                return back()->with('status', 'create success');
-            } else {
-                return back()->with('status', 'create fail');
-            }
+
+            $image = $request->file('file');
+
+            $imageName = time() . $image->getClientOriginalName();
+            
+            $image->move('admin/images/products', $imageName);
+            $data['image_path'] = $imageName;
+
+            Product::create($data);
+            return back()->with('status', 'create success');
+        } else {
+            return back()->with('status', 'create error');
         }
     }
 
@@ -76,6 +79,7 @@ class ProductController extends Controller
     public function show($id)
     {
         //
+        
     }
 
     /**
@@ -87,6 +91,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
+        $product = Product::find($id);
+        $categories = Category::all();
+        return view('admin.products.edit', compact(['product', 'categories']));
     }
 
     /**
@@ -96,9 +103,27 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         //
+        $product = Product::find($id);
+        $data = $request->except(['_method', '_token']);
+        $image = $request->file('file');
+
+        if ($image) {
+            $imageName = time() . $image->getClientOriginalName();
+            
+            $data['image_path'] = $imageName;
+        }
+
+        if($product->update($data)){
+            if($image){
+                $image->move('admin/images/products', $imageName);
+            }
+            return back()->with('status', 'update success');
+        } else {
+            return back()->with('status', 'update error');
+        }
     }
 
     /**

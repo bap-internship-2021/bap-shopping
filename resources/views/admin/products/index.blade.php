@@ -55,7 +55,7 @@
                                 <td>{{$pd->price}}</td>
                                 <td>{{$pd->quantity}}</td>
                                 <td>{{$pd->category->name}}</td>
-                                <td><img src="{{$pd->image_path}}"></td>
+                                <td><img src="{{asset('admin/images/products/'. $pd->image_path)}}"></td>
                                 <td>
                                     <a href="{{route('products.edit', [$pd->id])}}" class="btn btn-primary">Edit</a>
                                 </td>
