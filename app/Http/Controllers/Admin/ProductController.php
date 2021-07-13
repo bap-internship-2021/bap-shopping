@@ -9,7 +9,7 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Product\CreateProductRequest;
-
+use GuzzleHttp\Handler\Proxy;
 
 class ProductController extends Controller
 {
@@ -21,10 +21,10 @@ class ProductController extends Controller
     public function index()
     {
         //
-        if(Auth::check()){
+        if (Auth::check()) {
             $products = Product::with('category')->orderBy('id', 'DESC')->paginate(5);
             return view('admin.products.index')->with('products', $products);
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
@@ -51,18 +51,20 @@ class ProductController extends Controller
     {
         //
 
-        $data = $request->all();
+        $data = $request->except(['_method', '_token']);
 
-        if(Product::create($data)){
-            $imageName = time().'.'.$request->image_path->extension();  
-            $request->image_path->move(public_path('admin/images/products'), $imageName);
-            return back()->with('status', 'Create success');
-        } else {
-            return back()->with('status', 'Create fail');
+        if ($request->hasFile('file')) {
+            $imageName = time() . $request->file('file')->getClientOriginalName();
+            $targetDir = public_path('admin\images\products');
+            $imagePath = $targetDir .  "\\" . $imageName;
+            if ($request->file('file')->move($targetDir, $imageName)) {
+                $data['image_path'] = $imagePath;
+                Product::create($data);
+                return back()->with('status', 'create success');
+            } else {
+                return back()->with('status', 'create fail');
+            }
         }
-        
-        // Product::create($request->all());
-        
     }
 
     /**
