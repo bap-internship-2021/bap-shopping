@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Product\CreateProductRequest;
+
 
 class ProductController extends Controller
 {
@@ -15,7 +21,12 @@ class ProductController extends Controller
     public function index()
     {
         //
-        return view('admin.products.index');
+        if(Auth::check()){
+            $products = Product::with('category')->orderBy('id', 'DESC')->paginate(5);
+            return view('admin.products.index')->with('products', $products);
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     /**
@@ -26,6 +37,8 @@ class ProductController extends Controller
     public function create()
     {
         //
+        $categories = Category::orderBy('id', 'DESC')->get();
+        return view('admin.products.create')->with('categories', $categories);
     }
 
     /**
@@ -34,9 +47,22 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
         //
+
+        $data = $request->all();
+
+        if(Product::create($data)){
+            $imageName = time().'.'.$request->image_path->extension();  
+            $request->image_path->move(public_path('admin/images/products'), $imageName);
+            return back()->with('status', 'Create success');
+        } else {
+            return back()->with('status', 'Create fail');
+        }
+        
+        // Product::create($request->all());
+        
     }
 
     /**

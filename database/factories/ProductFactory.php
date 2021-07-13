@@ -28,7 +28,7 @@ class ProductFactory extends Factory
             'quantity' => rand(10, 100),
             'price' => rand(100, 10000),
             'category_id' => $this->faker->randomElement($listCategory),
-            'image_path' => public_path('public/admin/images/macbook.jfif')
+            'image_path' => asset('admin/images/macbook.jfif')
         ];
     }
 }

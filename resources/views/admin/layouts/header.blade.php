@@ -18,7 +18,7 @@
                         <!-- Light Logo icon -->
                         <img src="{{URL::asset('admin/assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" />
                     </b>
-                    <!--End Logo icon --
+                    <!--End Logo icon -->
                     <!-- Logo text -->
                     <span class="logo-text">
                         <!-- dark Logo text -->
