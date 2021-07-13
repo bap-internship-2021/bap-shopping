@@ -10,7 +10,7 @@
                     <div>
                         <div>
                             <img class="p-2 truncate overflow-hidden hover:overflow-visible"
-                                 src="{{ $product->image_path }}">
+                                 src="{{asset('admin/images/products/'. $product->image_path)}}">
                         </div>
                         <div>
                             <p class="p-2 truncate overflow-hidden hover:overflow-visible">Tên sản

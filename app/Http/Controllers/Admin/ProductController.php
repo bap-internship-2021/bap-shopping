@@ -118,7 +118,9 @@ class ProductController extends Controller
 
         if($product->update($data)){
             if($image){
+                
                 $image->move('admin/images/products', $imageName);
+                
             }
             return back()->with('status', 'update success');
         } else {
@@ -135,5 +137,8 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        $product = Product::find($id);
+        $product->delete();
+        return back()->with('status', 'delete success');
     }
 }
