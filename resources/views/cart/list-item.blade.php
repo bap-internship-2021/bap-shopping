@@ -31,6 +31,15 @@
             @endforeach
         </div>
     @else
-        <p class="text-2xl text-gray-900 text-center mt-10">{{ __('Giỏ hàng Trống') }}</p>
+        <div>
+            <img class="mt-5 mx-auto text-sm" src="https://salt.tikicdn.com/desktop/img/mascot@2x.png" alt="Image" width="190px" height="auto">
+        </div>
+        <div>
+            <p class="text-2xl text-gray-900 text-center mt-10">{{ __('Không có sản phẩm nào trong giỏ hàng của bạn.') }}</p>
+        </div>
+        <div class="text-center">
+            <a href="{{ route('products.list') }}" class="mt-5 bg-yellow-300  p-3  rounded-lg focus:ring-4 focus:ring-orange-400">Tiếp tục mua sắm</a>
+
+        </div>
     @endif
 @endsection
