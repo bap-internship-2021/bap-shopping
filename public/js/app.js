@@ -1872,6 +1872,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddProductToCart",
@@ -1915,7 +1917,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("http://127.0.0.1:8000/api/products/" + this.formData.id).then(function (response) {
-        // console.log('detail product', response);
         _this2.productQuantityResource = response.data.quantity;
       })["catch"](function (error) {
         console.log(error);
@@ -19593,9 +19594,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-2 mt-20" }, [
-    _c("pre", [
-      _vm._v("  " + _vm._s(JSON.stringify(_vm.formData, null, 2)) + "\n")
+  return _c("div", { staticClass: "p-2 mt-1" }, [
+    _c("p", [
+      _vm._v("Số lượng còn lại: "),
+      _c("span", { staticClass: "text-blue-900" }, [
+        _vm._v(_vm._s(_vm.productQuantityResource))
+      ]),
+      _vm._v(" sản phẩm")
     ]),
     _vm._v(" "),
     _c(
@@ -19696,7 +19701,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "label",
-          { staticClass: "text-blue-900", attrs: { for: "quantity" } },
+          { staticClass: "text-blue-900 mt-5", attrs: { for: "quantity" } },
           [_vm._v("Nhập số lượng cần mua")]
         ),
         _vm._v(" "),
@@ -19711,7 +19716,7 @@ var render = function() {
             }
           ],
           staticClass:
-            "my-2 w-2/5 border-2 border-blue-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 p-5",
+            "my-2  border-2 border-blue-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 p-5",
           attrs: {
             id: "quantity",
             placeholder: "Số lượng cần mua",
@@ -19735,9 +19740,9 @@ var render = function() {
           "button",
           {
             staticClass:
-              "bg-indigo-300 border rounded-lg p-5 hover:bg-indigo-200 transition mt-5 w-2/5"
+              "bg-indigo-300 border rounded-lg p-5 hover:bg-indigo-200 transition mt-5 "
           },
-          [_vm._v("\n            Thêm vào giỏ hàng\n        ")]
+          [_vm._v("\n                Thêm vào giỏ hàng\n            ")]
         )
       ]
     ),

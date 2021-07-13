@@ -1,20 +1,22 @@
 <template>
-    <div class="p-2 mt-20">
-    <pre>
-      {{ JSON.stringify(formData, null, 2) }}
-    </pre>
+    <div class="p-2 mt-1">
+        <p>Số lượng còn lại: <span class="text-blue-900">{{ productQuantityResource }}</span> sản phẩm</p>
+<!--        <pre>-->
+<!--             {{ JSON.stringify(formData, null, 2) }}-->
+<!--        </pre>-->
+
         <form class="flex flex-col" @submit.prevent="addProductToCart">
             <input v-model="formData.token" name="_token" type="hidden">
             <input v-model="formData.id" type="hidden"/>
             <input v-model="formData.name" type="hidden"/>
             <input v-model="formData.price" type="hidden"/>
-            <label class="text-blue-900" for="quantity">Nhập số lượng cần mua</label>
+            <label class="text-blue-900 mt-5" for="quantity">Nhập số lượng cần mua</label>
             <input id="quantity" v-model.number="formData.quantity"
-                   class="my-2 w-2/5 border-2 border-blue-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 p-5"
+                   class="my-2  border-2 border-blue-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 p-5"
                    placeholder="Số lượng cần mua"
                    type="text"/>
             <button
-                class="bg-indigo-300 border rounded-lg p-5 hover:bg-indigo-200 transition mt-5 w-2/5"
+                class="bg-indigo-300 border rounded-lg p-5 hover:bg-indigo-200 transition mt-5 "
             >
                 Thêm vào giỏ hàng
             </button>
@@ -47,7 +49,7 @@ export default {
     },
     methods: {
         addProductToCart() {
-            if (this.formData.quantity > 0){
+            if (this.formData.quantity > 0) {
                 if (this.productQuantityResource > this.formData.quantity) {
                     axios
                         .post("http://127.0.0.1:8000/carts", this.formData)
@@ -71,7 +73,6 @@ export default {
             axios
                 .get("http://127.0.0.1:8000/api/products/" + this.formData.id)
                 .then((response) => {
-                    // console.log('detail product', response);
                     this.productQuantityResource = response.data.quantity;
                 })
                 .catch((error) => {
