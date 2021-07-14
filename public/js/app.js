@@ -1974,11 +1974,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_2__.default({
   components: {
     App: _vue_App_vue__WEBPACK_IMPORTED_MODULE_0__.default
   }
-}); // const addProductToCart = new Vue({
-//     el: '#add-product-to-cart',
-//     components: { App, AddProductToCart },
-// })
-// Set default value of số lượng cần mua
+}); // Set default value of số lượng cần mua
 
 document.getElementById("quantity").value = 1;
 

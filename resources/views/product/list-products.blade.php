@@ -34,7 +34,10 @@
             @endforeach
         @endif
     </div>
-    <div class="flex sm:justify-start mt-5">
-        {{ $products->onEachSide(5)->links() }}
+    <div class="text-center mx-auto">
+        <div class="flex text-center w-1/2 mx-auto mt-5">
+            {{ $products->onEachSide(5)->links() }}
+        </div>
     </div>
+
 @endsection

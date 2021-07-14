@@ -28,7 +28,7 @@ class ProductFactory extends Factory
             'quantity' => rand(10, 100),
             'price' => rand(100, 10000),
             'category_id' => $this->faker->randomElement($listCategory),
-            'image_path' => 'https://mac365.vn/wp-content/uploads/2020/12/gPvyaz76tASn87RCGuSdDc.jpg'
+            'image_path' => 'https://cdn.tgdd.vn/Products/Images/5698/238054/imac-24-inch-45k-retina-m1-mgph3saa-600x600.jpg'
         ];
     }
 }

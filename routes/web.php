@@ -39,4 +39,5 @@ Route::namespace('Cart')->group(function () {
     Route::get('carts/item', [CartController::class, 'listItemInCart'])->name('carts.item');
     Route::post('carts', [CartController::class, 'addProductToCart']);
     Route::post('carts/destroy', [CartController::class, 'deleteAllItemCart'])->name('carts.destroy.all');
+    Route::post('carts/checkout', [CartController::class, 'cartCheckout'])->name('carts.cartCheckout');
 });
