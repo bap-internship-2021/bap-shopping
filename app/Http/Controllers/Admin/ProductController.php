@@ -21,13 +21,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-        if (Auth::check()) {
-            $products = Product::with('category')->orderBy('id', 'DESC')->paginate(5);
-            return view('admin.products.index')->with('products', $products);
-        } else {
-            return redirect()->route('login');
-        }
+        $products = Product::with('category')->orderBy('id', 'DESC')->paginate(5);
+        return view('admin.products.index')->with('products', $products);
     }
 
     /**
@@ -37,7 +32,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
         $categories = Category::orderBy('id', 'DESC')->get();
         return view('admin.products.create')->with('categories', $categories);
     }
@@ -50,8 +44,6 @@ class ProductController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        //
-
         $data = $request->except(['_method', '_token']);
 
         if ($request->hasFile('file')) {
@@ -79,7 +71,6 @@ class ProductController extends Controller
     public function show($id)
     {
         //
-        
     }
 
     /**
@@ -90,7 +81,6 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
         $product = Product::find($id);
         $categories = Category::all();
         return view('admin.products.edit', compact(['product', 'categories']));
@@ -105,7 +95,6 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
-        //
         $product = Product::find($id);
         $data = $request->except(['_method', '_token']);
         $image = $request->file('file');
@@ -136,7 +125,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
         $product = Product::find($id);
         $product->delete();
         return back()->with('status', 'delete success');

@@ -19,7 +19,7 @@ class CreateSalesTable extends Migration
             $table->integer('discount'); // phan tram giam gia
             $table->integer('sales_amount');
             $table->double('min_price_to_apply'); // gia thap nhat de duoc ap dung ma giam gia
-            $table->datetime('from'); // bat dat
+            $table->datetime('from'); // bat dau
             $table->datetime('to');
             $table->timestamps();
         });
