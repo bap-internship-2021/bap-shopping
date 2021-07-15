@@ -16,7 +16,7 @@ class Product extends Model
     use HasFactory;
 
     protected $table = 'products';
-    protected $fillable = ['name', 'price', ];
+    protected $fillable = ['name', 'price', 'quantity', 'image_path', 'category_id'];
 
     /**
      * Get the route key for the model.
@@ -28,10 +28,10 @@ class Product extends Model
         return 'name';
     }
 
-    public function belongsToMany($related, $table = null, $foreignPivotKey = null, $relatedPivotKey = null, $parentKey = null, $relatedKey = null, $relation = null)
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-
+    
 }

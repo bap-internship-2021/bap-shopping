@@ -31,17 +31,10 @@
                     </a>
                 </li>
                 
-                
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
-                        <i class="mdi mdi-border-none"></i>
-                        <span class="hide-menu">Table</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sale.index')}}" aria-expanded="false">
                         <i class="mdi mdi-face"></i>
-                        <span class="hide-menu">Icon</span>
+                        <span class="hide-menu">Sales</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

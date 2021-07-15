@@ -66,6 +66,7 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
+
     <script src="{{URL::asset('admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{URL::asset('admin/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
@@ -83,7 +84,9 @@
     <script src="{{URL::asset('admin/assets/libs/chartist/dist/chartist.min.js')}}"></script>
     <script src="{{URL::asset('admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
     <script src="{{URL::asset('admin/dist/js/pages/dashboards/dashboard1.js')}}"></script>
+    
     <!-- ckeditor -->
+    
     
     <!-- <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script> CKEDITOR.replace('demo'); </script> -->

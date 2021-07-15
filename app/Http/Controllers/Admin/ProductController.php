@@ -4,6 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Product\CreateProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
+use GuzzleHttp\Handler\Proxy;
 
 class ProductController extends Controller
 {
@@ -14,8 +21,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.products.index');
+        $products = Product::with('category')->orderBy('id', 'DESC')->paginate(5);
+        return view('admin.products.index')->with('products', $products);
     }
 
     /**
@@ -25,7 +32,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::orderBy('id', 'DESC')->get();
+        return view('admin.products.create')->with('categories', $categories);
     }
 
     /**
@@ -34,9 +42,24 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
-        //
+        $data = $request->except(['_method', '_token']);
+
+        if ($request->hasFile('file')) {
+
+            $image = $request->file('file');
+
+            $imageName = time() . $image->getClientOriginalName();
+            
+            $image->move('admin/images/products', $imageName);
+            $data['image_path'] = $imageName;
+
+            Product::create($data);
+            return back()->with('status', 'create success');
+        } else {
+            return back()->with('status', 'create error');
+        }
     }
 
     /**
@@ -58,7 +81,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Category::all();
+        return view('admin.products.edit', compact(['product', 'categories']));
     }
 
     /**
@@ -68,9 +93,28 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $data = $request->except(['_method', '_token']);
+        $image = $request->file('file');
+
+        if ($image) {
+            $imageName = time() . $image->getClientOriginalName();
+            
+            $data['image_path'] = $imageName;
+        }
+
+        if($product->update($data)){
+            if($image){
+                
+                $image->move('admin/images/products', $imageName);
+                
+            }
+            return back()->with('status', 'update success');
+        } else {
+            return back()->with('status', 'update error');
+        }
     }
 
     /**
@@ -81,6 +125,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return back()->with('status', 'delete success');
     }
 }

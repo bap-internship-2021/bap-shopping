@@ -9,4 +9,14 @@ class Sale extends Model
 {
     use HasFactory;
 
+    protected $table = 'sales';
+    protected $fillable = [
+        'sale_code',
+        'discount',
+        'sales_amount',
+        'min_price_to_apply',
+        'from',
+        'to'
+    ];
+
 }

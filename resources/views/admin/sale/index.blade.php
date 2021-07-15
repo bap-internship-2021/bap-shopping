@@ -22,7 +22,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-5 align-self-center">
-            <h4 class="page-title">Products</h4>
+            <h4 class="page-title">Sales</h4>
         </div>
     </div>
 </div>
@@ -36,31 +36,33 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Image</th>
+                                <th scope="col">Sale_code</th>
+                                <th scope="col">Discount</th>
+                                <th scope="col">Sale_amount</th>
+                                <th scope="col">Min_price_to_apply</th>
+                                <th scope="col">From</th>
+                                <th scope="col">to</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
-                            foreach($products as $key => $pd){
+                            foreach($sales as $key => $sale){
                             ?>
                             <tr>
-                                <th scope="row">{{$pd->id}}</th>
-                                <td>{{$pd->name}}</td>
-                                <td>{{$pd->price}}</td>
-                                <td>{{$pd->quantity}}</td>
-                                <td>{{$pd->category->name}}</td>
-                                <td><img src="{{asset('admin/images/products/'. $pd->image_path)}}"></td>
+                                <th scope="row">{{$sale->id}}</th>
+                                <td>{{$sale->sale_code}}</td>
+                                <td>{{$sale->discount}}%</td>
+                                <td>{{$sale->sales_amount}}</td>
+                                <td>{{$sale->min_price_to_apply}}$</td>
+                                <td>{{$sale->from}}</td>
+                                <td>{{$sale->to}}</td>
                                 <td>
-                                    <a href="{{route('products.edit', [$pd->id])}}" class="btn btn-primary">Edit</a>
+                                    <a href="{{route('sale.edit', [$sale->id])}}" class="btn btn-primary">Edit</a>
                                 </td>
                                 <td>
-                                    <form action="{{route('products.destroy', $pd->id)}}" method="POST">
+                                    <form action="{{route('sale.destroy', $sale->id)}}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                         <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?');" class="btn btn-danger">Delete</button>
@@ -72,7 +74,7 @@
                         <tfoot>
                             <tr>
                                 <td colspan="8">
-                                    <a href="{{route('products.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Add Product</button></a>
+                                    <a href="{{route('sale.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Add Sale</button></a>
                                 </td>
                             </tr>
                         </tfoot>
@@ -82,6 +84,6 @@
         </div>
     </div>
 </div>
-{{ $products->links() }}
+{{ $sales->links() }}
 
 @endsection

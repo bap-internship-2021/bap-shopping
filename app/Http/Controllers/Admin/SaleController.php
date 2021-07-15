@@ -4,16 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Http\Requests\Category\CreateCategoryRequest;
-use App\Http\Requests\Category\UpdateCategoryRequest;
+use App\Models\Sale;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Sale\CreateSaleRequest;
 
-
-class CategoryController extends Controller
+class SaleController extends Controller
 {
-
-    
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('id', 'DESC')->get();
-        return view('admin.category.index')->with('categories', $categories);
+        $sales = Sale::orderBy('id', 'DESC')->paginate(5);
+        return view('admin.sale.index')->with('sales', $sales);
     }
 
     /**
@@ -32,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.sale.create');
     }
 
     /**
@@ -41,10 +37,11 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateCategoryRequest $request)
+    public function store(CreateSaleRequest $request)
     {
-        Category::create($request->only('name'));
-        return back()->with('status', 'create success');  
+        $data = $request->except(['_method', '_token']);
+        Sale::create($data);
+        return back()->with('status', 'create success');
     }
 
     /**
@@ -66,8 +63,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('admin.category.edit')->with('category', $category);
+        //
     }
 
     /**
@@ -77,13 +73,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-
-        $category->update($request->only('name'));      
-        
-        return back()->with('status', 'Update success');
+        //
     }
 
     /**
@@ -94,9 +86,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-        $category->delete();
-        return back()->with('status', 'Delete success');
+        //
     }
-    
 }
