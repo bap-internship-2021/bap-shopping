@@ -16,8 +16,6 @@
     <!-- Custom CSS -->
     <link href="{{URL::asset('admin/dist/css/style.min.css')}}" rel="stylesheet">
 
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"> -->
-    <!-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> -->
 </head>
 
 <body>
@@ -90,13 +88,6 @@
     
     <!-- <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script> CKEDITOR.replace('demo'); </script> -->
-    
-
- 
-  
-
-    
-
     
 </body>
 

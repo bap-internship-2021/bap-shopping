@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SaleController;
 Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::get('home', [HomeController::class, 'index']);
     Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
+    Route::put('profile-update/{id}', [ProfileController::class, 'handleUpdateProfile'])->name('profile.update');
     Route::resource('products', ProductController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('sale', SaleController::class);
