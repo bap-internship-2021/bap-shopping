@@ -2,7 +2,7 @@
 @section('title', 'Products')
 
 @section('content')
-    <div class="mt-20 mx-auto grid grid-cols-4 gap-y-10 gap-4">
+    <div class="mt-20 mx-auto grid grid-cols-4 gap-y-10 gap-4 text-white">
         @if(!empty($products))
             @foreach ($products as $product)
                 <div
