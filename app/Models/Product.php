@@ -15,7 +15,7 @@ class Product extends Model
     use HasFactory;
 
     protected $table = 'products';
-    protected $fillable = ['name', 'price', 'quantity', 'image_path', 'category_id'];
+    protected $fillable = ['name', 'price', 'quantity', 'category_id'];
 
     /**
      * Get the route key for the model.
@@ -32,5 +32,8 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

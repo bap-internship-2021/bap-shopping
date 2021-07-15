@@ -60,7 +60,7 @@
 
     <div class="form-group">
         <label for="exampleFormControlFile1">Product Image</label>
-        <input type="file" class="form-control-file" name="file" id="exampleFormControlFile1">
+        <input type="file" class="form-control-file" name="files[]" multiple id="exampleFormControlFile1">
     </div>
 
     <button type="submit" class="btn btn-primary">Add</button>
