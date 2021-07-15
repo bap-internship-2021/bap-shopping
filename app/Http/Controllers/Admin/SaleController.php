@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Sale;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Sale\CreateSaleRequest;
+use App\Http\Requests\Sale\UpdateSaleRequest;
 
 class SaleController extends Controller
 {
@@ -63,7 +64,8 @@ class SaleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $sale = Sale::find($id);
+        return view('admin.sale.edit')->with('sale', $sale);
     }
 
     /**
@@ -73,9 +75,12 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSaleRequest $request, $id)
     {
-        //
+        $sale = Sale::find($id);
+        $data = $request->except(['_method', '_token']);
+        $sale->update($data);
+        return back()->with('status', 'update success');
     }
 
     /**
@@ -86,6 +91,8 @@ class SaleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sale = Sale::find($id);
+        $sale->delete();
+        return back()->with('status', 'delete success');
     }
 }
