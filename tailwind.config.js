@@ -13,6 +13,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: theme => ({
+                'iphone-12-pro-max': "url('https://wallpapershome.com/images/pages/pic_h/23065.jpg')"
+            })
         },
     },
 

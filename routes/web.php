@@ -23,7 +23,7 @@ Route::get('/', function () {
     } else {
         return redirect()->route('login');
     }
-});
+})->name('/');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('layouts.master');
