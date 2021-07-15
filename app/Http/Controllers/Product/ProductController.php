@@ -11,7 +11,7 @@ class ProductController extends Controller
     public function listAllProducts()
     {
         $products = Product::paginate(10);
-        return view('product/list-products', compact(['products']));
+
     }
 
     public function detailProductInfo(Product $product, Request $request)
