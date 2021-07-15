@@ -3,14 +3,13 @@
 
 @section('content')
     <div class="border-2 rounded-lg mt-5 shadow-2xl flex flex-row">
-        <div class="">
-            <img class="shadow-inner rounded-sm" src="{{ $product->image_path }}" alt="Sản phẩm">
+        <div class="w-1/2">
+            <img class="shadow-inner rounded-sm " src="{{ $product->image_path }}" alt="Sản phẩm">
         </div>
         <div class="ml-12 font-bold text-2xl">
             <p class="invisible"><span id="product-id">{{ $product->id }}</span></p>
             <p class="p-2">{{__('Tên sản phẩm: ')}} <span id="product-name">{{ $product->name }}</span></p>
             <p class="p-2">{{__('Giá: ')}} <span id="product-price" class="text-blue-900"> {{ $product->price }} </span>$</p>
-            <p class="p-2">{{__('Còn lại: ')}} <span id="product-price" class="text-blue-900"> {{ $product->quantity }} </span>sản phẩm</p>
             <div id="app">
                 <app></app>
             </div>

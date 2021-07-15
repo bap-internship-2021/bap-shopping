@@ -9,11 +9,6 @@ const app = new Vue({
     components: { App }
 });
 
-// const addProductToCart = new Vue({
-//     el: '#add-product-to-cart',
-//     components: { App, AddProductToCart },
-
-// })
 
 // Set default value of số lượng cần mua
 document.getElementById("quantity").value = 1;
