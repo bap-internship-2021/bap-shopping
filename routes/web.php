@@ -19,7 +19,7 @@ use App\Http\Controllers\Cart\CartController;
 
 Route::get('/', function () {
     if (Auth::check()) {
-        return view('layouts.master');
+        return view('home.home-page');
     } else {
         return redirect()->route('login');
     }

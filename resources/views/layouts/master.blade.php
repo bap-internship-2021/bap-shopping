@@ -2,8 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
+    <!-- TailwindCSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>BAP Shopping @yield('title', '')</title>
@@ -11,32 +16,38 @@
 
 <body>
 
+    <div class="container mx-auto">
+        <!-- Start top nav -->
+        <div class="flex justify-between">
+            <!-- Start Logo -->
+            <div class="text-gray-700 py-2">
+                <a href="{{ route('/') }}" class="text-blue-900 text-2xl" style="font-family: 'Zen Tokyo Zoo', cursive;">BAP SHOPPING</a>
+            </div>
+            <!-- End Logo -->
 
-<div class="w-screen h-screen relative bg-fixed bg-center bg-cover bg-no-repeat"
-     style="background-image:linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 24, 100, 0.1)), url('{{asset('background-image/iphone-12-pro-max.jpg')}}')">
+            <div>
+                <ul class="flex">
+                    <li><a class="px-2" href="">Login</a></li>
+                    <li><a class="px-2" href="">Register</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- End top nav -->
 
-    {{--  Start top nav  --}}
-    <ul class="flex flex-row mx-auto w-1/2 justify-center text-white text-2xl">
-        <li class="mt-5 p-2"><a href="{{ route('/') }}"
-                                class="transition delay-150 duration-700 ease-in-out hover:bg-blue-400 hover:scale-150 rounded-lg p-2">Trang
-                chủ</a></li>
-        <li class="mt-5 p-2"><a href=""
-                                class="transition delay-150 duration-700 ease-in-out hover:bg-blue-400 hover:scale-150 rounded-lg p-2">Sản
-                phẩm</a></li>
-        <li class="mt-5 p-2"><a href=""
-                                class="transition delay-150 duration-700 ease-in-out hover:bg-blue-400 hover:scale-150 rounded-lg p-2">Giỏ
-                hàng</a></li>
-        <li class="mt-5 p-2"><a href=""
-                                class="transition delay-150 duration-700 ease-in-out hover:bg-blue-400 hover:scale-150 rounded-lg p-2">Về
-                chúng tôi</a></li>
-    </ul>
-    {{--  End top nav  --}}
+        <!-- START SEARCH BAR -->
+        <div class="">
+            <input type="search" class="bg-purple-white border border-blue-200 shadow rounded  p-3 w-full ring-none focus:ring-4" placeholder="Tìm kiếm...">
+        </div>
+        <!-- END SEARCH BAR -->
 
-    <div>
-        @yield('content')
+        <!-- START CONTENT -->
+        <div>
+            @yield('content')
+        </div>
+        <!-- END CONTENT -->
     </div>
-</div>
 
 </body>
 @yield('js')
+
 </html>
