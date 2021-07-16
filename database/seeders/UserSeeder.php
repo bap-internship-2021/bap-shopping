@@ -23,7 +23,8 @@ class UserSeeder extends Seeder
             'age' => '20',
             'phone' => '0935234129',
             'address' => 'Da Nang',
-            'role_id' => 1
+            'role_id' => 1,
+            'profile_photo_path' => 'default.jpg'
         ]);
     }
 }

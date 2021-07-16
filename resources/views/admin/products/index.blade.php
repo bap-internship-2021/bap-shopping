@@ -51,7 +51,7 @@
                             <tr>
                                 <th scope="row">{{$pd->id}}</th>
                                 <td>{{$pd->name}}</td>
-                                <td>{{$pd->price}}</td>
+                                <td>{{$pd->price}}$</td>
                                 <td>{{$pd->quantity}}</td>
                                 <td>{{$pd->category->name}}</td>
                                 

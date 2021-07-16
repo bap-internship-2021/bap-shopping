@@ -31,9 +31,7 @@ class ProfileController extends Controller
 
         if($user->update($data)){
             if($image){
-                
                 $image->move('admin/images/avatar', $imageName);
-                
             }
             return back()->with('status', 'update success');
         } else {

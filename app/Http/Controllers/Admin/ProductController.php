@@ -59,7 +59,6 @@ class ProductController extends Controller
                 $product = Product::create($request->only(['name', 'price', 'quantity', 'category_id']));
                
                 foreach ($request->file('files') as $key => $image) {
-                    // Get file name inclue extention
                     $imageName = time() . $image->getClientOriginalname();
                     // Declare target dir contain image in public/images/rooms forder
                     $target_dir = 'admin/images/products';
