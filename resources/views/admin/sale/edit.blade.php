@@ -57,14 +57,12 @@
 
     <div class="form-group">
         <label for="exampleInputf">From</label>
-        <p>{{$sale->from}}</p>
-        <input type="date" value="{{date('m-d-Y', strtotime($sale->from))}}" name="from" class="form-control" id="exampleInputf" aria-describedby="emailHelp" placeholder="From">
+        <input type="date" value="{{date('Y-m-d', strtotime($sale->from))}}" name="from" class="form-control" id="exampleInputf" aria-describedby="emailHelp">
     </div>
 
     <div class="form-group">
         <label for="exampleInputt">To</label>
-        <p>{{$sale->to}}</p>
-        <input type="date" value="{{$sale->to}}" name="to" class="form-control" id="exampleInputt" aria-describedby="emailHelp" placeholder="To">
+        <input type="date" value="{{date('Y-m-d', strtotime($sale->to))}}" name="to" class="form-control" id="datepicker">
     </div>
 
     <button type="submit" class="btn btn-primary">Update</button>

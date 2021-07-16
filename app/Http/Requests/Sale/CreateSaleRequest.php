@@ -29,8 +29,8 @@ class CreateSaleRequest extends FormRequest
             'discount' => 'required|numeric|min:1',
             'sales_amount' => 'required|min:1',
             'min_price_to_apply' => 'required',
-            'from' => 'required',
-            'to' => 'required'
+            'from' => 'required|date_format:Y-m-d',
+            'to' => 'required|date_format:Y-m-d|after_or_equal:from'
         ];
     }
 }

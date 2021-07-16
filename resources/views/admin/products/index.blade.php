@@ -40,7 +40,6 @@
                                 <th scope="col">Price</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Category</th>
-                                <th scope="col">Image</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
                             </tr>
@@ -55,7 +54,7 @@
                                 <td>{{$pd->price}}</td>
                                 <td>{{$pd->quantity}}</td>
                                 <td>{{$pd->category->name}}</td>
-                                <td><img src="{{asset('admin/images/products/'. $pd->image_path)}}"></td>
+                                
                                 <td>
                                     <a href="{{route('products.edit', [$pd->id])}}" class="btn btn-primary">Edit</a>
                                 </td>
