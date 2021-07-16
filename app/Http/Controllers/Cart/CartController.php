@@ -29,7 +29,7 @@ class CartController extends Controller
         ];
         $request->session()->put('cart', $cart);
 
-        return response()->json(['Success' => 'success']);
+        return response()->json(['Success' => 'success'], 200);
     }
 
     public function listItemInCart()
