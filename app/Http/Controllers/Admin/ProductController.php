@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
@@ -125,19 +126,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $data = $request->except(['_method', '_token']);
-        $image = $request->file('file');
-
-        if ($image) {
-            $imageName = time() . $image->getClientOriginalName();
-
-            $data['image_path'] = $imageName;
-        }
 
         if ($product->update($data)) {
-            if ($image) {
-
-                $image->move('admin/images/products', $imageName);
-            }
             return back()->with('status', 'update success');
         } else {
             return back()->with('status', 'update error');
@@ -152,8 +142,25 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->delete();
-        return back()->with('status', 'delete success');
+        DB::beginTransaction();
+
+        try {
+            $images = Image::where('product_id', $id)->get();
+            foreach($images as $key => $image){
+                $imagePath = 'admin/images/products/' . $image->path;
+                File::delete($imagePath);
+            }
+            Image::where('product_id', $id)->delete();
+            Product::destroy($id);
+            DB::commit();
+            // all good
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+        }
+            
+                
+                
+                return back()->with('status', 'delete success');
     }
 }
