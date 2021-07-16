@@ -111,8 +111,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
+        $images = Image::where('product_id', $id)->get();
         $categories = Category::all();
-        return view('admin.products.edit', compact(['product', 'categories']));
+        return view('admin.products.edit', compact(['product', 'categories', 'images']));
     }
 
     /**
@@ -124,14 +125,50 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
-        $product = Product::find($id);
-        $data = $request->except(['_method', '_token']);
+        // $product = Product::find($id);
+        // $data = $request->except(['_method', '_token']);
 
-        if ($product->update($data)) {
-            return back()->with('status', 'update success');
-        } else {
-            return back()->with('status', 'update error');
-        }
+        DB::beginTransaction();
+
+        try {
+            $product = Product::find($id);
+
+            if($request->hasFile('files')){
+                
+                $images = Image::where('product_id', $id)->get();
+                foreach($images as $key => $image){
+                    $imagePath = 'admin/images/products/' . $image->path;
+                    File::delete($imagePath);
+                }
+                if(Image::where('product_id', $id)->delete()){
+                    
+                    $product->update($request->only(['name', 'price', 'quantity', 'category_id']));
+                    foreach ($request->file('files') as $key => $image) {
+                        // Get file name inclue extention
+                        $imageName = time() . $image->getClientOriginalname();
+                        // Declare target dir contain image in public/images/rooms forder
+                        $target_dir = 'admin/images/products';
+                        // Move images to target dir
+                        $image->move($target_dir, $imageName);
+                        // Add information to array for store new resource in images table
+                        $array[$key]['path'] = $imageName;
+                        $array[$key]['created_at'] = now();
+                        $array[$key]['updated_at'] = now();
+                        $array[$key]['product_id'] = $product->id;
+                    }
+                    $product->images()->insert($array);
+                }
+            } else {
+                $product->update($request->only(['name', 'price', 'quantity', 'category_id']));
+            }
+            DB::commit();
+            // all good
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->with('status', 'update fail');
+            // something went wrong
+        }    
+        return back()->with('status', 'update success');
     }
 
     /**
@@ -157,10 +194,7 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             // something went wrong
-        }
-            
-                
-                
-                return back()->with('status', 'delete success');
+        }    
+        return back()->with('status', 'delete success');
     }
 }
