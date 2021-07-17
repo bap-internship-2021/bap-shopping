@@ -1,6 +1,6 @@
 <aside class="left-sidebar" data-sidebarbg="skin5">
     <!-- Sidebar scroll-->
-    <div class="scroll-sidebar" style="margin-top: 100px;">
+    <div class="scroll-sidebar">
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
@@ -11,7 +11,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('profile.show')}}" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('admin.profile')}}" aria-expanded="false">
                         <i class="mdi mdi-account-network"></i>
                         <span class="hide-menu">Profile</span>
                     </a>
@@ -31,17 +31,10 @@
                     </a>
                 </li>
                 
-                
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
-                        <i class="mdi mdi-border-none"></i>
-                        <span class="hide-menu">Table</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sale.index')}}" aria-expanded="false">
                         <i class="mdi mdi-face"></i>
-                        <span class="hide-menu">Icon</span>
+                        <span class="hide-menu">Sales</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

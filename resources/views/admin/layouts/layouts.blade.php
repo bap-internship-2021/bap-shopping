@@ -16,8 +16,8 @@
     <!-- Custom CSS -->
     <link href="{{URL::asset('admin/dist/css/style.min.css')}}" rel="stylesheet">
 
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"> -->
-    <!-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> -->
+    <link rel="stylesheet" href="{{URL::asset('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')}}">
+    
 </head>
 
 <body>
@@ -66,6 +66,7 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
+
     <script src="{{URL::asset('admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{URL::asset('admin/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
@@ -83,17 +84,14 @@
     <script src="{{URL::asset('admin/assets/libs/chartist/dist/chartist.min.js')}}"></script>
     <script src="{{URL::asset('admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
     <script src="{{URL::asset('admin/dist/js/pages/dashboards/dashboard1.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <!-- ckeditor -->
+    
     
     <!-- <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script> CKEDITOR.replace('demo'); </script> -->
-    
-
- 
-  
-
-    
-
     
 </body>
 
