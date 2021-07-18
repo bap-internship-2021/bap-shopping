@@ -10,7 +10,16 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function addProductToCart(Request $request): JsonResponse
+    public function index()
+    {
+        if (session()->has('cart')) {
+            return view('cart.list-item')->with(['cart' => session()->get('cart')]);
+        }
+        dd(session()->get('cart'));
+        return view('cart.list-item');
+    }
+
+    public function store(Request $request): JsonResponse
     {
         $cart = $request->session()->get('cart');
         $productId = $request->input('id');
@@ -32,22 +41,15 @@ class CartController extends Controller
         return response()->json(['Success' => 'success'], 200);
     }
 
-    public function listItemInCart()
-    {
-        if (session()->has('cart')) {
-            return view('cart.list-item')->with(['cart' => session()->get('cart')]);
-        }
 
-        return view('cart.list-item');
-    }
 
-    public function deleteAllItemCart(Request $request): RedirectResponse
+    public function destroy(Request $request): RedirectResponse
     {
         $request->session()->forget('cart');
         return redirect()->back();
     }
 
-    public function cartCheckout()
+    public function checkout()
     {
         if (session()->has('cart')) {
             $cart = session()->get('cart');
