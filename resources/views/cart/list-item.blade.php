@@ -5,7 +5,7 @@
 
     @if(!empty($cart))
         <div class="flex flex-row justify-between">
-            <form action="{{ route('carts.cartCheckout') }}" method="post">
+            <form action="{{ route('carts.checkout') }}" method="post">
                 @csrf
                 <button
                     class="text-2xl text-white cursor-pointer duration-100 bg-blue-500 mt-5 rounded-lg p-4 hover:bg-blue-400 ring-none focus:ring-4 focus:ring-indio-500">
@@ -13,7 +13,7 @@
                 </button>
             </form>
             <div>
-                <form action="{{ route('carts.destroy.all') }}" method="post">
+                <form action="{{ route('carts.destroy') }}" method="post">
                     @csrf
                     <button
                         type="submit"
@@ -30,7 +30,7 @@
                     <p>Sản phẩm: <span>{{ $item['name'] }}</span></p>
                     <p>Giá sản phẩm: <span>{{ $item['price'] }}</span></p>
                     <p>Tổng số lượng: <span>{{ $item['quantity'] }}</span></p>
-                    <a href="{{ route('products.detailProduct', ['product' => $item['name']]) }}" class="underline text-blue-400">Chi tiết đơn hàng</a>
+                    <a href="{{ route('user.products.show', ['product' => $item['name']]) }}" class="underline text-blue-400">Chi tiết đơn hàng</a>
                 </div>
             @endforeach
         </div>

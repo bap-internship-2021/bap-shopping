@@ -13,14 +13,14 @@
         </div>
 
         <div>
-            <p>Đơn hàng: {{ $productCount }} sản phẩm</p>
+            <p>Đơn hàng: {{ $subTotal }} sản phẩm</p>
         </div>
 
         @foreach($data as $value)
-  
+
         @endforeach
 
-        <p>Tổng tiền: {{ $data['totalPrice'] }}</p>
+        <p>Tổng tiền: {{ $subTotal }} </p>
 
     </div>
 @endsection

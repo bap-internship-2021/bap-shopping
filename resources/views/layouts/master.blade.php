@@ -12,10 +12,19 @@
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
-    <!-- TailwindCSS -->
+
+{{-- Custom CSS --}}
+@yield('css')
+<!-- TailwindCSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/inficons/512/apple.png" type="image/gif" sizes="16x16">
+    <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/inficons/512/apple.png" type="image/gif"
+          sizes="16x16">
+    <style>
+        #tns1-ow > button {
+            display: none;
+        }
+    </style>
     <title>BAP Shopping @yield('title', '')</title>
 </head>
 
@@ -32,11 +41,11 @@
     <!-- End Logo -->
 
     <!-- START SEARCH BAR -->
-    <div class="w-4/6 p-8">
+    <div class="w-4/6 p-8 pl-12">
         <form action="" method="GET">
             <input type="text"
                    class="px-3 py-2 bg-purple-white  shadow-lg rounded w-5/6"
-                   placeholder="Tìm kiếm...">
+                   placeholder="Tìm kiếm sản phẩm">
             <button class="px-3 py-2 bg-blue-300 rounded shadow-lg"><i class="fas fa-search"></i>Tìm kiếm</button>
         </form>
     </div>
@@ -44,8 +53,18 @@
 
     <div class="w-1/6 p-8">
         <ul class="flex justify-between">
-            <li><a class="p-2 text-blue-900 rounded text-sm mr-2" href="">Đăng nhập</a></li>
-            <li><a class="p-2 text-blue-900 rounded text-sm" href="">Đăng ký</a></li>
+            @if(Auth::check())
+                <li><a class="p-2 text-blue-900 rounded text-sm mr-2" href=""><i class="fas fa-user"></i> {{Auth()->user()->name}}</a></li>
+                <li>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit" title="Click to logout"><i class="fas fa-sign-out-alt"></i></button>
+                    </form>
+                </li>
+            @else
+                <li><a class="p-2 text-blue-900 rounded text-sm mr-2" href=""><i class="fas fa-user"></i> Đăng nhập</a></li>
+            @endif
+
         </ul>
     </div>
 </div>
@@ -59,13 +78,35 @@
         <div class="w-1/6 h-96">
             <nav>
                 <ul class="px-4 py-2">
-                    <li class="animate-bounce transition hover:text-red-500 text-blue-400 cursor-pointer"><i class="fas fa-tags"></i> Chương trình khuyến mãi</li>
-                    <li class="cursor-pointer transition hover:text-red-500"><i class="fas fa-shopping-basket fill-current text-blue-400"></i> Giỏ hàng của tôi</li>
-                    <li class="cursor-pointer transition hover:text-red-500"><i class="fas fa-mobile fill-current text-blue-400"></i> Iphone</li>
-                    <li class="cursor-pointer transition hover:text-red-500"><i class="fas fa-tablet fill-current text-blue-400"></i> Ipad</li>
-                    <li class="cursor-pointer transition hover:text-red-500"><i class="fas fa-desktop fill-current text-blue-400"></i> Imac</li>
-                    <li class="cursor-pointer transition hover:text-red-500"><i class="fas fa-desktop fill-current text-blue-400"></i> MacBook</li>
-                    <li class="cursor-pointer transition hover:text-red-500"><span class="iconify inline fill-current text-blue-400" data-icon="gg-apple-watch" data-inline="false"></span>Apple Watch</li>
+                    <li class="animate-bounce transition hover:text-red-500  cursor-pointer">
+                        <a href=""><i class="fas fa-tags fill-current text-blue-400"></i> Chương trình khuyến mãi</a>
+                    </li>
+                    <li class="cursor-pointer transition hover:text-red-500">
+                        <a href="{{ route('carts.index') }}"><i class="fas fa-shopping-basket fill-current text-blue-400"></i> Giỏ hàng của
+                            tôi</a>
+                    </li>
+                    <li class="cursor-pointer transition hover:text-red-500">
+                        <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::IPHONE]) }}"><i
+                                class="fas fa-mobile fill-current text-blue-400"></i> Iphone</a>
+                    </li>
+                    <li class="cursor-pointer transition hover:text-red-500">
+                        <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::IPAD]) }}"><i
+                                class="fas fa-tablet fill-current text-blue-400"></i> Ipad</a>
+                    </li>
+                    <li class="cursor-pointer transition hover:text-red-500">
+                        <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::IMAC]) }}"><i
+                                class="fas fa-desktop fill-current text-blue-400"></i> Imac</a>
+                    </li>
+                    <li class="cursor-pointer transition hover:text-red-500">
+                        <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::MACBOOK]) }}"><i
+                                class="fas fa-laptop fill-current text-blue-400"></i> MacBook</a>
+                    </li>
+                    <li class="cursor-pointer transition hover:text-red-500">
+                        <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::APPLE_WATCH]) }}">
+                            <span class="iconify inline fill-current text-blue-400" data-icon="gg-apple-watch"
+                                  data-inline="false"></span>Apple Watch
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -83,5 +124,4 @@
 
 </body>
 @yield('js')
-
 </html>
