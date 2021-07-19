@@ -30,8 +30,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 p-2">
-        <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search')}}" method="POST">
-                @csrf
+        <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search')}}" method="GET">
                 <input class="form-control mr-sm-2" type="search" name="keywords" id="keywords" placeholder="Search" aria-label="Search" >
                 <div id="search_ajax"></div>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -50,8 +49,7 @@
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Category</th>
                                 <th scope="col">Image</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Delete</th>
+                                <th scope="col" colspan="2">&nbsp</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,13 +64,13 @@
                                 <td>{{$pd->category->name}}</td>
                                 <td><img src="{{asset('admin/images/products/'.$pd->images[2]['path'])}}" style="width: 150px; height:180px"></td>
                                 <td>
-                                    <a href="{{route('products.edit', [$pd->id])}}" class="btn btn-primary">Edit</a>
+                                    <a href="{{route('products.edit', [$pd->id])}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                 </td>
                                 <td>
                                     <form action="{{route('products.destroy', $pd->id)}}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                        <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?');" class="btn btn-danger">Delete</button>
+                                        <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?');" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
