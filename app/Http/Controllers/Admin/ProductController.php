@@ -25,7 +25,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category')->orderBy('id', 'DESC')->paginate(5);
+        $products = Product::with('category')->orderBy('id', 'DESC')->paginate(3);
         return view('admin.products.index')->with('products', $products);
     }
 
@@ -196,4 +196,5 @@ class ProductController extends Controller
         }    
         return back()->with('status', 'delete success');
     }
+
 }
