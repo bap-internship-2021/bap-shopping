@@ -111,7 +111,7 @@
         });
 
         $(document).on('click', '.li_search_ajax', function(){
-            $('#keywords').val(($this).text());
+            $('#keywords').val( $(this).text() );
             $('#search_ajax').fadeOut();
         })
     </script>

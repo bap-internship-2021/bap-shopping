@@ -19,5 +19,5 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::resource('category', CategoryController::class);
     Route::resource('sale', SaleController::class);
     Route::post('search-products', [SearchController::class, 'search'])->name('search.product');
-    
+    Route::post('search', [SearchController::class, 'index'])->name('search');
 });

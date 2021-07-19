@@ -1517,6 +1517,9 @@ select {
 .p-4 {
 	padding: 1rem;
 }
+.p-3 {
+	padding: 0.75rem;
+}
 .py-12 {
 	padding-top: 3rem;
 	padding-bottom: 3rem;
@@ -1961,4 +1964,3 @@ select {
 		padding-right: 2rem;
 	}
 }
-
