@@ -29,6 +29,15 @@
 
 <div class="container-fluid">
     <div class="row">
+        <div class="col-md-12 p-2">
+        <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search')}}" method="POST">
+                @csrf
+                <input class="form-control mr-sm-2" type="search" name="keywords" id="keywords" placeholder="Search" aria-label="Search" >
+                <div id="search_ajax"></div>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
@@ -40,6 +49,7 @@
                                 <th scope="col">Price</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Category</th>
+                                <th scope="col">Image</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
                             </tr>
@@ -51,10 +61,10 @@
                             <tr>
                                 <th scope="row">{{$pd->id}}</th>
                                 <td>{{$pd->name}}</td>
-                                <td>{{$pd->price}}</td>
+                                <td>{{$pd->price}}$</td>
                                 <td>{{$pd->quantity}}</td>
                                 <td>{{$pd->category->name}}</td>
-                                
+                                <td><img src="{{asset('admin/images/products/'.$pd->images[2]['path'])}}" style="width: 150px; height:180px"></td>
                                 <td>
                                     <a href="{{route('products.edit', [$pd->id])}}" class="btn btn-primary">Edit</a>
                                 </td>

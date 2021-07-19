@@ -25,7 +25,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category')->orderBy('id', 'DESC')->paginate(5);
+        $products = Product::with('category')->orderBy('id', 'DESC')->paginate(3);
         return view('admin.products.index')->with('products', $products);
     }
 
@@ -59,7 +59,6 @@ class ProductController extends Controller
                 $product = Product::create($request->only(['name', 'price', 'quantity', 'category_id']));
                
                 foreach ($request->file('files') as $key => $image) {
-                    // Get file name inclue extention
                     $imageName = time() . $image->getClientOriginalname();
                     // Declare target dir contain image in public/images/rooms forder
                     $target_dir = 'admin/images/products';
@@ -197,4 +196,5 @@ class ProductController extends Controller
         }    
         return back()->with('status', 'delete success');
     }
+
 }
