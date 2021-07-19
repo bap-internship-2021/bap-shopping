@@ -3,38 +3,67 @@
 namespace App\Http\Controllers\Cart;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function addProductToCart(Request $request): JsonResponse
+    public function index()
     {
-        $data = $request->only(['id', 'name', 'price', 'quantity']);
-
-        $request->session()->push('cart.products', [
-            'productId' => $data['id'],
-            'productName' => $data['name'],
-            'quantity' => $data['quantity'],
-            'price' => $data['price'] * $data['quantity']
-        ]);
-
-        return response()->json(['Success' => 'success']);
-    }
-
-    public function listItemInCart(Request $request)
-    {
-        if ($request->session()->has('cart.products')) { // If exist key products in cart
-            $cart = $request->session()->get('cart.products');
-            return view('cart.list-item', compact('cart'));
-        } else {
-            return view('cart.list-item');
+        if (session()->has('cart')) {
+            return view('cart.list-item')->with(['cart' => session()->get('cart')]);
         }
+        dd(session()->get('cart'));
+        return view('cart.list-item');
     }
 
-    public function deleteAllItemCart(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(Request $request): JsonResponse
     {
-        $request->session()->forget('cart.products');
+        $cart = $request->session()->get('cart');
+        $productId = $request->input('id');
+
+        // update item in cart if this item exist
+        if (isset($cart[$productId])) {
+            unset($cart[$productId]);
+            $cart = array_values($cart); // reset key index and return value
+        }
+
+        // else add new item
+        $cart[$productId] = [
+            'name' => $request->input('name'),
+            'quantity' => $request->input('quantity'),
+            'price' => $request->input('price')
+        ];
+        $request->session()->put('cart', $cart);
+
+        return response()->json(['Success' => 'success'], 200);
+    }
+
+
+
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->session()->forget('cart');
         return redirect()->back();
+    }
+
+    public function checkout()
+    {
+        if (session()->has('cart')) {
+            $cart = session()->get('cart');
+            $subTotal = 0;
+            $data = [];
+            foreach ($cart as $key => $item) {
+                $data[$key]['name'] = $item['name'];
+                $data[$key]['quantity'] = $item['quantity'];
+                $data[$key]['totalPrice'] = $item['quantity'] * $item['price'];
+                $subTotal += $data[$key]['totalPrice'];
+            }
+            return view('cart.cart-checkout', compact(['data', 'subTotal']));
+        }
+
+        return view('cart.cart-checkout');
     }
 }

@@ -19,11 +19,11 @@ use App\Http\Controllers\Cart\CartController;
 
 Route::get('/', function () {
     if (Auth::check()) {
-        return view('layouts.master');
+        return view('home.home-page');
     } else {
         return redirect()->route('login');
     }
-});
+})->name('/');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('layouts.master');
@@ -31,12 +31,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 Route::namespace('Product')->group(function () {
-    Route::get('products', [ProductController::class, 'listAllProducts'])->name('products.list'); // >> list all Products
-    Route::get('products/{product}', [ProductController::class, 'detailProductInfo'])->name('products.detailProduct');
+    Route::get('categories/{category}/products', [ProductController::class, 'index'])->name('categories.products.index');
+    Route::get('products/{product}', [ProductController::class, 'show'])->name('user.products.show');
 });
 
 Route::namespace('Cart')->group(function () {
-    Route::get('carts/item', [CartController::class, 'listItemInCart'])->name('carts.item');
-    Route::post('carts', [CartController::class, 'addProductToCart']);
-    Route::post('carts/destroy', [CartController::class, 'deleteAllItemCart'])->name('carts.destroy.all');
+    Route::get('carts/item', [CartController::class, 'index'])->name('carts.index');
+    Route::post('carts', [CartController::class, 'store']); // API store item to cart
+    Route::post('carts/destroy', [CartController::class, 'destroy'])->name('carts.destroy'); // Delete cart
+    Route::post('carts/checkout', [CartController::class, 'checkout'])->name('carts.checkout'); // Checkout item in cart
 });

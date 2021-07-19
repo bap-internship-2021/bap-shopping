@@ -2,39 +2,30 @@
 @section('title', 'Products')
 
 @section('content')
-    <div class="mt-20 mx-auto grid grid-cols-4 gap-y-10 gap-4">
-        @if(!empty($products))
-            @foreach ($products as $product)
-                <div
-                    class="flex flex-col justify-between border border-blue-600 ring-0 rounded-lg transform transition duration-300 ease-liner hover:scale-105 hover:ring hover:ring-blue-500 hover:border-blue-300 bg-gray-100">
-                    <div>
-                        <div>
-                            <img class="p-2 truncate overflow-hidden hover:overflow-visible"
-                                 src="{{asset('admin/images/products/'. $product->image_path)}}">
+    @isset($products)
+        <div class="grid grid-cols-3 gap-2 bg-gray-50">
+            @foreach($products as $key => $product)
+                <a href="{{ route('user.products.show', ['product' => $product->name ]) }}">
+                    <div class="flex flex-col group hover:shadow hover:bg-white">
+                        <div class="pt-5">
+                            <img class="object-cover h-48 w-full"
+                                 src="{{ asset("admin\\images\\products\\") . $product->first()->images->first()->path }}"
+                                 alt="Product">
                         </div>
                         <div>
-                            <p class="p-2 truncate overflow-hidden hover:overflow-visible">Tên sản
-                                phẩm: {{ $product->name }}</p>
+                            <p class="p-2">Tên sản phẩm: <span>{{ $product->name }}</span></p>
                         </div>
                         <div>
-                            <p class="p-2">Số lượng còn lại: {{ $product->quantity }}</p>
-                        </div>
-                        <div>
-                            <p class="p-2">Giá sản phẩm: {{ $product->price }}</p>
+                            <p class="p-2">Giá: <span>{{ $product->price }}</span> <span class="underline">đ</span></p>
                         </div>
                     </div>
+                </a>
 
-                    <div class="text-center h-full">
-                        <a class="font-bold text-blue-900 hover:text-gray-800"
-                           href="{{ route('products.detailProduct', ['product' => $product->name]) }}">
-                            Chi tiết sản phẩm
-                        </a>
-                    </div>
-                </div>
             @endforeach
-        @endif
-    </div>
-    <div class="flex sm:justify-start mt-5">
-        {{ $products->onEachSide(5)->links() }}
-    </div>
+        </div>
+        {{--  Paginate product --}}
+        <div>
+            {{ $products->links() }}
+        </div>
+    @endisset
 @endsection
