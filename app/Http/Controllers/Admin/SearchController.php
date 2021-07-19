@@ -27,10 +27,11 @@ class SearchController extends Controller
     public function index(Request $request){
         $data = $request->all();
         
-        if($data['keywords']){
+        if($data && isset($data['keywords'])){
             $products = Product::with('images')->where('name', 'LIKE', '%'.$data['keywords'].'%')->paginate(5);
+
             return view('admin.search.index')->with('products', $products);
         }
-
+        return redirect('admin/products')->with('status', 'NOT FOUND');
     }
 }
