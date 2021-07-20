@@ -36,14 +36,14 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">Name</th>
                                 <th scope="col">Sale_code</th>
                                 <th scope="col">Discount</th>
                                 <th scope="col">Sale_amount</th>
                                 <th scope="col">Min_price_to_apply</th>
                                 <th scope="col">From</th>
                                 <th scope="col">to</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Delete</th>
+                                <th scope="col" colspan="2">&nbsp</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +52,7 @@
                             ?>
                             <tr>
                                 <th scope="row">{{$sale->id}}</th>
+                                <td>{{$sale->name}}</td>
                                 <td>{{$sale->sale_code}}</td>
                                 <td>{{$sale->discount}}%</td>
                                 <td>{{$sale->sales_amount}}</td>
@@ -59,13 +60,13 @@
                                 <td>{{$sale->from}}</td>
                                 <td>{{$sale->to}}</td>
                                 <td>
-                                    <a href="{{route('sale.edit', [$sale->id])}}" class="btn btn-primary">Edit</a>
+                                    <a href="{{route('sale.edit', [$sale->id])}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                 </td>
                                 <td>
                                     <form action="{{route('sale.destroy', $sale->id)}}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                        <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?');" class="btn btn-danger">Delete</button>
+                                        <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?');" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
