@@ -24,6 +24,7 @@ class UpdateSaleRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|string|max:255',
             'sale_code' => 'required|string|max:255',
             'discount' => 'required|numeric|min:1',
             'sales_amount' => 'required|min:1',

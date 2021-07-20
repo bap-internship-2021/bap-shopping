@@ -35,6 +35,11 @@
 <form action="{{route('sale.store')}}" class="col-8 border p-5 rounded" method="POST">
     @csrf
     <div class="form-group">
+        <label for="exampleInputn">Name</label>
+        <input type="text" value="{{old('name')}}" name="name" class="form-control " id="exampleInputn" aria-describedby="emailHelp" placeholder="Name">
+    </div>
+
+    <div class="form-group">
         <label for="exampleInputsc">Sale Code</label>
         <input type="text" value="{{old('sale_code')}}" name="sale_code" class="form-control " id="exampleInputsc" aria-describedby="emailHelp" placeholder="sale_code">
     </div>

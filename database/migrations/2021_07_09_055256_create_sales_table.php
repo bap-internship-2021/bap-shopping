@@ -15,7 +15,8 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->string('sale_code'); // ma code
+            $table->string('name');
+            $table->string('sale_code')->unique(); // ma code
             $table->integer('discount'); // phan tram giam gia
             $table->integer('sales_amount');
             $table->double('min_price_to_apply'); // gia thap nhat de duoc ap dung ma giam gia
