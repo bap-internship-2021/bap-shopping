@@ -29,9 +29,9 @@
                 <div class="w-1/2">
                     <div class="pl-2">
                         <p class="invisible"><span id="product-id">{{ $item->id }}</span></p>
+                        <p class="invisible"><span id="image-path">{{ $item->images->first()->path }}</span></p>
                         <p class="p-2">{{__('Tên sản phẩm: ')}} <span id="product-name">{{ $item->name }}</span></p>
                         <p class="p-2">{{__('Giá: ')}} <span id="product-price" class="text-blue-900"> {{ $item->price }} </span>$</p>
-                        <p class="p-2">{{__('Còn lại: ')}} <span id="product-price" class="text-blue-900"> {{ $item->quantity }} </span>sản phẩm</p>
                     </div>
                     <div id="app">
                         <app></app>
