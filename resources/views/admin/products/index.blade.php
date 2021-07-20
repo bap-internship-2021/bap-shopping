@@ -62,7 +62,7 @@
                                 <td>{{$pd->price}}$</td>
                                 <td>{{$pd->quantity}}</td>
                                 <td>{{$pd->category->name}}</td>
-                                <td><img src="{{asset('admin/images/products/'.$pd->images[2]['path'])}}" style="width: 150px; height:180px"></td>
+                                <td><img src="{{asset('admin/images/products/'.$pd->images[3]['path'])}}" style="width: 150px; height:180px"></td>
                                 <td>
                                     <a href="{{route('products.edit', [$pd->id])}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                 </td>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SearchController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::get('home', [HomeController::class, 'index']);
@@ -20,4 +21,5 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::resource('sale', SaleController::class);
     Route::post('search-products', [SearchController::class, 'search'])->name('search.product');
     Route::get('search', [SearchController::class, 'index'])->name('search');
+    Route::get('users', [UserController::class, 'index'])->name('users');
 });
