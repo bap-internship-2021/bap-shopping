@@ -18,6 +18,13 @@
                 </li>
 
                 <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('users')}}" aria-expanded="false">
+                        <i class="fas fa-users"></i>
+                        <span class="hide-menu">Users</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('category.index')}}" aria-expanded="false">
                         <i class="fab fa-apple"></i>
                         <span class="hide-menu">Category</span>
@@ -37,12 +44,7 @@
                         <span class="hide-menu">Sales</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('users')}}" aria-expanded="false">
-                        <i class="fas fa-users"></i>
-                        <span class="hide-menu">Users</span>
-                    </a>
-                </li>
+                
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
                         <i class="mdi mdi-alert-outline"></i>
