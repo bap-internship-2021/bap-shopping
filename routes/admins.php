@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Error\ErrorController;
 
 Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::get('home', [HomeController::class, 'index']);
@@ -23,3 +24,5 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::get('search', [SearchController::class, 'index'])->name('search');
     Route::get('users', [UserController::class, 'index'])->name('users');
 });
+
+Route::get('404', [ErrorController::class, 'errorPage']);
