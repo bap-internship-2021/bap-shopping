@@ -29,7 +29,7 @@ class UpdateProfileRequest extends FormRequest
             'phone' => 'required|numeric|min:11',
             'address'=> 'required',
             'gender' => 'required',
-            'profile_photo_path' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
+            'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ];
     }
 }

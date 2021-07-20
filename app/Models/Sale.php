@@ -11,6 +11,7 @@ class Sale extends Model
 
     protected $table = 'sales';
     protected $fillable = [
+        'name',
         'sale_code',
         'discount',
         'sales_amount',

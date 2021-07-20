@@ -25,6 +25,7 @@ class CreateSaleRequest extends FormRequest
     {
         return [
             //
+            'name' => 'required|string|max:255',
             'sale_code' => 'required|string|max:255|unique:sales',
             'discount' => 'required|numeric|min:1',
             'sales_amount' => 'required|min:1',
