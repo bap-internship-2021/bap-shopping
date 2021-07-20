@@ -1874,6 +1874,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddProductToCart",
@@ -1884,6 +1887,7 @@ __webpack_require__.r(__webpack_exports__);
         name: document.getElementById("product-name").innerHTML,
         price: document.getElementById("product-price").innerHTML,
         quantity: 1,
+        image: document.getElementById("image-path").innerHTML,
         token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       },
       notification: '',
@@ -1893,15 +1897,16 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.getProductQuantity();
   },
+  watch: {},
   methods: {
     addProductToCart: function addProductToCart() {
       var _this = this;
 
       if (this.formData.quantity > 0) {
-        if (this.productQuantityResource > this.formData.quantity) {
+        if (this.productQuantityResource >= this.formData.quantity) {
           axios__WEBPACK_IMPORTED_MODULE_0___default().post("http://127.0.0.1:8000/carts", this.formData).then(function (response) {
             console.log(response);
-            _this.notification = 'Thêm vào giỏ thành công';
+            _this.notification = 'Thêm vào giỏ hàng thành công';
           })["catch"](function (error) {
             _this.notification = 'Xảy ra lỗi, vui lòng thử lại';
           });
@@ -19591,12 +19596,18 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "p-2 mt-1" }, [
-    _c("p", [
+    _c("p", { staticClass: "p-2" }, [
       _vm._v("Số lượng còn lại: "),
       _c("span", { staticClass: "text-blue-900" }, [
         _vm._v(_vm._s(_vm.productQuantityResource))
       ]),
       _vm._v(" sản phẩm")
+    ]),
+    _vm._v(" "),
+    _c("pre", [
+      _vm._v(
+        "        " + _vm._s(JSON.stringify(_vm.formData, null, 2)) + "\n    "
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -19695,9 +19706,30 @@ var render = function() {
           }
         }),
         _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.image,
+              expression: "formData.image"
+            }
+          ],
+          attrs: { type: "hidden" },
+          domProps: { value: _vm.formData.image },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "image", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
         _c(
           "label",
-          { staticClass: "text-blue-900 mt-5", attrs: { for: "quantity" } },
+          { staticClass: "text-blue-900 mt-5 p-2", attrs: { for: "quantity" } },
           [_vm._v("Nhập số lượng cần mua")]
         ),
         _vm._v(" "),
@@ -19712,7 +19744,7 @@ var render = function() {
             }
           ],
           staticClass:
-            "my-2  border-2 border-blue-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 p-5",
+            "my-2  border-2 border-blue-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 p-2",
           attrs: {
             id: "quantity",
             placeholder: "Số lượng cần mua",
@@ -19736,9 +19768,9 @@ var render = function() {
           "button",
           {
             staticClass:
-              "bg-indigo-300 border rounded-lg p-5 hover:bg-indigo-200 transition mt-5 "
+              "bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5 "
           },
-          [_vm._v("\n                Thêm vào giỏ hàng\n            ")]
+          [_vm._v("\n            Thêm vào giỏ hàng\n        ")]
         )
       ]
     ),

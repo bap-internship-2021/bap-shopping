@@ -37,8 +37,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Delete</th>
+                                <th scope="col" colspan="2">&nbsp</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,13 +48,13 @@
                                 <th scope="row">{{$ct->id}}</th>
                                 <td>{{$ct->name}}</td>
                                 <td>
-                                    <a href="{{route('category.edit', [$ct->id])}}" class="btn btn-primary">Edit</a>
+                                    <a href="{{route('category.edit', [$ct->id])}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                 </td>
                                 <td>
                                     <form action="{{route('category.destroy', $ct->id)}}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                        <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?');" class="btn btn-danger">Delete</button>
+                                        <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?');" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>

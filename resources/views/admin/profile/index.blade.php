@@ -53,7 +53,7 @@
                     <div class="card-body">
                         <center class="m-t-30"><img src="{{asset('admin/images/avatar/' . Auth::user()->profile_photo_path ) }}" class="rounded-circle" width="200" height="250">
                             <h4 class="card-title m-t-10">{{Auth::user()->name}}</h4>
-                            <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
+                            <h6 class="card-subtitle">Account Admin BAP Shop</h6>
                             <div class="row text-center justify-content-md-center">
                                 <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
                                 <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
@@ -124,10 +124,10 @@
                             
                             <div class="form-group">
                                 <label class="col-md-12">Choose File</label>
-                                <input type="file" name="file" class="form-control-file">
+                                <input type="file" name="file" value="{{Auth::user()->profile_photo_path}}" class="form-control-file">
                             </div>
                             
-                            <d class="form-group">
+                            <div class="form-group">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-success">Update Profile</button>
                                 </div>

@@ -36,6 +36,11 @@
     @method('PUT')
     @csrf
     <div class="form-group">
+        <label for="exampleInputn">Name</label>
+        <input type="text" value="{{$sale->name}}" name="name" class="form-control " id="exampleInputn" aria-describedby="emailHelp">
+    </div>
+
+    <div class="form-group">
         <label for="exampleInputsc">Sale Code</label>
         <input type="text" value="{{$sale->sale_code}}" name="sale_code" class="form-control " id="exampleInputsc" aria-describedby="emailHelp">
     </div>

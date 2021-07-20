@@ -26,12 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->integer('role_id')->default(2);
             $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
-            $table->string('age');
-            $table->string('gender');
-            $table->string('phone');
-            $table->string('address');
-            $table->integer('role_id')->default(2);
+            $table->string('profile_photo_path', 2048)->default('default.jpg');
             $table->timestamps();
         });
     }
