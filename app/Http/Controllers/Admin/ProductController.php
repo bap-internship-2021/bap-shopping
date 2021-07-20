@@ -25,7 +25,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category')->orderBy('id', 'ASC')->paginate(3);
+        $products = Product::with('category')->orderBy('id', 'DESC')->paginate(3);
         return view('admin.products.index')->with('products', $products);
     }
 
@@ -52,12 +52,12 @@ class ProductController extends Controller
         // start transaction
         DB::beginTransaction();
         try {
-           
+
             // If request has file upload
             if ($request->hasFile('files')) {
                 // create new room in rooms table
                 $product = Product::create($request->only(['name', 'price', 'quantity', 'category_id']));
-               
+
                 foreach ($request->file('files') as $key => $image) {
                     $imageName = time() . $image->getClientOriginalname();
                     // Declare target dir contain image in public/images/rooms forder
@@ -70,13 +70,13 @@ class ProductController extends Controller
                     $array[$key]['updated_at'] = now();
                     $array[$key]['product_id'] = $product->id;
                 }
-          
+
                 $product->images()->insert($array);
                 // dd($array);
                 DB::commit();
             }
             // Insert new resource in images table with data = $array by using relationship
- 
+
 
             // All OK then commit
 
@@ -133,14 +133,14 @@ class ProductController extends Controller
             $product = Product::find($id);
 
             if($request->hasFile('files')){
-                
+
                 $images = Image::where('product_id', $id)->get();
                 foreach($images as $key => $image){
                     $imagePath = 'admin/images/products/' . $image->path;
                     File::delete($imagePath);
                 }
                 if(Image::where('product_id', $id)->delete()){
-                    
+
                     $product->update($request->only(['name', 'price', 'quantity', 'category_id']));
                     foreach ($request->file('files') as $key => $image) {
                         // Get file name inclue extention
@@ -166,7 +166,7 @@ class ProductController extends Controller
             DB::rollback();
             return back()->with('status', 'update fail');
             // something went wrong
-        }    
+        }
         return back()->with('status', 'update success');
     }
 
@@ -193,7 +193,7 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             // something went wrong
-        }    
+        }
         return back()->with('status', 'delete success');
     }
 
