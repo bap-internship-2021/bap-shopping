@@ -22,7 +22,7 @@
                     @endif
                 </div>
                 <div>
-                    @if(session()->has('salePrice'))
+                    @if(session()->has('grandTotal'))
                         <p>Tổng cộng: {{ number_format(session()->get('grandTotal'), 0, '', ',') }} <span
                                 class="underline">đ</span></p>
                     @else

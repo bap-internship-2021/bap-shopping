@@ -20,7 +20,6 @@ class OrderController extends Controller
                     $grandTotal = $subTotal - $salePrice; // Tổng chính
                     session()->put('salePrice', $salePrice);
                     session()->put('grandTotal', $grandTotal);
-                    dd('Order thanh cong');
                     return view('order.confirmation');
                 } else { // if sale code not found
                     return back()->with(['errorSaleCode' => 'Mã giảm giá không tồn tại'])->withInput();
@@ -29,7 +28,6 @@ class OrderController extends Controller
             $subTotal = session()->get('subTotal');
             session()->put('salePrice', 0);
             session()->put('grandTotal', $subTotal);
-            dd('Order thanh cong');
             return view('order.confirmation');
         } else {
             return route('carts.index');

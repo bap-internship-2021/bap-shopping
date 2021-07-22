@@ -127,7 +127,7 @@
                                            class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
                                            placeholder="Mã khuyến mãi"
                                            value="{{ old('saleCode') }}"
-                                    onkeyup="getSaleCode()">
+                                    onchange="getSaleCode()">
                                 </div>
                             </div>
                         </div>
@@ -163,9 +163,9 @@
                         <div class="pt-5">
                             <form action="{{ route('orders.confirmation') }}" method="post">
                                 @csrf
-                                <input type="hidden" id="sale-code" name="saleCode">
+                                <input type="hidden" id="sale-code"  name="saleCode">
                                 <button class="bg-red-500 p-2 w-full rounded text-white font-semibold hover:bg-red-600">
-                                    Tiến hành đặt hàng
+                                    Tiến hành thanh toán
                                 </button>
                             </form>
                         </div>
