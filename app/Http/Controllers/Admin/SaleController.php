@@ -40,7 +40,6 @@ class SaleController extends Controller
      */
     public function store(CreateSaleRequest $request)
     {
-        dd($request->all());
         $data = $request->except(['_method', '_token']);
         Sale::create($data);
         return back()->with('status', 'create success');

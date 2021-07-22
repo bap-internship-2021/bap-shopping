@@ -16,7 +16,8 @@
     <!-- Custom CSS -->
     <link href="{{URL::asset('admin/dist/css/style.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('admin/dist/css/admin.css')}}" rel="stylesheet">
-
+    @yield('css')
+    
     <link rel="stylesheet" href="{{URL::asset('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
@@ -88,6 +89,7 @@
     {{-- <script src="{{URL::asset('admin/dist/js/pages/dashboards/dashboard1.js')}}"></script> --}}
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    @yield('js')
 
     <script type="text/javascript">
         $('#keywords').keyup(function(){
