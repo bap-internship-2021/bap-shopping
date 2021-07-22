@@ -49,6 +49,7 @@
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Category</th>
                                 <th scope="col">Image</th>
+                                <th scope="col">Specification</th>
                                 <th scope="col" colspan="2">&nbsp</th>
                             </tr>
                         </thead>
@@ -63,6 +64,7 @@
                                 <td>{{$pd->quantity}}</td>
                                 <td>{{$pd->category->name}}</td>
                                 <td><img src="{{asset('admin/images/products/'.$pd->images[3]['path'])}}" style="width: 150px; height:180px"></td>
+                                <td><a href="{{route('product.specification', [$pd->id])}}" class="btn btn-danger"><i class="fas fa-eye"></i></a></td>
                                 <td>
                                     <a href="{{route('products.edit', [$pd->id])}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                 </td>
