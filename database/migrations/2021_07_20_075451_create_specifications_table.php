@@ -27,6 +27,7 @@ class CreateSpecificationsTable extends Migration
             $table->string('operating_system');
             $table->string('made_in');
             $table->date('release_time');
+            $table->text('description');
             $table->foreignId('product_id')->constrained('products');
             $table->timestamps();
         });
