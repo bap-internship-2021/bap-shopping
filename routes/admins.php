@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SearchController;
+use App\Http\Controllers\Admin\SpecificationController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Error\ErrorController;
 
@@ -23,6 +24,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::post('search-products', [SearchController::class, 'search'])->name('search.product');
     Route::get('search', [SearchController::class, 'index'])->name('search');
     Route::get('users', [UserController::class, 'index'])->name('users');
+    Route::get('product/specification/{id}', [SpecificationController::class, 'index'])->name('product.specification');
+    Route::get('product/specification/create', [SpecificationController::class, 'create'])->name('product.specification.create');
 });
 
 Route::get('404', [ErrorController::class, 'errorPage']);

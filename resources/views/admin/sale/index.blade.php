@@ -36,20 +36,21 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Name</th>
                                     <th scope="col">Sale_code</th>
                                     <th scope="col">Discount</th>
                                     <th scope="col">Sale_amount</th>
                                     <th scope="col">Min_price_to_apply</th>
                                     <th scope="col">From</th>
                                     <th scope="col">to</th>
-                                    <th scope="col">Edit</th>
-                                    <th scope="col">Delete</th>
+                                    <th scope="col" colspan="2">&nbsp</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($sales as $key => $sale)
                                     <tr>
                                         <th scope="row">{{$sale->id}}</th>
+                                        <td>{{$sale->name}}</td>
                                         <td>{{$sale->sale_code}}</td>
                                         <td>{{$sale->discount}}%</td>
                                         <td>{{$sale->sales_amount}}</td>

@@ -124,9 +124,6 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
-        // $product = Product::find($id);
-        // $data = $request->except(['_method', '_token']);
-
         DB::beginTransaction();
 
         try {

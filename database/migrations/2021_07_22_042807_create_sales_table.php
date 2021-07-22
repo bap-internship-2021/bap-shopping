@@ -13,7 +13,7 @@ class CreateSalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('sale', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('sale_code')->unique(); // ma code
@@ -33,6 +33,6 @@ class CreateSalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('sale');
     }
 }
