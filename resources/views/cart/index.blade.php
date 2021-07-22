@@ -3,21 +3,21 @@
 
 @section('content')
     @if(!empty($data))
-        <section class="py-5">
-            <div class="border bg-blue-900 shadow rounded  mx-auto">
-                <div class="animate-pulse mx-auto">
-                    <p class="text-center text-white p-3">Hình thức thanh toán COD</p>
-                </div>
-            </div>
-        </section>
+        {{--        <section class="py-5">--}}
+        {{--            <div class="border bg-blue-900 shadow rounded  mx-auto">--}}
+        {{--                <div class="animate-pulse mx-auto">--}}
+        {{--                    <p class="text-center text-white p-3">Hình thức thanh toán COD</p>--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--        </section>--}}
         <div><p class="text-xl font-bold">GIỎ HÀNG</p></div>
         <section class="flex flex-row">
             <div class="w-3/6">
 
                 <div>
                     <div class="border border-white rounded bg-white mb-5">
-                        <div class="flex">
-                            <div class="w-2/6 py-2">
+                        <div class="flex p-2">
+                            <div class="w-2/6">
                                 <p>Tất cả ({{ count($data) }} sản phẩm)</p>
                             </div>
                             <div class="w-1/6">
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="py-5 border border-white rounded bg-white">
+                <div class="p-2 border border-white rounded bg-white">
                     @foreach($data as $key => $item)
                         <div class="flex py-5">
                             <div class="w-2/6 flex">
@@ -119,20 +119,15 @@
                                 <p>Nhập mã khuyến mãi <span
                                         class="text-sm text-blue-900">(Tối đa một mã khuyến mãi)</span></p>
                             </div>
-
+                            <!-- Input sale code -->
                             <div>
                                 <div>
-                                    <form action="#" method="post">
-                                        @csrf
-                                        <input type="text"
-                                               id="sale-code"
-                                               class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
-                                               placeholder="Mã khuyến mãi">
-                                        <button
-                                            class="mt-1 border bg-blue-400 border-blue-400 hover:bg-blue-500 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1">
-                                            Sử dụng mã giảm giá
-                                        </button>
-                                    </form>
+                                    <input type="text"
+                                           id="sale-code-input"
+                                           class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
+                                           placeholder="Mã khuyến mãi"
+                                           value="{{ old('saleCode') }}"
+                                    onkeyup="getSaleCode()">
                                 </div>
                             </div>
                         </div>
@@ -144,7 +139,7 @@
 
                     <!-- Start count price total and sale price -->
                     <div class="">
-                        <div class="font-light bg-white p-2 rounded rounded-b-none mt-5">
+                        <div class="font-light bg-white p-2 rounded mt-5">
                             <div class="flex justify-between">
                                 <div>
                                     <p>Tạm tính</p>
@@ -156,44 +151,29 @@
                                     </p>
                                 </div>
                             </div>
-
-                            <div class="flex justify-between">
-                                <div>
-                                    <p>Giảm giá</p>
-                                </div>
-                                <div class="font-semibold">
-                                    @if(isset($salePrice))
-                                        <p class="font-semibold">{{ $salePrice }} <span class="underline">đ</span></p>
-                                    @else
-                                        <p class="font-semibold">0 <span class="underline">đ</span></p>
-                                    @endif
-                                </div>
-                            </div>
                         </div>
                         <!-- Divide  -->
                         <div class="h-px"></div>
                         <!-- End divide -->
-                        <div class="flex justify-between bg-white border-t-0 rounded rounded-t-none p-2">
-
-                            <div>
-                                <p class="font-light">Tổng cộng</p>
-                            </div>
-                            <div>
-                                <p class="font-semibold">{{ $subTotal }} <span class="underline">đ</span></p>
-                            </div>
-                        </div>
                     </div>
                     <!-- End count price total and sale price -->
 
                     <!-- Start form click to buy -->
                     <div>
                         <div class="pt-5">
-                            <form action="" method="post">
+                            <form action="{{ route('orders.confirmation') }}" method="post">
+                                @csrf
+                                <input type="hidden" id="sale-code" name="saleCode">
                                 <button class="bg-red-500 p-2 w-full rounded text-white font-semibold hover:bg-red-600">
-                                    Mua hàng
+                                    Tiến hành đặt hàng
                                 </button>
                             </form>
                         </div>
+                        @if(session()->has('errorSaleCode'))
+                            <div class="pt-5">
+                            <p class="border bg-white border-red-500 p-2 w-full rounded text-black font-semibold text-center">{{ session()->get('errorSaleCode') }}</p>
+                            </div>
+                        @endif
                     </div>
                     <!-- End form click to buy -->
                 </div>
@@ -213,4 +193,8 @@
                class="mt-20 bg-yellow-300 p-3 rounded-lg focus:ring-4 focus:ring-orange-400">Tiếp tục mua sắm</a>
         </div>
     @endif
+@endsection
+@section('js')
+{{--  Get user input sale code  --}}
+<script src="{{ asset('js/get-sale-code.js') }}"></script>
 @endsection

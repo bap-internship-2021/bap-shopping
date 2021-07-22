@@ -9,7 +9,7 @@
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
     {{--  FONT AWESOME 6  --}}
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+          integ\rity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
 
@@ -46,7 +46,9 @@
             <input type="text"
                    class="px-3 py-2 bg-purple-white  shadow-lg rounded w-5/6"
                    placeholder="Tìm kiếm sản phẩm">
-            <button class="px-3 py-2 bg-white rounded shadow-lg text-black font-medium"><i class="fas fa-search"></i> Tìm Kiếm</button>
+            <button class="px-3 py-2 bg-white rounded shadow-lg text-black font-medium"><i class="fas fa-search"></i>
+                Tìm Kiếm
+            </button>
         </form>
     </div>
     <!-- END SEARCH BAR -->
@@ -81,7 +83,7 @@
             <nav>
                 <ul class="px-4 py-2">
                     <li class="animate-bounce transition hover:text-red-500  cursor-pointer">
-                        <a href=""><i class="fas fa-tags fill-current text-blue-400"></i> Chương trình khuyến mãi</a>
+                        <a href="{{ route('user.sales.index') }}"><i class="fas fa-tags fill-current text-blue-400"></i> Chương trình khuyến mãi</a>
                     </li>
                     <li class="cursor-pointer transition hover:text-red-500">
                         <a href="{{ route('carts.index') }}"><i
@@ -112,7 +114,8 @@
                     </li>
                     <li class="cursor-pointer transition hover:text-red-500">
                         <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::AIR_POD]) }}">
-                            <span class="iconify inline fill-current text-blue-400" data-icon="akar-icons:airpods" data-inline="false"></span>Air Pod
+                            <span class="iconify inline fill-current text-blue-400" data-icon="akar-icons:airpods"
+                                  data-inline="false"></span>Air Pod
                         </a>
                     </li>
                 </ul>

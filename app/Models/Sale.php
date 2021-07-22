@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static paginate(int $int)
+ * @method static where(string $string, mixed $input)
+ * @method static find($id)
+ */
 class Sale extends Model
 {
     use HasFactory;
@@ -19,5 +24,4 @@ class Sale extends Model
         'from',
         'to'
     ];
-
 }
