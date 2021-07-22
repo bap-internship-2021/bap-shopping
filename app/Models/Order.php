@@ -10,8 +10,17 @@ class Order extends Model
     use HasFactory;
 
     const PENDING_STATUS = 1;
-    const FINISH_STATUS = 2;
-    protected $fillable = ['user_id', 'status', 'voucher_id'];
+    const SENDING_STATUS = 2;
+    const FINISH_STATUS = 3;
+    protected $fillable = ['user_id', 'status'];
 
-//    public function
+    public function voucherDetails()
+    {
+        return $this->hasMany(VoucherDetail::class);
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }

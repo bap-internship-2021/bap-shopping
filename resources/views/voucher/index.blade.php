@@ -9,7 +9,7 @@
                     <p class="text-center p-2">{{ $voucher->name }}</p>
                 </div>
                 <div class="p-3">
-                    <p>Mã code: <span id="{{ 'voucher-code-' . $key }}">{{ $voucher->sale_code }}</span></p>
+                    <p>Mã code: <span id="{{ 'code-' . $key }}">{{ $voucher->code }}</span></p>
                 </div>
                 <div class="p-3">
                     <p>Giảm giá: {{ $voucher->discount }}<span>%</span></p>
@@ -27,9 +27,9 @@
                 <div class="p-3">
                     <button
 
-                        data-clipboard-target="{{ '#voucher-code-' . $key }}"
+                        data-clipboard-target="{{ '#code-' . $key }}"
                         class="btn bg-blue-400 hover:bg-blue-500 p-2 w-full rounded ring:none focus:outline-none focus:ring-2 focus:ring-500-50">
-                        Sao chép mã khuyến mãi
+                        Sao chép
                     </button>
                 </div>
             </div>

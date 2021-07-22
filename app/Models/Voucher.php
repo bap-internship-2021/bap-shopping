@@ -13,13 +13,10 @@ class Voucher extends Model
     const EXPIRED_STATUS = 2;
 
     protected $table = 'vouchers';
-    protected $fillable = [
-        'voucher_code',
-        'from',
-        'to',
-        'status',
-        'discount',
-        'min_price',
-        'quantity'
-    ];
+    protected $fillable = ['code', 'from', 'to', 'status', 'discount', 'min_price', 'quantity'];
+
+    public function voucherDetails()
+    {
+        return $this->hasMany(VoucherDetail::class );
+    }
 }

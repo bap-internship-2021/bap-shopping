@@ -9,12 +9,12 @@ use App\Http\Requests\User\Order\UserConfirmRequest;
 
 class OrderController extends Controller
 {
-    public function confirmation(UserConfirmRequest $request, VoucherController $voucherController)
+    public function confirmation(UserConfirmRequest $request)
     {
         if (session()->has('cart')) {
-            if (!empty($request->input('saleCode'))) { // If user request has voucher code
-                if (count($voucherController->show($request->input('saleCode'))) > 0) {
-                    $sale = $voucherController->show($request->input('saleCode'));
+            if (!empty($request->input('code'))) { // If user request has voucher code
+                if (count(VoucherController::checkVoucherCodeIsExist($request->input('code'))) > 0) {
+                    $sale = VoucherController::checkVoucherCodeIsExist($request->input('code'));
                     $discount = $sale->first()->discount;  // Discount percent (%)
                     $subTotal = session()->get('subTotal'); // tổng phụ
                     $voucherPrice = ($subTotal * $discount) / 100;
@@ -34,9 +34,10 @@ class OrderController extends Controller
             return route('carts.index');
         }
     }
+
     // TODO: Xem lại bảng order
     public function store()
     {
-
+        dd(session()->all());
     }
 }

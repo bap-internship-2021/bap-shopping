@@ -13,8 +13,8 @@ class VoucherController extends Controller
         return view('voucher.index', compact('vouchers'));
     }
 
-    public function show($voucherCode)
+    public static function checkVoucherCodeIsExist($voucherCode)
     {
-        return Voucher::where('voucher_code', $voucherCode)->where('status', Voucher::DUE_STATUS)->get();
+        return Voucher::where('code', $voucherCode)->where('status', Voucher::DUE_STATUS)->get();
     }
 }

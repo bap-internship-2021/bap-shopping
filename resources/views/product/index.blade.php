@@ -28,7 +28,7 @@
             {{ $products->links() }}
         </div>
     @endisset
-    @if(!empty($products))
+    @if(count($products) === 0)
         <div class="p-5">
             <p class="text-center">Chưa có sản phẩm</p>
         </div>

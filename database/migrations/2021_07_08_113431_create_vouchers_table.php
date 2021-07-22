@@ -15,7 +15,8 @@ class CreateVouchersTable extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
-            $table->string('voucher_code')->unique();
+            $table->string('name');
+            $table->string('code')->unique();
             $table->dateTime('from');
             $table->dateTime('to');
             $table->integer('status');
