@@ -9,5 +9,9 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'shipping_date', 'shipping_status', ''];
+    const PENDING_STATUS = 1;
+    const FINISH_STATUS = 2;
+    protected $fillable = ['user_id', 'status', 'voucher_id'];
+
+//    public function
 }

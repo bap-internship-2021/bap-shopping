@@ -83,7 +83,7 @@
             <nav>
                 <ul class="px-4 py-2">
                     <li class="animate-bounce transition hover:text-red-500  cursor-pointer">
-                        <a href="{{ route('user.sales.index') }}"><i class="fas fa-tags fill-current text-blue-400"></i> Chương trình khuyến mãi</a>
+                        <a href="{{ route('user.vouchers.index') }}"><i class="fas fa-tags fill-current text-blue-400"></i> Chương trình khuyến mãi</a>
                     </li>
                     <li class="cursor-pointer transition hover:text-red-500">
                         <a href="{{ route('carts.index') }}"><i

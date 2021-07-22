@@ -8,9 +8,9 @@ $(function() {
     "use strict";
 
     // ==============================================================
-    // sale ratio
+    // voucher ratio
     // ==============================================================
-    var chart = new Chartist.Line('.sale', {
+    var chart = new Chartist.Line('.voucher', {
         labels: [1, 2, 3, 4, 5, 6, 7],
         series: [
             [24.5, 28.3, 42.7, 32, 34.9, 48.6, 40],

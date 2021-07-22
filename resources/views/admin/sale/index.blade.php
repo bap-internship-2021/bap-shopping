@@ -58,11 +58,11 @@
                                         <td>{{$sale->from}}</td>
                                         <td>{{$sale->to}}</td>
                                         <td>
-                                            <a href="{{route('sale.edit', [$sale->id])}}"
+                                            <a href="{{route('voucher.edit', [$sale->id])}}"
                                                class="btn btn-primary">Edit</a>
                                         </td>
                                         <td>
-                                            <form action="{{route('sale.destroy', $sale->id)}}" method="POST">
+                                            <form action="{{route('voucher.destroy', $sale->id)}}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit"
@@ -77,7 +77,7 @@
                                 <tfoot>
                                 <tr>
                                     <td colspan="8">
-                                        <a href="{{route('sale.create')}}">
+                                        <a href="{{route('voucher.create')}}">
                                             <button class="btn btn-primary" style="margin-top:20px" id="button">Add
                                                 Sale
                                             </button>

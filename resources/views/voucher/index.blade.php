@@ -3,28 +3,31 @@
 
 @section('content')
     <div class="grid grid-cols-3 gap-1">
-        @foreach($sales as $key => $sale)
+        @foreach($vouchers as $key => $voucher)
             <div class="bg-white hover:shadow">
                 <div class="bg-green-400">
-                    <p class="text-center p-2">{{ $sale->name }}</p>
+                    <p class="text-center p-2">{{ $voucher->name }}</p>
                 </div>
                 <div class="p-3">
-                    <p>Mã code: <span id="{{ 'sale-code-' . $key }}">{{ $sale->sale_code }}</span></p>
+                    <p>Mã code: <span id="{{ 'voucher-code-' . $key }}">{{ $voucher->sale_code }}</span></p>
                 </div>
                 <div class="p-3">
-                    <p>Giảm giá: {{ $sale->discount }}<span>%</span></p>
+                    <p>Giảm giá: {{ $voucher->discount }}<span>%</span></p>
                 </div>
                 <div class="p-3">
-                    <p>Số lượng còn lại: {{ $sale->sales_amount }}</p>
+                    <p>Số lượng còn lại: {{ $voucher->quantity }}</p>
                 </div>
                 <div class="p-3">
-                    <p>Áp dụng cho đơn hàng: {{ number_format($sale->min_price_to_apply, 0, '', ',') }}<span
+                    <p>Áp dụng cho đơn hàng: {{ number_format($voucher->min_price, 0, '', ',') }}<span
                             class="underline">đ</span> trở lên</p>
+                </div>
+                <div class="p-3">
+                    <p>Hết hạn: <span class="transition text-red-500">{{ \Carbon\Carbon::parse($voucher->to)->format('d-m-Y')  }}</span></p>
                 </div>
                 <div class="p-3">
                     <button
 
-                        data-clipboard-target="{{ '#sale-code-' . $key }}"
+                        data-clipboard-target="{{ '#voucher-code-' . $key }}"
                         class="btn bg-blue-400 hover:bg-blue-500 p-2 w-full rounded ring:none focus:outline-none focus:ring-2 focus:ring-500-50">
                         Sao chép mã khuyến mãi
                     </button>
@@ -34,7 +37,7 @@
     </div>
     <!-- Paginate -->
     <div>
-        {{$sales->links()}}
+        {{$vouchers->links()}}
     </div>
 @endsection
 @section('js')

@@ -3,30 +3,31 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Voucher\VoucherController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Sale\SaleController;
+use App\Http\Requests\User\Order\UserConfirmRequest;
 
 class OrderController extends Controller
 {
-    public function confirmation(Request $request, SaleController $saleController)
+    public function confirmation(UserConfirmRequest $request, VoucherController $voucherController)
     {
         if (session()->has('cart')) {
-            if (!empty($request->input('saleCode'))) { // If user request has sale code
-                if (count($saleController->show($request->input('saleCode'))) > 0) {
-                    $sale = $saleController->show($request->input('saleCode'));
+            if (!empty($request->input('saleCode'))) { // If user request has voucher code
+                if (count($voucherController->show($request->input('saleCode'))) > 0) {
+                    $sale = $voucherController->show($request->input('saleCode'));
                     $discount = $sale->first()->discount;  // Discount percent (%)
                     $subTotal = session()->get('subTotal'); // tổng phụ
-                    $salePrice = ($subTotal * $discount) / 100;
-                    $grandTotal = $subTotal - $salePrice; // Tổng chính
-                    session()->put('salePrice', $salePrice);
+                    $voucherPrice = ($subTotal * $discount) / 100;
+                    $grandTotal = $subTotal - $voucherPrice; // Tổng chính
+                    session()->put('voucherPrice', $voucherPrice);
                     session()->put('grandTotal', $grandTotal);
                     return view('order.confirmation');
-                } else { // if sale code not found
-                    return back()->with(['errorSaleCode' => 'Mã giảm giá không tồn tại'])->withInput();
+                } else { // if voucher code not found
+                    return back()->with(['errorVoucherCode' => 'Mã giảm giá không tồn tại'])->withInput();
                 }
             }
             $subTotal = session()->get('subTotal');
-            session()->put('salePrice', 0);
+            session()->put('voucherPrice', 0);
             session()->put('grandTotal', $subTotal);
             return view('order.confirmation');
         } else {

@@ -20,7 +20,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::put('profile-update/{id}', [ProfileController::class, 'handleUpdateProfile'])->name('profile.update');
     Route::resource('products', ProductController::class);
     Route::resource('category', CategoryController::class);
-    Route::resource('sale', SaleController::class);
+    Route::resource('voucher', SaleController::class);
     Route::post('search-products', [SearchController::class, 'search'])->name('search.product');
     Route::get('search', [SearchController::class, 'index'])->name('search');
     Route::get('users', [UserController::class, 'index'])->name('users');

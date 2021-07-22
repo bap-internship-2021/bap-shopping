@@ -112,14 +112,14 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Form enter sale code -->
+                    <!-- Form enter voucher code -->
                     <div class="bg-gray-100 mt-5">
                         <div class="flex flex-col bg-white rounded p-2">
                             <div class="py-2">
                                 <p>Nhập mã khuyến mãi <span
                                         class="text-sm text-blue-900">(Tối đa một mã khuyến mãi)</span></p>
                             </div>
-                            <!-- Input sale code -->
+                            <!-- Input voucher code -->
                             <div>
                                 <div>
                                     <input type="text"
@@ -135,9 +135,9 @@
 
                         </div>
                     </div>
-                    <!-- End form enter sale code -->
+                    <!-- End form enter voucher code -->
 
-                    <!-- Start count price total and sale price -->
+                    <!-- Start count price total and voucher price -->
                     <div class="">
                         <div class="font-light bg-white p-2 rounded mt-5">
                             <div class="flex justify-between">
@@ -156,7 +156,7 @@
                         <div class="h-px"></div>
                         <!-- End divide -->
                     </div>
-                    <!-- End count price total and sale price -->
+                    <!-- End count price total and voucher price -->
 
                     <!-- Start form click to buy -->
                     <div>
@@ -195,6 +195,6 @@
     @endif
 @endsection
 @section('js')
-{{--  Get user input sale code  --}}
-<script src="{{ asset('js/get-sale-code.js') }}"></script>
+{{--  Get user input voucher code  --}}
+<script src="{{ asset('js/get-voucher-code.js') }}"></script>
 @endsection

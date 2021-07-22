@@ -1,6 +1,6 @@
 function getSaleCode()
 {
-    const saleCode = document.getElementById("sale-code-input").value;
-    // Set input sale code form for submit sale code
-    document.getElementById("sale-code").value = saleCode;
+    const saleCode = document.getElementById("voucher-code-input").value;
+    // Set input voucher code form for submit voucher code
+    document.getElementById("voucher-code").value = saleCode;
 }
