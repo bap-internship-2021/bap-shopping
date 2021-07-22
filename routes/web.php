@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Cart\CartController;
+use App\Http\Controllers\Order\OrderController;
 
 
 /*
@@ -30,15 +31,19 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-Route::namespace('Product')->group(function () {
+Route::namespace('Product')->group(function() {
     Route::get('categories/{category}/products', [ProductController::class, 'index'])->name('categories.products.index');
     Route::get('products/{product}', [ProductController::class, 'show'])->name('user.products.show');
 });
 
-Route::namespace('Cart')->group(function () {
+Route::namespace('Cart')->group(function() {
     Route::get('checkout/cart', [CartController::class, 'index'])->name('carts.index');
     Route::post('carts', [CartController::class, 'store']); // API store item to cart
-//    Route::post('carts/checkout', [CartController::class, 'checkout'])->name('carts.checkout'); // Checkout item in cart
-    Route::delete('carts/item', [CartController::class, 'destroyItemInCart'])->name('carts.item.destroy');
+    Route::delete('carts/item', [CartController::class, 'destroyItemInCart'])->name('carts.item.destroy'); // Delete item in cart
     Route::delete('carts', [CartController::class, 'destroy'])->name('carts.destroy'); // Delete cart
+});
+
+Route::group([], function() {
+    Route::post('orders/confirmation', [OrderController::class, 'confirmation'])->name('orders.confirmation');
+    Route::resource('orders', OrderController::class);
 });

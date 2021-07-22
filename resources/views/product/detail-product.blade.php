@@ -31,7 +31,8 @@
                         <p class="invisible"><span id="product-id">{{ $item->id }}</span></p>
                         <p class="invisible"><span id="image-path">{{ $item->images->first()->path }}</span></p>
                         <p class="p-2">{{__('Tên sản phẩm: ')}} <span id="product-name">{{ $item->name }}</span></p>
-                        <p class="p-2">{{__('Giá: ')}} <span id="product-price" class="text-blue-900"> {{ $item->price }} </span>$</p>
+                        <p id="product-price" class="invisible">{{ $item->price }}</p>
+                        <p class="p-2">{{__('Giá: ')}} <span id="" class="text-blue-900"> {{ number_format($item->price, 0, '', ',') }} </span>$</p>
                     </div>
                     <div id="app">
                         <app></app>

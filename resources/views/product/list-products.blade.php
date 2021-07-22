@@ -16,7 +16,7 @@
                             <p class="p-2">Tên sản phẩm: <span>{{ $product->name }}</span></p>
                         </div>
                         <div>
-                            <p class="p-2">Giá: <span>{{ $product->price }}</span> <span class="underline">đ</span></p>
+                            <p class="p-2">Giá: <span>{{ number_format($product->price, 0, '', ',') }}</span> <span class="underline">đ</span></p>
                         </div>
                     </div>
                 </a>
