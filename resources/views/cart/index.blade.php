@@ -6,7 +6,6 @@
         <div><p class="text-xl font-bold">GIỎ HÀNG</p></div>
         <section class="flex flex-row">
             <div class="w-3/6">
-
                 <div>
                     <div class="border border-white rounded bg-white mb-5">
                         <div class="flex p-2">
@@ -119,7 +118,7 @@
                                            id="voucher-code-input"
                                            class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
                                            placeholder="Mã khuyến mãi"
-                                    onchange="getVoucherCode()">
+                                           onchange="getVoucherCode()">
                                 </div>
                             </div>
                         </div>
@@ -155,7 +154,7 @@
                         <div class="pt-5">
                             <form action="{{ route('orders.confirmation') }}" method="post">
                                 @csrf
-                                <input type="hidden" id="code"  name="code" value="{{old('code')}}">
+                                <input type="hidden" id="code" name="code">
                                 <button class="bg-red-500 p-2 w-full rounded text-white font-semibold hover:bg-red-600">
                                     Tiến hành thanh toán
                                 </button>
@@ -163,7 +162,7 @@
                         </div>
                         @if(session()->has('errorVoucherCode'))
                             <div class="pt-5">
-                            <p class="border bg-white border-red-500 p-2 w-full rounded text-black font-semibold text-center">{{ session()->get('errorVoucherCode') }}</p>
+                                <p class="border bg-white border-red-500 p-2 w-full rounded text-black font-semibold text-center">{{ session()->get('errorVoucherCode') }}</p>
                             </div>
                         @endif
                     </div>
@@ -178,15 +177,18 @@
                  width="190px" height="auto">
         </div>
         <div>
-            <p class="text-2xl text-gray-900 text-center mt-10">{{ __('Không có sản phẩm nào trong giỏ hàng của bạn.') }}</p>
+            <p class="text-2xl text-gray-900 text-center mt-10">{{ __('Giỏ hàng trống.') }}</p>
         </div>
         <div class="text-center mt-5">
             <a href="{{ route('/') }}"
                class="mt-20 bg-yellow-300 p-3 rounded-lg focus:ring-4 focus:ring-orange-400">Tiếp tục mua sắm</a>
         </div>
     @endif
+    @if(session()->has('notify-order'))
+        <p class="p-5 text-center">{{ session()->get('notify-order') }}</p>
+    @endif
 @endsection
 @section('js')
-{{--  Get user input voucher code  --}}
-<script src="{{ asset('js/get-voucher-code.js') }}"></script>
+    {{--  Get user input voucher code  --}}
+    <script src="{{ asset('js/get-voucher-code.js') }}"></script>
 @endsection
