@@ -22,6 +22,7 @@ class CreateVouchersTable extends Migration
             $table->tinyInteger('status');
             $table->tinyInteger('discount');
             $table->integer('min_price');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

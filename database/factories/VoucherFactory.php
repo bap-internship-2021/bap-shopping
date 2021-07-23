@@ -28,7 +28,8 @@ class VoucherFactory extends Factory
             'to' => $this->faker->dateTime(),
             'status' => rand(1,2),
             'discount' => rand(10, 50),
-            'min_price' => 20000000
+            'min_price' => 20000000,
+            'quantity' => rand(1, 10)
         ];
     }
 }

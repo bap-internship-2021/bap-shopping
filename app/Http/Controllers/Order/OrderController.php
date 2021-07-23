@@ -7,7 +7,9 @@ use App\Http\Controllers\Voucher\VoucherController;
 use App\Http\Requests\User\Order\UserConfirmRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
+use App\Models\Voucher;
 use App\Http\Controllers\Cart\CartController;
+
 
 class OrderController extends Controller
 {
@@ -50,7 +52,8 @@ class OrderController extends Controller
         $cart = session()->get('cart');
         $userId = Auth::id();
         $voucherPrice = session()->get('voucherPrice');
-        $order = ['user_id' => $userId, 'date_start' => now(), 'date_end' => now(), 'status' => Order::PENDING_STATUS];
+//        $order = ['user_id' => $userId, 'date_start' => now(), 'date_end' => now(), 'status' => Order::PENDING_STATUS];
+        $order = ['user_id' => $userId];
 
         $orderDetails = [];
         foreach ($cart as $key => $item) {
@@ -62,6 +65,9 @@ class OrderController extends Controller
             $order = Order::create($order);
             $order->orderDetails()->createMany($orderDetails); // Insert record 'order_details' table with order id
             $order->voucherDetails()->create($voucher);
+            $voucherQuantity = VoucherController::getVoucherQuantity(session()->get('voucherId'));
+            $voucherQuantity -= 1;
+            Voucher::where('id', session()->get('voucherId'))->update(['quantity' => $voucherQuantity]);
         } else {
             $order = Order::create($order); // Insert record to 'orders' tables
             $order->orderDetails()->createMany($orderDetails); // Insert record 'order_details' table with order id
