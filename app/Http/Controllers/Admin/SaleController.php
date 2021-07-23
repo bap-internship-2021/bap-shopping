@@ -19,7 +19,7 @@ class SaleController extends Controller
     public function index()
     {
         $sales = Sale::orderBy('id', 'DESC')->paginate(5);
-        return view('admin.sale.index')->with('sales', $sales);
+        return view('admin.voucher.index')->with('sales', $sales);
     }
 
     /**
@@ -29,7 +29,7 @@ class SaleController extends Controller
      */
     public function create()
     {
-        return view('admin.sale.create');
+        return view('admin.voucher.create');
     }
 
     /**
@@ -65,7 +65,7 @@ class SaleController extends Controller
     public function edit($id)
     {
         $sale = Sale::find($id);
-        return view('admin.sale.edit')->with('sale', $sale);
+        return view('admin.voucher.edit')->with('voucher', $sale);
     }
 
     /**

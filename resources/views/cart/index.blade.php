@@ -3,13 +3,6 @@
 
 @section('content')
     @if(!empty($data))
-        {{--        <section class="py-5">--}}
-        {{--            <div class="border bg-blue-900 shadow rounded  mx-auto">--}}
-        {{--                <div class="animate-pulse mx-auto">--}}
-        {{--                    <p class="text-center text-white p-3">Hình thức thanh toán COD</p>--}}
-        {{--                </div>--}}
-        {{--            </div>--}}
-        {{--        </section>--}}
         <div><p class="text-xl font-bold">GIỎ HÀNG</p></div>
         <section class="flex flex-row">
             <div class="w-3/6">
@@ -46,7 +39,7 @@
                         <div class="flex py-5">
                             <div class="w-2/6 flex">
                                 <div>
-                                    <img src="{{ asset("admin\\images\\products\\" . $item['image']) }}"
+                                    <img src="{{ asset('admin/images/products') . '/' . $item['image'] }}"
                                          class="rounded w-16 h-16" alt="">
                                 </div>
                                 <div>
@@ -112,22 +105,21 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Form enter sale code -->
+                    <!-- Form enter voucher code -->
                     <div class="bg-gray-100 mt-5">
                         <div class="flex flex-col bg-white rounded p-2">
                             <div class="py-2">
                                 <p>Nhập mã khuyến mãi <span
                                         class="text-sm text-blue-900">(Tối đa một mã khuyến mãi)</span></p>
                             </div>
-                            <!-- Input sale code -->
+                            <!-- Input voucher code -->
                             <div>
                                 <div>
                                     <input type="text"
-                                           id="sale-code-input"
+                                           id="voucher-code-input"
                                            class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
                                            placeholder="Mã khuyến mãi"
-                                           value="{{ old('saleCode') }}"
-                                    onkeyup="getSaleCode()">
+                                    onchange="getVoucherCode()">
                                 </div>
                             </div>
                         </div>
@@ -135,9 +127,9 @@
 
                         </div>
                     </div>
-                    <!-- End form enter sale code -->
+                    <!-- End form enter voucher code -->
 
-                    <!-- Start count price total and sale price -->
+                    <!-- Start count price total and voucher price -->
                     <div class="">
                         <div class="font-light bg-white p-2 rounded mt-5">
                             <div class="flex justify-between">
@@ -156,22 +148,22 @@
                         <div class="h-px"></div>
                         <!-- End divide -->
                     </div>
-                    <!-- End count price total and sale price -->
+                    <!-- End count price total and voucher price -->
 
                     <!-- Start form click to buy -->
                     <div>
                         <div class="pt-5">
                             <form action="{{ route('orders.confirmation') }}" method="post">
                                 @csrf
-                                <input type="hidden" id="sale-code" name="saleCode">
+                                <input type="hidden" id="code"  name="code" value="{{old('code')}}">
                                 <button class="bg-red-500 p-2 w-full rounded text-white font-semibold hover:bg-red-600">
-                                    Tiến hành đặt hàng
+                                    Tiến hành thanh toán
                                 </button>
                             </form>
                         </div>
-                        @if(session()->has('errorSaleCode'))
+                        @if(session()->has('errorVoucherCode'))
                             <div class="pt-5">
-                            <p class="border bg-white border-red-500 p-2 w-full rounded text-black font-semibold text-center">{{ session()->get('errorSaleCode') }}</p>
+                            <p class="border bg-white border-red-500 p-2 w-full rounded text-black font-semibold text-center">{{ session()->get('errorVoucherCode') }}</p>
                             </div>
                         @endif
                     </div>
@@ -189,12 +181,12 @@
             <p class="text-2xl text-gray-900 text-center mt-10">{{ __('Không có sản phẩm nào trong giỏ hàng của bạn.') }}</p>
         </div>
         <div class="text-center mt-5">
-            <a href="{{ route('/') }}" title="Tiki Pha Ke"
+            <a href="{{ route('/') }}"
                class="mt-20 bg-yellow-300 p-3 rounded-lg focus:ring-4 focus:ring-orange-400">Tiếp tục mua sắm</a>
         </div>
     @endif
 @endsection
 @section('js')
-{{--  Get user input sale code  --}}
-<script src="{{ asset('js/get-sale-code.js') }}"></script>
+{{--  Get user input voucher code  --}}
+<script src="{{ asset('js/get-voucher-code.js') }}"></script>
 @endsection

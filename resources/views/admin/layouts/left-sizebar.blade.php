@@ -37,14 +37,14 @@
                         <span class="hide-menu">Product</span>
                     </a>
                 </li>
-                
+
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('sale.index')}}" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('voucher.index')}}" aria-expanded="false">
                         <i class="fas fa-gift"></i>
                         <span class="hide-menu">Sales</span>
                     </a>
                 </li>
-                
+
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
