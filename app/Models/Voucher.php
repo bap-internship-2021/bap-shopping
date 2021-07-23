@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static where(string $string, int $DUE_STATUS)
+ */
 class Voucher extends Model
 {
     use HasFactory;
@@ -13,7 +16,7 @@ class Voucher extends Model
     const EXPIRED_STATUS = 2;
 
     protected $table = 'vouchers';
-    protected $fillable = ['code', 'from', 'to', 'status', 'discount', 'min_price', 'quantity'];
+    protected $fillable = ['name', 'code', 'from', 'to', 'status', 'discount', 'min_price', 'quantity'];
 
     public function voucherDetails()
     {

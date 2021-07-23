@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
-use Database\Factories\ProductFactory;
+use Database\Factories\VoucherFactory;
 use Illuminate\Database\Seeder;
+use App\Models\Voucher;
 
-class ProductSeeder extends Seeder
+class VoucherSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        Product::factory()->count(50)->create();
+        Voucher::factory()->count(10)->create();
     }
 }

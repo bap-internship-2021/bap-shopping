@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Cart;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -31,7 +30,7 @@ class CartController extends Controller
         return view('cart.index');
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(Request $request)
     {
         $cart = $request->session()->get('cart');
         $productId = $request->input('id');
@@ -46,9 +45,9 @@ class CartController extends Controller
         return response()->json(['Success' => 'success'], 200);
     }
 
-    public function destroy(): RedirectResponse
+    public static function destroy(): RedirectResponse
     {
-        session()->forget(['cart', 'subTotal', 'grandTotal', 'voucherPrice']);
+        session()->forget(['cart', 'subTotal', 'grandTotal', 'voucherPrice', 'voucherId']);
         return redirect()->back();
     }
 

@@ -19,9 +19,9 @@ class CreateVouchersTable extends Migration
             $table->string('code')->unique();
             $table->dateTime('from');
             $table->dateTime('to');
-            $table->integer('status');
-            $table->integer('discount');
-            $table->double('min_price');
+            $table->tinyInteger('status');
+            $table->tinyInteger('discount');
+            $table->integer('min_price');
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->datetime('date_start');
             $table->dateTime('date_end');
-            $table->integer('status');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

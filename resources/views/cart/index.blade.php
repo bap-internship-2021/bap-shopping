@@ -119,7 +119,6 @@
                                            id="voucher-code-input"
                                            class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
                                            placeholder="Mã khuyến mãi"
-                                           value="{{ old('code') }}"
                                     onchange="getVoucherCode()">
                                 </div>
                             </div>
@@ -156,7 +155,7 @@
                         <div class="pt-5">
                             <form action="{{ route('orders.confirmation') }}" method="post">
                                 @csrf
-                                <input type="hidden" id="code"  name="code">
+                                <input type="hidden" id="code"  name="code" value="{{old('code')}}">
                                 <button class="bg-red-500 p-2 w-full rounded text-white font-semibold hover:bg-red-600">
                                     Tiến hành thanh toán
                                 </button>
