@@ -16,8 +16,15 @@ class VoucherController extends Controller
         $vouchers = Voucher::where('from', '<=', $currentDate)
             ->where('to', '>=', $currentDate)
             ->where('status', Voucher::DUE_STATUS)
+            ->where('quantity', '>', 0)
             ->paginate(10);
         return view('voucher.index', compact('vouchers'));
+    }
+
+    public static function getVoucherQuantity($id)
+    {
+        $voucher = Voucher::where('id', $id)->get();
+        return $voucher->first()->quantity;
     }
 
     public static function checkVoucherCodeIsExist($voucherCode)

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,9 +17,9 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->datetime('date_start');
-            $table->dateTime('date_end');
-            $table->tinyInteger('status');
+            $table->datetime('date_start')->nullable();
+            $table->dateTime('date_end')->nullable();
+            $table->tinyInteger('status')->default(Order::PENDING_STATUS);
             $table->timestamps();
         });
     }
