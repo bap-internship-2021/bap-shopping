@@ -13,8 +13,8 @@ class VoucherController extends Controller
         $currentDate = Carbon::now('Asia/Ho_Chi_Minh');
         $currentDate->toDateTimeString();
 
-        $vouchers = Voucher::where('from', '<=', $currentDate)
-            ->where('to', '>=', $currentDate)
+        $vouchers = Voucher::whereDate('from', '<=', $currentDate)
+            ->whereDate('to', '>=', $currentDate)
             ->where('status', Voucher::DUE_STATUS)
             ->where('quantity', '>', 0)
             ->paginate(10);
