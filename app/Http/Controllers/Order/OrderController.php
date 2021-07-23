@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Voucher\VoucherController;
 use App\Http\Requests\User\Order\UserConfirmRequest;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\Voucher;
 use App\Http\Controllers\Cart\CartController;
+use App\Http\Controllers\Mail\MailController;
+use Illuminate\Support\Facades\DB;
 
 
 class OrderController extends Controller
@@ -49,32 +52,43 @@ class OrderController extends Controller
 
     public function store()
     {
-        $cart = session()->get('cart');
-        $userId = Auth::id();
-        $voucherPrice = session()->get('voucherPrice');
-//        $order = ['user_id' => $userId, 'date_start' => now(), 'date_end' => now(), 'status' => Order::PENDING_STATUS];
-        $order = ['user_id' => $userId];
+        DB::beginTransaction();
 
-        $orderDetails = [];
-        foreach ($cart as $key => $item) {
-            $orderDetails[$key]['product_id'] = $key;
-            $orderDetails[$key]['quantity'] = $item['quantity'];
+        try {
+            $cart = session()->get('cart');
+            $userId = Auth::id();
+            $voucherPrice = session()->get('voucherPrice');
+            $order = ['user_id' => $userId];
+            $orderDetails = [];
+            foreach ($cart as $key => $item) {
+                $product = Product::where('id', $key)->get();
+                $productQuantity = $product->first()->quantity;
+                $productQuantity -= $item['quantity'];
+                Product::where('id', $key)->update(['quantity' => $productQuantity]);
+                $orderDetails[$key]['product_id'] = $key;
+                $orderDetails[$key]['quantity'] = $item['quantity'];
+            }
+            if ($voucherPrice > 0) {
+                $voucher = ['voucher_id' => session()->get('voucherId'), 'used_at' => now()];
+                $order = Order::create($order);
+                $order->orderDetails()->createMany($orderDetails); // Insert record 'order_details' table with order id
+                $order->voucherDetails()->create($voucher);
+                $voucherQuantity = VoucherController::getVoucherQuantity(session()->get('voucherId'));
+                $voucherQuantity -= 1;
+                Voucher::where('id', session()->get('voucherId'))->update(['quantity' => $voucherQuantity]);
+            } else {
+                $order = Order::create($order); // Insert record to 'orders' tables
+                $order->orderDetails()->createMany($orderDetails); // Insert record 'order_details' table with order id
+            }
+            DB::commit();
+            // all good
+            CartController::destroy(); //  delete cart
+            MailController::notifyOrder(); // send mail notify to user
+            return redirect()->route('carts.index')->with(['notify-order' => 'Thanh toán thành công, cảm ơn quý khách.']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return redirect()->route('carts.index')->with(['notify-order' => 'Có lỗi xảy ra, xin quý khách thử lại']);
         }
-        if ($voucherPrice > 0) {
-            $voucher = ['voucher_id' => session()->get('voucherId'), 'used_at' => now()];
-            $order = Order::create($order);
-            $order->orderDetails()->createMany($orderDetails); // Insert record 'order_details' table with order id
-            $order->voucherDetails()->create($voucher);
-            $voucherQuantity = VoucherController::getVoucherQuantity(session()->get('voucherId'));
-            $voucherQuantity -= 1;
-            Voucher::where('id', session()->get('voucherId'))->update(['quantity' => $voucherQuantity]);
-        } else {
-            $order = Order::create($order); // Insert record to 'orders' tables
-            $order->orderDetails()->createMany($orderDetails); // Insert record 'order_details' table with order id
-        }
-
-        CartController::destroy(); // Call back delete cart
-        return 'success';
-
     }
 }
