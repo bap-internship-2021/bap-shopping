@@ -26,7 +26,13 @@
                 </div>
             </div>
         </div>
-
+        <div class="col-md-12 p-2">
+            <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search')}}" method="GET">
+                <input class="form-control mr-sm-2" type="search" name="keywords" id="keywords" placeholder="Search" aria-label="Search" >
+                <div id="search_ajax"></div>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
@@ -35,11 +41,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Specification</th>
+                                <th scope="col">Detail</th>
                                 <th scope="col" colspan="2">&nbsp</th>
                             </tr>
                         </thead>
@@ -50,10 +52,6 @@
                             <tr>
                                 <th scope="row">{{$pd->id}}</th>
                                 <td>{{$pd->name}}</td>
-                                <td>{{$pd->price}}$</td>
-                                <td>{{$pd->quantity}}</td>
-                                <td>{{$pd->category->name}}</td>
-                                <td><img src="{{asset('admin/images/products/'.$pd->images[3]['path'])}}" style="width: 150px; height:180px"></td>
                                 <td><a href="{{route('products.show', [$pd->id])}}" class="btn btn-danger"><i class="fas fa-eye"></i></a></td>
                                 <td>
                                     <a href="{{route('products.edit', [$pd->id])}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
@@ -83,4 +81,34 @@
             </div>
         </div>
 
+@endsection
+
+@section('js')
+<script type="text/javascript">
+    $('#keywords').keyup(function(){
+        var keywords = $(this).val();
+
+        if(keywords != '') {
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url:"{{URL('admin/search-products')}}",
+                method:"POST",
+                data:{keywords:keywords, _token:_token},
+                success:function(data) {
+                    $('#search_ajax').fadeIn();
+                    $('#search_ajax').html(data);
+                }
+            });
+
+        } else {
+            $('#search_ajax').fadeOut();
+        }
+    });
+
+    $(document).on('click', '.li_search_ajax', function(){
+        $('#keywords').val( $(this).text() );
+        $('#search_ajax').fadeOut();
+    })
+</script>
 @endsection

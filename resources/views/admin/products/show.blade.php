@@ -52,78 +52,95 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-sm-7">
-                <h1>abc</h1>
+            <div class="col-sm-5">
+                <h1>Detail</h1>
+                <table class="table table-striped table-dark">
+                    <tbody>
+                        <tr>
+                            <td class="col-3">Category</td>
+                            <td>{{$value->category}}</td>
+                        </tr>
+                        <tr>
+                            <td class="col-3">Price</td>
+                            <td>{{$value->price}}$</td>
+                        </tr>
+                        <tr>
+                            <td class="col-3">Quantity</td>
+                            <td>{{$value->quantity}}$</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         @endforeach
     </div>
-
-    <div class="col-6 p-5">
-        @if(count($specification) == 0)
-        <div class="col-8 p-3 align-self-center">
-            <h3 class="page-title text-white bg-dark rounded-circle p-5">The product has no specifications. Please create<a href="{{route('specification.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Create Now</button></a></h3>
-        </div>
-        @endif
-        <div class="card re-card st-card">
-            <h2 class="card-title">Thông số kỹ thuật</h2>
-            <div class="card-body">
-                <table class="table table-striped table-dark">
-                    <tbody>
-                        @foreach ($specification as $value)
-                        <tr>
-                            <td>Screen</td>
-                            <td><span>{{$value->screen}}</span></td>
-                        </tr>
-                        <tr>
-                            <td>Camera</td>
-                            <td><span>{{$value->camera}}</span></td>
-                        </tr>
-                        <tr>
-                            <td>Camera Selfie</td>
-                            <td><span>{{$value->camera_selfie}}</span></td>
-                        </tr>
-                        <tr>
-                            <td>Ram</td>
-                            <td><span>{{$value->ram}}</span></td>
-                        </tr>
-                        <tr>
-                            <td>Internal Memory</td>
-                            <td><span>{{$value->internal_memory}}</span></td>
-                        </tr>
-                        <tr>
-                            <td>CPU</td>
-                            <td><span>{{$value->cpu}}</span></td>
-                        </tr>
-                        <tr>
-                            <td>GPU</td>
-                            <td><span>{{$value->gpu}}</span></td>
-                        </tr>
-                        <tr>
-                            <td>PIN</td>
-                            <td><span>{{$value->pin}}</span></td>
-                        </tr>
-                        <tr>
-                            <td>SIM</td>
-                            <td><span>{{$value->sim}}</span></td>
-                        </tr>
-                        <tr>
-                            <td>Operating System</td>
-                            <td><span>{{$value->operating_system}}</span></td>
-                        </tr>
-                        <tr>
-                            <td>Made In</td>
-                            <td><span>{{$value->made_in}}</span></td>
-                        </tr>
-                        <tr>
-                            <td>Release Time</td>
-                            <td><span>{{$value->release_time}}</span></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                 </table>
+    <div class="row">
+        <div class="col-6 pt-5">
+            @if(count($specification) == 0)
+            <div class="col-8 p-3 align-self-center">
+                <h3 class="page-title text-white bg-dark rounded-circle p-5">The product has no specifications. Please create<a href="{{route('specification.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Create Now</button></a></h3>
             </div>
+            @endif
+            
+                <h2 class="card-title text-center">Thông số kỹ thuật</h2>
+                <div class="card-body">
+                    <table class="table table-striped table-dark">
+                        <tbody>
+                            @foreach ($specification as $value)
+                            <tr>
+                                <td>Screen</td>
+                                <td><span>{{$value->screen}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Camera</td>
+                                <td><span>{{$value->camera}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Camera Selfie</td>
+                                <td><span>{{$value->camera_selfie}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ram</td>
+                                <td><span>{{$value->ram}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Internal Memory</td>
+                                <td><span>{{$value->internal_memory}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>CPU</td>
+                                <td><span>{{$value->cpu}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>GPU</td>
+                                <td><span>{{$value->gpu}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>PIN</td>
+                                <td><span>{{$value->pin}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>SIM</td>
+                                <td><span>{{$value->sim}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Operating System</td>
+                                <td><span>{{$value->operating_system}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Made In</td>
+                                <td><span>{{$value->made_in}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Release Time</td>
+                                <td><span>{{$value->release_time}}</span></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                     </table>
+                </div>
         </div>
     </div>
+    
 </div>
 
 @endsection

@@ -90,34 +90,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     @yield('js')
-
-    <script type="text/javascript">
-        $('#keywords').keyup(function(){
-            var keywords = $(this).val();
-
-            if(keywords != '') {
-                var _token = $('input[name="_token"]').val();
-
-                $.ajax({
-                    url:"{{URL('admin/search-products')}}",
-                    method:"POST",
-                    data:{keywords:keywords, _token:_token},
-                    success:function(data) {
-                        $('#search_ajax').fadeIn();
-                        $('#search_ajax').html(data);
-                    }
-                });
-
-            } else {
-                $('#search_ajax').fadeOut();
-            }
-        });
-
-        $(document).on('click', '.li_search_ajax', function(){
-            $('#keywords').val( $(this).text() );
-            $('#search_ajax').fadeOut();
-        })
-    </script>
 </body>
 
 </html>
