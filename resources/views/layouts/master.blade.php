@@ -31,7 +31,7 @@
 <body>
 
 <!-- Start top nav -->
-<div class="w-screen h-24 flex justify-between bg-blue-500">
+<div class="w-screen h-24 flex justify-between" style="background-color: #1A94FF">
 
     <!-- Start Logo -->
     <div class="text-gray-700 p-8">
@@ -46,7 +46,7 @@
             <input type="text"
                    class="px-3 py-2 bg-purple-white  shadow-lg rounded w-5/6"
                    placeholder="Tìm kiếm sản phẩm">
-            <button class="px-3 py-2 bg-white rounded shadow-lg text-black font-medium"><i class="fas fa-search"></i>
+            <button style="background-color: #0D5CB6" class="px-3 py-2 rounded shadow-lg text-black font-medium"><i class="fas fa-search"></i>
                 Tìm Kiếm
             </button>
         </form>
@@ -89,6 +89,10 @@
                         <a href="{{ route('carts.index') }}"><i
                                 class="fas fa-shopping-basket fill-current text-blue-400"></i> Giỏ hàng của
                             tôi</a>
+                    </li>
+                    <li class="cursor-pointer transition hover:text-red-500">
+                        <a href="{{ route('orders.index') }}"><i
+                                class="fas fa-shopping-basket fill-current text-blue-400"></i> Đơn hàng của tôi</a>
                     </li>
                     <li class="cursor-pointer transition hover:text-red-500">
                         <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::IPHONE]) }}"><i

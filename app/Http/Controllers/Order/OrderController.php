@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function index()
+    {
+        $orders = Order::where('user_id', Auth::id())->with(['orderDetails.product'])->get();
+        return view('Order.index', compact('orders'));
+    }
     public function confirmation(UserConfirmRequest $request)
     {
         $voucher = VoucherController::checkVoucherCodeIsExist($request->input('code'));
@@ -58,7 +63,7 @@ class OrderController extends Controller
             $cart = session()->get('cart');
             $userId = Auth::id();
             $voucherPrice = session()->get('voucherPrice');
-            $order = ['user_id' => $userId];
+            $userOrder = ['user_id' => $userId, 'total_price' => session()->get('grandTotal')];
             $orderDetails = [];
             foreach ($cart as $key => $item) {
                 $product = Product::where('id', $key)->get();
@@ -70,14 +75,15 @@ class OrderController extends Controller
             }
             if ($voucherPrice > 0) {
                 $voucher = ['voucher_id' => session()->get('voucherId'), 'used_at' => now()];
-                $order = Order::create($order);
+                $order = Order::create($userOrder);
                 $order->orderDetails()->createMany($orderDetails); // Insert record 'order_details' table with order id
                 $order->voucherDetails()->create($voucher);
                 $voucherQuantity = VoucherController::getVoucherQuantity(session()->get('voucherId'));
                 $voucherQuantity -= 1;
                 Voucher::where('id', session()->get('voucherId'))->update(['quantity' => $voucherQuantity]);
             } else {
-                $order = Order::create($order); // Insert record to 'orders' tables
+
+                $order = Order::create($userOrder); // Insert record to 'orders' tables
                 $order->orderDetails()->createMany($orderDetails); // Insert record 'order_details' table with order id
             }
             DB::commit();

@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->datetime('date_start')->nullable();
             $table->dateTime('date_end')->nullable();
             $table->tinyInteger('status')->default(Order::PENDING_STATUS);
+            $table->double('total_price');
             $table->timestamps();
         });
     }
