@@ -101,6 +101,7 @@ class ProductController extends Controller
     {
         $product = Product::with('images')->where('id', $id)->get();
         $specification = Specification::where('product_id', $id)->get();
+        // dd($specification);
         return view('admin.products.show', compact(['product', 'specification']));
     }
 

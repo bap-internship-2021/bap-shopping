@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Specification\CreateSpecificationRequest;
 use App\Models\Product;
+use App\Models\Specification;
 use Illuminate\Http\Request;
 
 class SpecificationController extends Controller
@@ -35,9 +37,11 @@ class SpecificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateSpecificationRequest $request)
     {
-        //
+        $data = $request->except(['_method', '_token']);
+        Specification::create($data);
+        return back()->with('status', 'create success');
     }
 
     /**

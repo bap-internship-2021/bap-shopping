@@ -27,7 +27,9 @@
                 {{ session('status') }}
             </div>
         @endif
-
+<div>
+    <a href="{{route('products.index')}}" class="btn btn-primary">Back</a>
+</div>
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-2 p-3 align-self-center">
@@ -37,9 +39,9 @@
 </div>
 
 <div class="container-fluid">
-    <div class="flex flex-row">
+    <div class="row">
         @foreach($product as $key => $value)
-            <div>
+            <div class="col-sm-5">
                 <h1>{{$value->name}}</h1>
                 <div class="my-slider">
                     
@@ -50,42 +52,75 @@
                     @endforeach
                 </div>
             </div>
+            <div class="col-sm-7">
+                <h1>abc</h1>
+            </div>
         @endforeach
     </div>
 
-    <div class="col-8 p-5">
+    <div class="col-6 p-5">
         @if(count($specification) == 0)
         <div class="col-8 p-3 align-self-center">
             <h3 class="page-title text-white bg-dark rounded-circle p-5">The product has no specifications. Please create<a href="{{route('specification.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Create Now</button></a></h3>
         </div>
         @endif
-        <div class="card">
-            <div class="table-responsive">
+        <div class="card re-card st-card">
+            <h2 class="card-title">Thông số kỹ thuật</h2>
+            <div class="card-body">
                 <table class="table table-striped table-dark">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                      </tr>
-                    </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                    </tbody>
-                    <tfoot>
+                        @foreach ($specification as $value)
                         <tr>
-                            <td colspan="8">
-                                <a href=""><button class="btn btn-primary" style="margin-top:20px" id="button">Add</button></a>
-                            </td>
+                            <td>Screen</td>
+                            <td><span>{{$value->screen}}</span></td>
                         </tr>
-                    </tfoot>
-                  </table>
+                        <tr>
+                            <td>Camera</td>
+                            <td><span>{{$value->camera}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Camera Selfie</td>
+                            <td><span>{{$value->camera_selfie}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ram</td>
+                            <td><span>{{$value->ram}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Internal Memory</td>
+                            <td><span>{{$value->internal_memory}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>CPU</td>
+                            <td><span>{{$value->cpu}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>GPU</td>
+                            <td><span>{{$value->gpu}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>PIN</td>
+                            <td><span>{{$value->pin}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>SIM</td>
+                            <td><span>{{$value->sim}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Operating System</td>
+                            <td><span>{{$value->operating_system}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Made In</td>
+                            <td><span>{{$value->made_in}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Release Time</td>
+                            <td><span>{{$value->release_time}}</span></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                 </table>
             </div>
         </div>
     </div>

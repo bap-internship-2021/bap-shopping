@@ -35,6 +35,15 @@
 <form action="{{route('specification.store')}}" class="col-8 border p-5 rounded" method="POST" enctype='multipart/form-data'>
     @csrf
     <div class="form-group">
+        <label for="exampleInputproduct">Product</label>
+        <select name="product_id" class="form-control" id="exampleInputproduct">
+            @foreach($products as $product)
+                <option value="{{$product->id}}">{{$product->name}}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
         <label for="exampleInputscreen">Screen</label>
         <input type="text" value="{{old('screen')}}" name="screen" class="form-control" id="exampleInputscreen" aria-describedby="emailHelp" placeholder="Screen">
     </div>
@@ -98,15 +107,6 @@
         <label for="exampleInputct">Description</label>
         <textarea id="demo" value="{{old('description')}}" name="description" class="form-control" rows="8" style="resize:none"></textarea>
     </div>
-
-    {{-- <div class="form-group">
-        <label for="exampleInputctg">Category</label>
-        <select name="category_id" class="form-control" id="exampleInputctg">
-            @foreach($categories as $key => $category)
-                <option value="{{$category->id}}">{{$category->name}}</option>
-            @endforeach
-        </select>
-    </div> --}}
 
     <button type="submit" class="btn btn-primary">Add</button>
 </form>   
