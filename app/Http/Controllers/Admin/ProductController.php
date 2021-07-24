@@ -12,6 +12,7 @@ use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Product\CreateProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
+use App\Models\Specification;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Support\Facades\DB;
 
@@ -98,7 +99,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::with('images')->where('id', $id)->get();
+        $specification = Specification::where('product_id', $id)->get();
+        return view('admin.products.show', compact(['product', 'specification']));
     }
 
     /**

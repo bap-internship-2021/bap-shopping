@@ -39,12 +39,18 @@
                 </li>
 
                 <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
+                        <i class="fas fa-keyboard"></i>
+                        <span class="hide-menu">Specification</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('voucher.index')}}" aria-expanded="false">
                         <i class="fas fa-gift"></i>
                         <span class="hide-menu">Sales</span>
                     </a>
                 </li>
-
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
