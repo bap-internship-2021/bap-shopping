@@ -55,6 +55,11 @@ class OrderController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        return Order::find($id);
+    }
+
     public function store()
     {
         DB::beginTransaction();

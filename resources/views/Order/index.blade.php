@@ -7,9 +7,9 @@
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200">
-                    <table class="min-w-full divide-y divide-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200 cursor-default">
                         <thead class="bg-white">
-                        <tr>
+                        <tr class="hover:bg-blue-50">
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Mã đơn hàng
@@ -30,12 +30,13 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                         @foreach($orders as $key => $order)
-                            <tr>
+                            <tr class="hover:bg-blue-50">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-blue-600">
-                                                {{ $order->id }}
+                                                <a href="{{ route('orders.oderDetails.index', ['id' => $order->id]) }}"
+                                                   class="underline">{{ $order->id }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -51,9 +52,9 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     @if($order->status === \App\Models\Order::PENDING_STATUS)
                                         {{__('Đang đợi kiểm duyệt')}}
-                                        @elseif($order->status === \App\Models\Order::SENDING_STATUS)
+                                    @elseif($order->status === \App\Models\Order::SENDING_STATUS)
                                         {{__('Đang vận chuyển đơn hàng')}}
-                                        @elseif($order->status === \App\Models\Order::FINISH_STATUS)
+                                    @elseif($order->status === \App\Models\Order::FINISH_STATUS)
                                         {{__('Giao hàng thành công')}}
                                     @endif
                                 </td>

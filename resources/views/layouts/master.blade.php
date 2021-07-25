@@ -57,7 +57,7 @@
         <ul class="flex justify-between">
             @if(Auth::check())
                 <li><a class="p-2 text-white rounded text-sm mr-2" href=""><i
-                            class="fas fa-user"></i> {{Auth()->user()->name}}</a></li>
+                            class="fas fa-user"></i> {{ !empty(Auth()->user()->name) ? Auth()->user()->name : '' }}</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
@@ -80,7 +80,7 @@
 
         {{--    START LEFT NAV --}}
         <div class="w-1/6 h-96">
-            <nav>
+            <nav class="bg-blue-50 shadow-sm h-full">
                 <ul class="px-4 py-2">
                     <li class="animate-bounce transition hover:text-red-500  cursor-pointer">
                         <a href="{{ route('user.vouchers.index') }}"><i class="fas fa-tags fill-current text-blue-400"></i> Xem voucher</a>

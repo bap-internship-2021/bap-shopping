@@ -27,6 +27,11 @@ class VoucherController extends Controller
         return $voucher->first()->quantity;
     }
 
+    public static function getDiscount($id)
+    {
+        return Voucher::find($id)->discount;
+    }
+
     public static function checkVoucherCodeIsExist($voucherCode)
     {
         return Voucher::where('code', $voucherCode)->where('status', Voucher::DUE_STATUS)->get();
