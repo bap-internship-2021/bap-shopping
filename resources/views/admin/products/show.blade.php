@@ -41,7 +41,7 @@
 <div class="container-fluid">
     <div class="row">
         @foreach($product as $key => $value)
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <h1>{{$value->name}}</h1>
                 <div class="my-slider">
                     
@@ -66,7 +66,7 @@
                         </tr>
                         <tr>
                             <td class="col-3">Quantity</td>
-                            <td>{{$value->quantity}}$</td>
+                            <td>{{$value->quantity}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -75,17 +75,29 @@
     </div>
     <div class="row">
         <div class="col-6 pt-5">
-            @if(count($specification) == 0)
-            <div class="col-8 p-3 align-self-center">
-                <h3 class="page-title text-white bg-dark rounded-circle p-5">The product has no specifications. Please create<a href="{{route('specification.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Create Now</button></a></h3>
+            <div class="card re-card st-card">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Description</h2>
+                    <div class="card-body">
+                        @foreach ($specification as $value)
+                        {!! $value->description !!}
+                        @endforeach
+                    </div>
+                </div>
             </div>
-            @endif
-            
-                <h2 class="card-title text-center">Thông số kỹ thuật</h2>
+        </div>  
+        <div class="col-6 pt-5">
+            <div class="card re-card st-card">
+                @if(count($specification) == 0)
+                <div class="col-8 p-3 align-self-center">
+                    <h3 class="page-title text-white bg-dark rounded-circle p-5">The product has no specifications. Please create<a href="{{route('specification.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Create Now</button></a></h3>
+                </div>
+                @endif
+                <h2 class="card-title p-3 text-center">Specification</h2>
                 <div class="card-body">
                     <table class="table table-striped table-dark">
+                        @foreach ($specification as $value)
                         <tbody>
-                            @foreach ($specification as $value)
                             <tr>
                                 <td>Screen</td>
                                 <td><span>{{$value->screen}}</span></td>
@@ -134,13 +146,20 @@
                                 <td>Release Time</td>
                                 <td><span>{{$value->release_time}}</span></td>
                             </tr>
-                            @endforeach
                         </tbody>
-                     </table>
+                        <tfoot>
+                            <tr>
+                                <td colspan="8">
+                                    <a href="{{route('specification.edit', [$value->id])}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Edit Specification</button></a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        @endforeach
+                    </table>
                 </div>
-        </div>
+            </div>
+        </div>     
     </div>
-    
 </div>
 
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Specification\CreateSpecificationRequest;
+use App\Http\Requests\Specification\UpdateSpecificationRequest;
 use App\Models\Product;
 use App\Models\Specification;
 use Illuminate\Http\Request;
@@ -63,7 +64,8 @@ class SpecificationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $specification = Specification::where('id', $id)->get();
+        return view('admin.specification.edit', compact('specification'));
     }
 
     /**
@@ -73,9 +75,12 @@ class SpecificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSpecificationRequest $request, $id)
     {
-        //
+        $data = $request->except(['_method', '_token']);
+        $specification = Specification::find($id);
+        $specification->update($data);
+        return back()->with('status', 'Update Success');
     }
 
     /**
