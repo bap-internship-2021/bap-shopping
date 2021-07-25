@@ -44,7 +44,6 @@
                         <span class="hide-menu">Sales</span>
                     </a>
                 </li>
-
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

@@ -12,7 +12,7 @@
             <h3>{{$value->name}}</h3>
             
             <img src="{{asset('admin/images/products/'.$value->images[0]['path'])}}" style="width:200px; height:250px">
-            <h3><a>Detail</a></h3>
+            <h3><a href="{{route('products.show', [$value->id])}}" class="btn btn-primary">Detail</a></h3>
         </div>
         @endforeach
     </div>

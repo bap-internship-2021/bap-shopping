@@ -24,8 +24,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::post('search-products', [SearchController::class, 'search'])->name('search.product');
     Route::get('search', [SearchController::class, 'index'])->name('search');
     Route::get('users', [UserController::class, 'index'])->name('users');
-    Route::get('product/specification/{id}', [SpecificationController::class, 'index'])->name('product.specification');
-    Route::get('product/specification/create', [SpecificationController::class, 'create'])->name('product.specification.create');
+    Route::resource('specification', SpecificationController::class);
 });
 
 Route::get('404', [ErrorController::class, 'errorPage']);
