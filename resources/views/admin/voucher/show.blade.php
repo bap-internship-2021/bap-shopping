@@ -17,7 +17,9 @@
                 {{ session('status') }}
             </div>
         @endif
-
+        <div>
+            <a href="{{route('voucher.index')}}" class="btn btn-primary">Back</a>
+        </div>
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-5 align-self-center">
@@ -29,7 +31,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="card re-card st-card">
+            <div class="col-5 card re-card st-card">
                 <div class="card-body">
                     <table class="table table-striped table-dark">
                         <tbody>
@@ -67,7 +69,11 @@
                             </tr>
                         </tbody>
                         <tfoot>
-
+                            <tr>
+                                <td colspan="8">
+                                    <a href="{{route('voucher.edit', [$voucher->id])}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Edit Voucher</button></a>
+                                </td>
+                            </tr>
                         </tfoot>
                     </table>
                 </div>

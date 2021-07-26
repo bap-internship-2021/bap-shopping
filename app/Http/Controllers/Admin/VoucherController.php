@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Voucher\CreateVoucherRequest;
+use App\Http\Requests\Voucher\UpdateVoucherRequest;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 
@@ -52,7 +53,6 @@ class VoucherController extends Controller
     public function show($id)
     {
         $voucher = Voucher::find($id);
-        // dd($voucher);
         return view('admin.voucher.show', compact('voucher'));
     }
 
@@ -64,7 +64,8 @@ class VoucherController extends Controller
      */
     public function edit($id)
     {
-        //
+        $voucher = Voucher::find($id);
+        return view('admin.voucher.edit', compact('voucher'));
     }
 
     /**
@@ -74,9 +75,12 @@ class VoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateVoucherRequest $request, $id)
     {
-        //
+        $voucher = Voucher::find($id);
+        $data = $request->except(['_method', '_token']);
+        $voucher->update($data);
+        return back()->with('status', 'update success');
     }
 
     /**

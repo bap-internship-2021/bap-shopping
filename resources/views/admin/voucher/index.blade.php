@@ -35,7 +35,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Detail</th>
-                                <th scope="col" colspan="2">&nbsp</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -46,23 +46,13 @@
                                 <th scope="row">{{$voucher->id}}</th>
                                 <td>{{$voucher->name}}</td>
                                 <td><a href="{{route('voucher.show', [$voucher->id])}}" class="btn btn-danger"><i class="fas fa-eye"></i></a></td>
-                                <td>
-                                    <a href="{{route('voucher.edit', [$voucher->id])}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                </td>
-                                <td>
-                                    <form action="{{route('voucher.destroy', $voucher->id)}}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                        <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?');" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </td>
                             </tr>
                             <?php } ?>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="8">
-                                    <a href="{{route('voucher.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Add Product</button></a>
+                                    <a href="{{route('voucher.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Add Voucher</button></a>
                                 </td>
                             </tr>
                         </tfoot>
