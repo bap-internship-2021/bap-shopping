@@ -14,19 +14,19 @@ class OrderDetailController extends OrderController
     public function getOrderDetail($orderId)
     {
         $order = parent::show($orderId);
-        $orderDetails = OrderDetail::where('order_id', $orderId)->with('product')->get();
-//        dd($orderDetails->toArray());
-        foreach ($orderDetails as $orderDetail) {
-            $subTotalPrice = 0;
-            $subTotalPrice += ($orderDetail->product->price * $orderDetail->product->quantity);
+        $orderDetails = OrderDetail::where('order_id', $orderId)->with('product')->simplePaginate(5);
+        $data = [];
+        foreach ($orderDetails as $key => $orderDetail) {
+            $data[$key] = ($orderDetail->product->price * $orderDetail->quantity);
         }
-//        dd($subTotalPrice);
-//        dd($orderDetails->toArray());
+        $subTotalPrice = 0;
+        $subTotalPrice = array_sum($data);
+
         if ($order->voucherDetails->count() > 0) { // If order has voucher then get voucher discount
             $voucherId = $order->voucherDetails->first()->voucher_id;
             $discount = VoucherController::getDiscount($voucherId);
-            return view('order.order-details', compact('order', 'orderDetails', 'discount'));
+            return view('order.order-details', compact('order', 'orderDetails', 'subTotalPrice', 'discount'));
         }
-        return view('order.order-details', compact('order', 'orderDetails'));
+        return view('order.order-details', compact('order', 'orderDetails', 'subTotalPrice'));
     }
 }

@@ -17,7 +17,7 @@
                    class="my-2  border-2 border-blue-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 p-2"
                    placeholder="Số lượng cần mua"
                    type="text"/>
-            <button
+            <button id="btn-add-to-cart"
                 class="bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5 "
             >
                 Thêm vào giỏ hàng
