@@ -19768,7 +19768,8 @@ var render = function() {
           "button",
           {
             staticClass:
-              "bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5 "
+              "bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5 ",
+            attrs: { id: "btn-add-to-cart" }
           },
           [_vm._v("\n            Thêm vào giỏ hàng\n        ")]
         )

@@ -13,25 +13,21 @@
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
 
-{{-- Custom CSS --}}
-@yield('css')
-<!-- TailwindCSS -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- Custom CSS --}}
+    @yield('css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/inficons/512/apple.png" type="image/gif"
           sizes="16x16">
-    <style>
-        #tns1-ow > button {
-            display: none;
-        }
-    </style>
+
+    <!-- TailwindCSS -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>BAP Shopping @yield('title', '')</title>
 </head>
 
 <body>
 
 <!-- Start top nav -->
-<div class="w-screen h-24 flex justify-between bg-blue-500">
+<div class="w-screen h-24 flex justify-between" style="background-color: #1A94FF">
 
     <!-- Start Logo -->
     <div class="text-gray-700 p-8">
@@ -46,7 +42,8 @@
             <input type="text"
                    class="px-3 py-2 bg-purple-white  shadow-lg rounded w-5/6"
                    placeholder="Tìm kiếm sản phẩm">
-            <button class="px-3 py-2 bg-white rounded shadow-lg text-black font-medium"><i class="fas fa-search"></i>
+            <button style="background-color: #0D5CB6" class="px-3 py-2 rounded shadow-lg text-black font-medium"><i
+                    class="fas fa-search"></i>
                 Tìm Kiếm
             </button>
         </form>
@@ -57,7 +54,8 @@
         <ul class="flex justify-between">
             @if(Auth::check())
                 <li><a class="p-2 text-white rounded text-sm mr-2" href=""><i
-                            class="fas fa-user"></i> {{Auth()->user()->name}}</a></li>
+                            class="fas fa-user"></i> {{ !empty(Auth()->user()->name) ? Auth()->user()->name : '' }}</a>
+                </li>
                 <li>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
@@ -80,15 +78,20 @@
 
         {{--    START LEFT NAV --}}
         <div class="w-1/6 h-96">
-            <nav>
+            <nav class="bg-blue-50 shadow-sm h-full">
                 <ul class="px-4 py-2">
                     <li class="animate-bounce transition hover:text-red-500  cursor-pointer">
-                        <a href="{{ route('user.vouchers.index') }}"><i class="fas fa-tags fill-current text-blue-400"></i> Xem voucher</a>
+                        <a href="{{ route('user.vouchers.index') }}"><i
+                                class="fas fa-tags fill-current text-blue-400"></i> Xem voucher</a>
                     </li>
                     <li class="cursor-pointer transition hover:text-red-500">
                         <a href="{{ route('carts.index') }}"><i
                                 class="fas fa-shopping-basket fill-current text-blue-400"></i> Giỏ hàng của
                             tôi</a>
+                    </li>
+                    <li class="cursor-pointer transition hover:text-red-500">
+                        <a href="{{ route('orders.index') }}"><i
+                                class="fas fa-shopping-basket fill-current text-blue-400"></i> Đơn hàng của tôi</a>
                     </li>
                     <li class="cursor-pointer transition hover:text-red-500">
                         <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::IPHONE]) }}"><i

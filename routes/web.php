@@ -45,4 +45,5 @@ Route::namespace('Cart')->group(function() {
 Route::group([], function() {
     Route::post('orders/confirmation', [OrderController::class, 'confirmation'])->name('orders.confirmation');
     Route::resource('orders', OrderController::class);
+    Route::get('orders/{id}/order-details', [\App\Http\Controllers\Order\OrderDetailController::class, 'getOrderDetail'])->name('orders.oderDetails.index');
 });

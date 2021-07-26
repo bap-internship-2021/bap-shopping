@@ -1,6 +1,17 @@
 @extends('layouts.master')
 @section('title', 'Mã Khuyến mãi')
-
+@section('css')
+    <style>
+        .pagination{
+            display: flex;
+            flex-direction: row;
+        }
+        .pagination li {
+            background: white;
+            padding: 5px 15px;
+        }
+    </style>
+@endsection()
 @section('content')
     <div class="grid grid-cols-3 gap-1">
         @foreach($vouchers as $key => $voucher)

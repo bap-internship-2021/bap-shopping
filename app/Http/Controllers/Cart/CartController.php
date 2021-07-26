@@ -11,6 +11,7 @@ class CartController extends Controller
 {
     public function index()
     {
+//        dd(session()->get('cart'));
         if (session()->has('cart')) {
             $cart = session()->get('cart');
             $subTotal = 0;

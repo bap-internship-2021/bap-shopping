@@ -13,7 +13,7 @@ class Order extends Model
     const PENDING_STATUS = 1;
     const SENDING_STATUS = 2;
     const FINISH_STATUS = 3;
-    protected $fillable = ['user_id','date_start', 'date_end', 'status'];
+    protected $fillable = ['user_id','date_start', 'date_end', 'status', 'total_price'];
 
     public function voucherDetails()
     {
