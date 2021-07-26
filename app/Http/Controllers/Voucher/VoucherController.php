@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class VoucherController extends Controller
 {
-    public function listVoucher()
+    public function index()
     {
         $currentDate = Carbon::now('Asia/Ho_Chi_Minh');
         $currentDate->toDateTimeString();

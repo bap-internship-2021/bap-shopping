@@ -20,7 +20,7 @@ class Voucher extends Command
      *
      * @var string
      */
-    protected $description = 'Update voucher status to expired when current date > date end';
+    protected $description = 'Update voucher status to expired when current date > date end or quantity = 0';
 
     /**
      * Create a new command instance.

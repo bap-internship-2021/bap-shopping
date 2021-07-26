@@ -30,19 +30,19 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('layouts.master');
 })->name('dashboard');
 
-Route::namespace('Product')->group(function() {
+Route::namespace('Product')->group(function () {
     Route::get('categories/{category}/products', [ProductController::class, 'index'])->name('categories.products.index');
     Route::get('products/{product}', [ProductController::class, 'show'])->name('user.products.show');
 });
 
-Route::namespace('Cart')->group(function() {
+Route::middleware(['auth'])->namespace('Cart')->group(function () {
     Route::get('checkout/cart', [CartController::class, 'index'])->name('carts.index');
     Route::post('carts', [CartController::class, 'store']); // API store item to cart
     Route::delete('carts/item', [CartController::class, 'destroyItemInCart'])->name('carts.item.destroy'); // Delete item in cart
     Route::delete('carts', [CartController::class, 'destroy'])->name('carts.destroy'); // Delete cart
 });
 
-Route::group([], function() {
+Route::middleware('auth')->group(function () {
     Route::post('orders/confirmation', [OrderController::class, 'confirmation'])->name('orders.confirmation');
     Route::resource('orders', OrderController::class);
     Route::get('orders/{id}/order-details', [\App\Http\Controllers\Order\OrderDetailController::class, 'getOrderDetail'])->name('orders.oderDetails.index');
