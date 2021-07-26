@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Voucher\CreateVoucherRequest;
+use App\Http\Requests\Voucher\UpdateVoucherRequest;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
-use App\Models\Sale;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\Sale\CreateSaleRequest;
-use App\Http\Requests\Sale\UpdateSaleRequest;
 
-class SaleController extends Controller
+class VoucherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,8 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales = Sale::orderBy('id', 'DESC')->paginate(5);
-        return view('admin.voucher.index')->with('sales', $sales);
+        $vouchers = Voucher::orderBy('id', 'DESC')->paginate(5);
+        return view('admin.voucher.index')->with('vouchers', $vouchers);
     }
 
     /**
@@ -38,10 +37,10 @@ class SaleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateSaleRequest $request)
+    public function store(CreateVoucherRequest $request)
     {
         $data = $request->except(['_method', '_token']);
-        Sale::create($data);
+        Voucher::create($data);
         return back()->with('status', 'create success');
     }
 
@@ -53,7 +52,8 @@ class SaleController extends Controller
      */
     public function show($id)
     {
-        //
+        $voucher = Voucher::find($id);
+        return view('admin.voucher.show', compact('voucher'));
     }
 
     /**
@@ -64,8 +64,8 @@ class SaleController extends Controller
      */
     public function edit($id)
     {
-        $sale = Sale::find($id);
-        return view('admin.voucher.edit')->with('voucher', $sale);
+        $voucher = Voucher::find($id);
+        return view('admin.voucher.edit', compact('voucher'));
     }
 
     /**
@@ -75,11 +75,11 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSaleRequest $request, $id)
+    public function update(UpdateVoucherRequest $request, $id)
     {
-        $sale = Sale::find($id);
+        $voucher = Voucher::find($id);
         $data = $request->except(['_method', '_token']);
-        $sale->update($data);
+        $voucher->update($data);
         return back()->with('status', 'update success');
     }
 
@@ -91,8 +91,6 @@ class SaleController extends Controller
      */
     public function destroy($id)
     {
-        $sale = Sale::find($id);
-        $sale->delete();
-        return back()->with('status', 'delete success');
+        //
     }
 }

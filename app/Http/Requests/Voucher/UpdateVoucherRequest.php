@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Sale;
+namespace App\Http\Requests\Voucher;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSaleRequest extends FormRequest
+class UpdateVoucherRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +25,13 @@ class UpdateSaleRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'sale_code' => 'required|string|max:255',
+            'code' => 'required|string|max:255',
             'discount' => 'required|numeric|min:1',
-            'sales_amount' => 'required|min:1',
-            'min_price_to_apply' => 'required',
+            'quantity' => 'required|numeric|min:1',
+            'min_price' => 'required|numeric|min:1',
+            'status' => 'required|numeric',
             'from' => 'required|date_format:Y-m-d',
             'to' => 'required|date_format:Y-m-d|after_or_equal:from'
         ];
     }
-
-    
 }
