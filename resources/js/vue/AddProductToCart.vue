@@ -1,6 +1,7 @@
 <template>
     <div class="p-2 mt-1">
-        <p class="p-2">Số lượng còn lại: <span class="text-blue-900">{{ productQuantityResource }}</span> sản phẩm</p>
+        <p v-if="productQuantityResource > 0" class="p-2">Số lượng còn lại: <span class="text-blue-900">{{ productQuantityResource }}</span> sản phẩm</p>
+        <p v-else class="p-2 text-red-600">Tạm thời hết sản phẩm</p>
         <pre>
             {{ JSON.stringify(formData, null, 2) }}
         </pre>
@@ -12,13 +13,19 @@
             <input v-model="formData.name" type="hidden"/>
             <input v-model="formData.price" type="hidden"/>
             <input v-model="formData.image" type="hidden">
-            <label class="text-blue-900 mt-5 p-2" for="quantity">Nhập số lượng cần mua</label>
-            <input id="quantity" v-model.number="formData.quantity"
+            <label v-show="productQuantityResource > 0" class="text-blue-900 mt-5 p-2" for="quantity">Nhập số lượng cần mua</label>
+            <input v-show="productQuantityResource > 0" id="quantity" v-model.number="formData.quantity"
                    class="my-2  border-2 border-blue-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 p-2"
                    placeholder="Số lượng cần mua"
                    type="text"/>
-            <button id="btn-add-to-cart"
-                class="bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5 "
+            <button v-if="productQuantityResource > 0"
+                    class="bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5"
+            >
+                Thêm vào giỏ hàng
+            </button>
+            <button v-else
+                    class="bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5"
+                    disabled hidden
             >
                 Thêm vào giỏ hàng
             </button>
@@ -51,9 +58,7 @@ export default {
     created() {
         this.getProductQuantity();
     },
-    watch: {
-
-    },
+    watch: {},
     methods: {
         addProductToCart() {
             if (this.formData.quantity > 0) {

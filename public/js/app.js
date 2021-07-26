@@ -1877,6 +1877,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddProductToCart",
@@ -19596,13 +19603,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "p-2 mt-1" }, [
-    _c("p", { staticClass: "p-2" }, [
-      _vm._v("Số lượng còn lại: "),
-      _c("span", { staticClass: "text-blue-900" }, [
-        _vm._v(_vm._s(_vm.productQuantityResource))
-      ]),
-      _vm._v(" sản phẩm")
-    ]),
+    _vm.productQuantityResource > 0
+      ? _c("p", { staticClass: "p-2" }, [
+          _vm._v("Số lượng còn lại: "),
+          _c("span", { staticClass: "text-blue-900" }, [
+            _vm._v(_vm._s(_vm.productQuantityResource))
+          ]),
+          _vm._v(" sản phẩm")
+        ])
+      : _c("p", { staticClass: "p-2 text-red-600" }, [
+          _vm._v("Tạm thời hết sản phẩm")
+        ]),
     _vm._v(" "),
     _c("pre", [
       _vm._v(
@@ -19729,12 +19740,29 @@ var render = function() {
         _vm._v(" "),
         _c(
           "label",
-          { staticClass: "text-blue-900 mt-5 p-2", attrs: { for: "quantity" } },
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.productQuantityResource > 0,
+                expression: "productQuantityResource > 0"
+              }
+            ],
+            staticClass: "text-blue-900 mt-5 p-2",
+            attrs: { for: "quantity" }
+          },
           [_vm._v("Nhập số lượng cần mua")]
         ),
         _vm._v(" "),
         _c("input", {
           directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.productQuantityResource > 0,
+              expression: "productQuantityResource > 0"
+            },
             {
               name: "model",
               rawName: "v-model.number",
@@ -19764,15 +19792,24 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5 ",
-            attrs: { id: "btn-add-to-cart" }
-          },
-          [_vm._v("\n            Thêm vào giỏ hàng\n        ")]
-        )
+        _vm.productQuantityResource > 0
+          ? _c(
+              "button",
+              {
+                staticClass:
+                  "bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5"
+              },
+              [_vm._v("\n            Thêm vào giỏ hàng\n        ")]
+            )
+          : _c(
+              "button",
+              {
+                staticClass:
+                  "bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5",
+                attrs: { disabled: "", hidden: "" }
+              },
+              [_vm._v("\n            Thêm vào giỏ hàng\n        ")]
+            )
       ]
     ),
     _vm._v(" "),

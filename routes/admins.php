@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Error\ErrorController;
 
-Route::middleware(['auth'])->prefix('admin')->group(function() {
+Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('home', [HomeController::class, 'index']);
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
