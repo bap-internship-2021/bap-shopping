@@ -51,7 +51,9 @@ class VoucherController extends Controller
      */
     public function show($id)
     {
-        //
+        $voucher = Voucher::find($id);
+        // dd($voucher);
+        return view('admin.voucher.show', compact('voucher'));
     }
 
     /**
