@@ -16,7 +16,7 @@
                         <!-- Dark Logo icon -->
                         <img src="{{URL::asset('admin/assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
                         <!-- Light Logo icon -->
-                        <img src="{{URL::asset('admin/assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" />
+                        <img src="{{asset('admin/images/Bap-logo.jpg')}}" alt="homepage" style="width:67px; height:67px; border:1px solid #233242; border-radius:50%;" />
                     </b>
                     <!--End Logo icon -->
                     <!-- Logo text -->

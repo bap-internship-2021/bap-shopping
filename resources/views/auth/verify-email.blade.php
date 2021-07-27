@@ -1,11 +1,12 @@
 <x-guest-layout>
     <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
-
+        
+            <x-slot name="logo">
+            <img src="{{asset('admin/images/Bap-logo.jpg')}}" class="w-80 h-80 rounded-full">
+            </x-slot>
+        
         <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+            {{ __('Tài khoản chưa xác thực email. Vui lòng xác thực để sử dụng tính năng của shop') }}
         </div>
 
         @if (session('status') == 'verification-link-sent')
@@ -20,7 +21,7 @@
 
                 <div>
                     <x-jet-button type="submit">
-                        {{ __('Resend Verification Email') }}
+                        {{ __('Gửi lại mã') }}
                     </x-jet-button>
                 </div>
             </form>
@@ -29,9 +30,10 @@
                 @csrf
 
                 <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
+                    {{ __('Đăng xuất') }}
                 </button>
             </form>
+            <a href="{{route('/')}}">Để sau</a>
         </div>
     </x-jet-authentication-card>
 </x-guest-layout>
