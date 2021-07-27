@@ -13,35 +13,42 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('profiles.show')}}" aria-expanded="false">
                         <i class="fas fa-address-card"></i>
-                        <span class="hide-menu">Profile</span>
+                        <span class="hide-menu">Thông tin cá nhân</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('users')}}" aria-expanded="false">
                         <i class="fas fa-users"></i>
-                        <span class="hide-menu">Users</span>
+                        <span class="hide-menu">Quản lí người dùng</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('category.index')}}" aria-expanded="false">
                         <i class="fab fa-apple"></i>
-                        <span class="hide-menu">Category</span>
+                        <span class="hide-menu">Danh mục sản phẩm</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('products.index')}}" aria-expanded="false">
                         <i class="fas fa-desktop"></i>
-                        <span class="hide-menu">Product</span>
+                        <span class="hide-menu">Sản phẩm</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('voucher.index')}}" aria-expanded="false">
                         <i class="fas fa-gift"></i>
-                        <span class="hide-menu">Voucher</span>
+                        <span class="hide-menu">Khuyến mãi</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
+                        <i class="fas fa-shipping-fast"></i>
+                        <span class="hide-menu">Quản lí đơn hàng</span>
                     </a>
                 </li>
             </ul>
