@@ -74,6 +74,12 @@
         @endforeach
     </div>
     <div class="row">
+        @if(count($specification) == 0)
+        <div class="col-5 p-3 align-self-center">
+            <i class="fas fa-exclamation-triangle p-3"></i>
+            <h3 class="page-title text-dark">The product has no specifications. Please create now</br><a href="{{route('specification.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Create Now</button></a></h3>
+        </div>
+        @else
         <div class="col-6 pt-5">
             <div class="card re-card st-card">
                 <div class="card-body">
@@ -88,11 +94,6 @@
         </div>  
         <div class="col-6 pt-5">
             <div class="card re-card st-card">
-                @if(count($specification) == 0)
-                <div class="col-8 p-3 align-self-center">
-                    <h3 class="page-title text-white bg-dark rounded-circle p-5">The product has no specifications. Please create<a href="{{route('specification.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Create Now</button></a></h3>
-                </div>
-                @endif
                 <h2 class="card-title p-3 text-center">Specification</h2>
                 <div class="card-body">
                     <table class="table table-striped table-dark">
@@ -158,7 +159,8 @@
                     </table>
                 </div>
             </div>
-        </div>     
+        </div>  
+        @endif   
     </div>
 </div>
 
