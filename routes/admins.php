@@ -17,7 +17,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('home', [HomeController::class, 'index']);
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
     Route::put('profile-update/{id}', [ProfileController::class, 'handleUpdateProfile'])->name('profile.update');
     Route::resource('products', ProductController::class);

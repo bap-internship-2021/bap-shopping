@@ -27,7 +27,7 @@ Route::get('/', function () {
 })->name('/');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('layouts.master');
+    return redirect()->route('/');
 })->name('dashboard');
 
 Route::namespace('Product')->group(function () {
