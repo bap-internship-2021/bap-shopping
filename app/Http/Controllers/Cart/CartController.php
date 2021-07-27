@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 
+
 class CartController extends Controller
 {
     public function index()
@@ -24,6 +25,7 @@ class CartController extends Controller
                 $data[$key]['totalPrice'] = $item['quantity'] * $item['price'];
                 $subTotal += $data[$key]['totalPrice']; // Total price of all product
             }
+            session()->put('dataCart', $data);
             session()->put('subTotal', $subTotal);
             return view('cart.index', compact(['subTotal', 'data']));
         }
@@ -59,5 +61,12 @@ class CartController extends Controller
         unset($cart[$productId]);
         session()->put('cart', $cart); // Update cart session
         return back();
+    }
+
+    public function changeAddressShipped(\App\Http\Requests\Cart\ChangeAddressShippedRequest $request)
+    {
+        $userInfo = $request->only(['name', 'phone', 'address']);
+        session()->put('userInfo', $userInfo);
+        return redirect()->route('carts.index');
     }
 }

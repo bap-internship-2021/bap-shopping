@@ -83,27 +83,103 @@
                             <div>
                                 <p class="font-semibold">Giao tới</p>
                             </div>
-                            <div>
-                                <a class="text-blue-500 hover:underline cursor-pointer">Thay đổi</a>
+                            <div id="change-address">
+                                <button onclick="showFormChangeAddress()">Thay đổi<button>
                             </div>
                         </div>
                         <div>
-                            <div>
-                                <p class="font-bold">{{ Auth()->user()->name }} <span class="text-gray-300 font-normal">|</span> {{ Auth()->user()->phone }}
-                                </p>
-                            </div>
+                            @if(session()->has('userInfo'))
+                                <div>
+                                    <p class="font-bold">{{ session()->get('userInfo')['name'] }} <span
+                                            class="text-gray-300 font-normal">|</span> {{ session()->get('userInfo')['phone'] }}
+                                    </p>
+                                </div>
+                            @else
+                                <div>
+                                    <p class="font-bold">{{ Auth()->user()->name }} <span
+                                            class="text-gray-300 font-normal">|</span> {{ Auth()->user()->phone }}
+                                    </p>
+                                </div>
+                            @endif
+
                         </div>
                         <div>
-                            <div>
-                                <p>
-                                    Địa chỉ:
-                                    <span class="text-sm text-gray-400 italic">
+                            @if(session()->has('userInfo'))
+                                <div>
+                                    <p>
+                                        Địa chỉ:
+                                        <span class="text-sm text-gray-400 italic">
+                                      {{ session()->get('userInfo')['address'] }}
+                                    </span>
+                                    </p>
+                                </div>
+                            @else
+                                <div>
+                                    <p>
+                                        Địa chỉ:
+                                        <span class="text-sm text-gray-400 italic">
                                       {{ Auth::user()->address }}
                                     </span>
-                                </p>
-                            </div>
+                                    </p>
+                                </div>
+                            @endif
                         </div>
                     </div>
+
+                    <!-- Form change new address -->
+                    <div class="bg-gray-100 mt-5 hidden" id="form-change-address">
+                        <div class="flex flex-col bg-white rounded p-2">
+                            <!-- Input voucher code -->
+                            <div>
+                                <div>
+                                    <form action="{{ route('carts.changeShipping') }}" method="post">
+                                        @csrf
+                                        <label for="name">Tên người nhận</label>
+                                        <input type="text"
+                                               id="voucher-code-input"
+                                               class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
+                                               placeholder="Nhập tên người nhận"
+                                               value="{{ old('name') }}"
+                                               name="name">
+                                        @if($errors->has('name'))
+                                            <p class="text-red-600">{{$errors->first('name')}}</p>
+                                        @endif
+                                        <label for="phone">Số điện thoại người nhận</label>
+                                        <input type="text"
+                                               id="voucher-code-input"
+                                               class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
+                                               placeholder="Nhập số điện thoại"
+                                               value="{{ old('phone') }}"
+                                               name="phone">
+                                        @if($errors->has('phone'))
+                                            <p class="text-red-600">{{$errors->first('phone')}}</p>
+                                        @endif
+                                        <label for="">Địa chị người nhận</label>
+                                        <input type="text"
+                                               id="voucher-code-input"
+                                               class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
+                                               placeholder="Nhập địa chỉ người nhận"
+                                               value="{{ old('address') }}"
+                                               name="address">
+                                        @if($errors->has('address'))
+                                            <p class="text-red-600">{{$errors->first('address')}}</p>
+                                        @endif
+                                        <div class="pt-3">
+                                            <button
+                                                class="bg-green-500 p-2 w-full rounded text-white font-semibold hover:bg-red-600">
+                                                Xác nhận thay đổi
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
+                    <! -- End form change new address -->
+
                     <!-- Form enter voucher code -->
                     <div class="bg-gray-100 mt-5">
                         <div class="flex flex-col bg-white rounded p-2">
@@ -191,4 +267,9 @@
 @section('js')
     {{--  Get user input voucher code  --}}
     <script src="{{ asset('js/get-voucher-code.js') }}"></script>
+    <script>
+        function showFormChangeAddress(){
+            document.getElementById("form-change-address").style.display = "block";
+        }
+    </script>
 @endsection
