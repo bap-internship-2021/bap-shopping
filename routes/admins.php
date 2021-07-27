@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\HomeController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\SpecificationController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Error\ErrorController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('home', [HomeController::class, 'index']);
@@ -28,3 +30,19 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
 });
 
 Route::get('404', [ErrorController::class, 'errorPage']);
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
