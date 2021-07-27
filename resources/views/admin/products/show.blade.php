@@ -44,7 +44,6 @@
             <div class="col-sm-6">
                 <h1>{{$value->name}}</h1>
                 <div class="my-slider">
-                    
                     @foreach($value->images as $image)
                     <div>
                         <img src="{{asset('admin/images/products/'.$image->path)}}" style="width:250px; height: 300px;">
@@ -74,6 +73,7 @@
         @endforeach
     </div>
     <div class="row">
+
         @if(count($specification) == 0)
         <div class="col-5 p-3 align-self-center">
             <i class="fas fa-exclamation-triangle p-3"></i>
@@ -160,7 +160,7 @@
                 </div>
             </div>
         </div>  
-        @endif   
+        @endif  
     </div>
 </div>
 
