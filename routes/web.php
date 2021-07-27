@@ -37,6 +37,7 @@ Route::namespace('Product')->group(function () {
 
 Route::middleware(['auth'])->namespace('Cart')->group(function () {
     Route::get('checkout/cart', [CartController::class, 'index'])->name('carts.index');
+    Route::post('checkout/shipping', [CartController::class, 'changeAddressShipped'])->name('carts.changeShipping');
     Route::post('carts', [CartController::class, 'store']); // API store item to cart
     Route::delete('carts/item', [CartController::class, 'destroyItemInCart'])->name('carts.item.destroy'); // Delete item in cart
     Route::delete('carts', [CartController::class, 'destroy'])->name('carts.destroy'); // Delete cart

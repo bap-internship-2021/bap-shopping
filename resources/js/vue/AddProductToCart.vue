@@ -2,9 +2,9 @@
     <div class="p-2 mt-1">
         <p v-if="productQuantityResource > 0" class="p-2">Số lượng còn lại: <span class="text-blue-900">{{ productQuantityResource }}</span> sản phẩm</p>
         <p v-else class="p-2 text-red-600">Tạm thời hết sản phẩm</p>
-        <pre>
+        <!-- <pre>
             {{ JSON.stringify(formData, null, 2) }}
-        </pre>
+        </pre> -->
 
         <!--    Form add item to cart    -->
         <form class="flex flex-col" @submit.prevent="addProductToCart">
@@ -17,14 +17,14 @@
             <input v-show="productQuantityResource > 0" id="quantity" v-model.number="formData.quantity"
                    class="my-2  border-2 border-blue-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 p-2"
                    placeholder="Số lượng cần mua"
-                   type="text"/>
+                   type="number"/>
             <button v-if="productQuantityResource > 0"
-                    class="bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5"
+                    class="bg-blue-300 border rounded-lg p-2 hover:bg-blue-200 transition pt-5"
             >
                 Thêm vào giỏ hàng
             </button>
             <button v-else
-                    class="bg-indigo-300 border rounded-lg p-2 hover:bg-indigo-200 transition pt-5"
+                    class="bg-blue-300 border rounded-lg p-2 hover:bg-blue-200 transition pt-5"
                     disabled hidden
             >
                 Thêm vào giỏ hàng
@@ -96,4 +96,7 @@ export default {
 </script>
 
 <style scoped>
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+}
 </style>

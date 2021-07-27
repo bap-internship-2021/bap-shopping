@@ -68,6 +68,11 @@
                 @endif
             @endforeach
         </div>
+
+        <div>
+            <div>Thông số kĩ thuật</div>
+            
+        </div>
     </div>
 @endsection
 

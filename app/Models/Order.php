@@ -10,10 +10,11 @@ class Order extends Model
 {
     use HasFactory;
 
+    
     const PENDING_STATUS = 1;
     const SENDING_STATUS = 2;
     const FINISH_STATUS = 3;
-    protected $fillable = ['user_id','date_start', 'date_end', 'status', 'total_price'];
+    protected $fillable = ['user_id','date_start', 'date_end', 'status', 'total_price', 'phone', 'name', 'address'];
 
     public function voucherDetails()
     {

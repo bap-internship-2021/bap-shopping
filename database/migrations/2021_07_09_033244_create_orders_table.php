@@ -17,6 +17,9 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->string('name');
+            $table->string('phone');
+            $table->string('address');
             $table->datetime('date_start')->nullable();
             $table->dateTime('date_end')->nullable();
             $table->tinyInteger('status')->default(Order::PENDING_STATUS);

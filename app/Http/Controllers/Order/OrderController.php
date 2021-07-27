@@ -21,6 +21,14 @@ class OrderController extends Controller
         $orders = Order::where('user_id', Auth::id())->with(['orderDetails.product'])->paginate(6);
         return view('Order.index', compact('orders'));
     }
+
+
+    /**
+     * Check order and caulator data to push order tables
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function confirmation(UserConfirmRequest $request)
     {
         $voucher = VoucherController::checkVoucherCodeIsExist($request->input('code'));
@@ -67,8 +75,25 @@ class OrderController extends Controller
         try {
             $cart = session()->get('cart');
             $userId = Auth::id();
+            if (session()->has('userInfo')) {
+                $userOrder = [
+                    'user_id' => $userId,
+                    'total_price' => session()->get('grandTotal'),
+                    'address' => session()->get('userInfo')['address'],
+                    'name' => session()->get('userInfo')['name'],
+                    'phone' => session()->get('userInfo')['phone']
+                ];
+            } else {
+                $userOrder = [
+                    'user_id' => $userId,
+                    'total_price' => session()->get('grandTotal'),
+                    'address' => Auth()->user()->address,
+                    'name' => Auth()->user()->name,
+                    'phone' => Auth()->user()->phone
+                ];
+            }
             $voucherPrice = session()->get('voucherPrice');
-            $userOrder = ['user_id' => $userId, 'total_price' => session()->get('grandTotal')];
+
             $orderDetails = [];
             foreach ($cart as $key => $item) {
                 $product = Product::where('id', $key)->get();
@@ -99,6 +124,7 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             // something went wrong
+            dd($e->getMessage());
             return redirect()->route('carts.index')->with(['notify-order' => 'Có lỗi xảy ra, xin quý khách thử lại']);
         }
     }
