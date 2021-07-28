@@ -141,10 +141,12 @@
                         <a href="{{ route('user.vouchers.index') }}"><i
                                 class="fas fa-tags fill-current text-blue-400"></i> Xem voucher</a>
                     </li>
+                    @if(Auth::user()->role_id === \App\Models\User::USER_ROLE)
                     <li class="cursor-pointer transition hover:text-red-500">
                         <a href="{{ route('orders.index') }}"><i
                                 class="fas fa-shopping-basket fill-current text-blue-400"></i> Đơn hàng của tôi</a>
                     </li>
+                    @endif
                     <li class="cursor-pointer transition hover:text-red-500">
                         <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::IPHONE]) }}"><i
                                 class="fas fa-mobile fill-current text-blue-400"></i> Iphone</a>
