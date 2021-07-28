@@ -46,7 +46,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('admin.order')}}" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('admin.orderpending')}}" aria-expanded="false">
                         <i class="fas fa-shipping-fast"></i>
                         <span class="hide-menu">Quản lí đơn hàng</span>
                     </a>

@@ -13,6 +13,11 @@ class OrderController extends Controller
         return view('admin.order.listOrderPending', compact('orders'));
     }
 
+    public function listOrderSending(){
+        $orders = Order::where('status', '2')->paginate(5);
+        return view('admin.order.listOrderSending', compact('orders'));
+    }
+
     public function detailOrder($id){
         $order = Order::select('orders.*', 'products.name as productname', 'order_details.quantity')
         ->join('order_details', 'orders.id', '=', 'order_details.order_id')

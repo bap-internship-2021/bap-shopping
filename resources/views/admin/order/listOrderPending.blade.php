@@ -30,10 +30,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                          <a class="nav-link" href="{{route('admin.order')}}">Đang chờ</a>
+                          <a class="nav-link" href="{{route('admin.orderpending')}}">Đang chờ</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#">Đã duyệt</a>
+                          <a class="nav-link" href="{{route('admin.ordersending')}}">Đang giao</a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="#">Hoàn thành</a>

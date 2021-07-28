@@ -18,7 +18,7 @@
             </div>
         @endif
         <div>
-            <a href="{{route('admin.order')}}" class="btn btn-primary">Quay lại</a>
+            <a href="{{route('admin.orderpending')}}" class="btn btn-primary">Quay lại</a>
         </div>
         <div class="page-breadcrumb">
             <div class="row">
