@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\SpecificationController;
 use App\Http\Controllers\Admin\UserController;
@@ -27,6 +28,7 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('users', [UserController::class, 'index'])->name('users');
     Route::resource('specification', SpecificationController::class);
     Route::resource('voucher', VoucherController::class);
+    Route::get('orders', [OrderController::class , 'handleIndex'])->name('admin.order');
 });
 
 Route::get('profile', [ProfileController::class, 'index'])->name('profiles.show');
