@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Order;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Voucher\VoucherController;
 use App\Http\Requests\User\Order\UserConfirmRequest;
@@ -12,7 +13,7 @@ use App\Models\Voucher;
 use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\Mail\MailController;
 use Illuminate\Support\Facades\DB;
-
+use App\Helpers\CustomID;
 
 class OrderController extends Controller
 {
@@ -75,9 +76,12 @@ class OrderController extends Controller
         try {
             $cart = session()->get('cart');
             $userId = Auth::id();
+            $custom_order_id = CustomID::IdGenerator(new Order, 'custom_order_id', 8, 'BAP');
+//            dd($custom_order_id);
             if (session()->has('userInfo')) {
                 $userOrder = [
                     'user_id' => $userId,
+                    'custom_order_id' => $custom_order_id,
                     'total_price' => session()->get('grandTotal'),
                     'address' => session()->get('userInfo')['address'],
                     'name' => session()->get('userInfo')['name'],
@@ -86,6 +90,7 @@ class OrderController extends Controller
             } else {
                 $userOrder = [
                     'user_id' => $userId,
+                    'custom_order_id' => $custom_order_id,
                     'total_price' => session()->get('grandTotal'),
                     'address' => Auth()->user()->address,
                     'name' => Auth()->user()->name,
