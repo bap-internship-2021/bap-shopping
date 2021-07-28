@@ -18,8 +18,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('home', [HomeController::class, 'index']);
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
-    Route::put('profile-update/{id}', [ProfileController::class, 'handleUpdateProfile'])->name('profile.update');
+//    Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
+//    Route::put('profile-update/{id}', [ProfileController::class, 'handleUpdateProfile'])->name('profile.update');
     Route::resource('products', ProductController::class);
     Route::resource('category', CategoryController::class);
     Route::post('search-products', [SearchController::class, 'search'])->name('search.product');
@@ -28,6 +28,9 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::resource('specification', SpecificationController::class);
     Route::resource('voucher', VoucherController::class);
 });
+
+Route::get('profile', [ProfileController::class, 'index'])->name('profiles.show');
+Route::put('profile/{id}', [ProfileController::class, 'handleUpdateProfile'])->name('profiles.update');
 
 Route::get('404', [ErrorController::class, 'errorPage']);
 

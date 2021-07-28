@@ -11,7 +11,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('admin.profile')}}" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('profiles.show')}}" aria-expanded="false">
                         <i class="fas fa-address-card"></i>
                         <span class="hide-menu">Profile</span>
                     </a>
