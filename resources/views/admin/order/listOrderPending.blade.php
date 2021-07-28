@@ -66,7 +66,7 @@
                             <tr>
                                 <th scope="row">{{$order->custom_order_id}}</th>
                                 <td>
-                                    <a href="" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                    <a href="{{route('admin.order.detail', [$order->id])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td>
                                     <a href="" class="btn btn-primary"><i class="fas fa-check-circle"></i></a>

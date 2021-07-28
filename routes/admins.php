@@ -28,7 +28,8 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('users', [UserController::class, 'index'])->name('users');
     Route::resource('specification', SpecificationController::class);
     Route::resource('voucher', VoucherController::class);
-    Route::get('orders', [OrderController::class , 'handleIndex'])->name('admin.order');
+    Route::get('orders', [OrderController::class , 'listOrderPending'])->name('admin.order');
+    Route::get('orders/detail/{id}', [OrderController::class , 'detailOrder'])->name('admin.order.detail');
 });
 
 Route::get('profile', [ProfileController::class, 'index'])->name('profiles.show');
