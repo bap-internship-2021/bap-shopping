@@ -23,7 +23,7 @@
     <!-- TailwindCSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <title>BAP Shopping @yield('title', '')</title>
+    <title>@yield('title', 'BAP SHOPPING')</title>
 </head>
 
 <body>
@@ -34,7 +34,7 @@
     <!-- Start Logo -->
     <div class="text-gray-700 p-8 w-1/6">
         <a href="{{ route('/') }}" class="text-white w-1/6 text-xl" style="font-family: 'Zen Tokyo Zoo', cursive;">
-            <img src="https://bap.bemo.cloud/web/image/website/1/logo/Bemo?unique=44aea3b" class="" alt="">
+            <img src="https://bap.bemo.cloud/web/image/website/1/logo/Bemo?unique=44aea3b" class="" alt="BAP LOGO">
             BAP SHOPPING
         </a>
     </div>
@@ -47,7 +47,7 @@
         <div class="w-1/2">
             <form action="" method="GET" class="flex">
                 <input type="text"
-                       class=" bg-purple-white  shadow-lg rounded p-2 w-4/6"
+                       class="bg-purple-white shadow-lg rounded p-2 w-4/6 placeholder-black placeholder-opacity-90"
                        placeholder="Tìm kiếm sản phẩm">
                 <button style="background-color: #fff" class="p-2 ml-2 rounded shadow-lg text-black font-medium"><i
                         class="fas fa-search"></i>
@@ -72,7 +72,7 @@
                             <div class="dropdown inline-block relative">
                                 <button
                                     class="text-white font-semibold rounded inline-flex items-center">
-                                    <span class=""><i class="fas fa-user"></i> {{ !empty(Auth()->user()->name) ? Auth()->user()->name : '' }}</span>
+                                    <span class="flex"><img class="rounded-full" src="{{ asset("admin\\images\\avatar\\") . Auth()->user()->profile_photo_path }}" alt="" style="width: 30px; height: 30px"> {{ !empty(Auth()->user()->name) ? Auth()->user()->name : '' }}</span>
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                          viewBox="0 0 20 20">
                                         <path
@@ -91,9 +91,10 @@
                                                     href="{{ route('profiles.show', ['profile' => Auth::id()]) }}">Cập nhật thông tin cá nhân</a>
                                             </li>
                                         @else
+                                            <!-- User Profile -->
                                             <li class=""><a
                                                     class="rounded-t bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                                                    href="{{ route('profiles.show', ['profile' => Auth::id()]) }}">Cập nhật thông tin cá nhân</a>
+                                                    href="{{ route('users.profiles.show') }}">Tài khoản của tôi</a>
                                             </li>
                                         @endif
 
@@ -134,7 +135,7 @@
 
         {{--    START LEFT NAV --}}
         <div class="w-1/6 h-96">
-            <nav class="bg-blue-50 shadow-sm h-full">
+            <nav class="bg-blue-200 shadow-sm h-full">
                 <ul class="px-4 py-2">
                     <li class="animate-bounce transition hover:text-red-500  cursor-pointer">
                         <a href="{{ route('user.vouchers.index') }}"><i

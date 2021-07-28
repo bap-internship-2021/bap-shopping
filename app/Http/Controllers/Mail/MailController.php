@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mail;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Mail;
 

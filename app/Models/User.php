@@ -20,8 +20,13 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    // Role
     const AMIN_ROLE = 1;
     const USER_ROLE = 2;
+
+    // Gender
+    const MALE_GENDER = 1;
+    const FEMALE_GENDER = 2;
 
     /**
      * The attributes that are mass assignable.
