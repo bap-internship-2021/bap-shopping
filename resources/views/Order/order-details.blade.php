@@ -15,7 +15,7 @@
 @section('content')
     <div class="">
         <div class="">
-            <p class="text-2xl p-5 text-center">Chi tiết đơn hàng <span>#{{ $order->id }}</span></p>
+            <p class="text-2xl p-5 text-center">Chi tiết đơn hàng <span>#{{ $order->custom_order_id }}</span></p>
         </div>
         <div class="flex justify-between w-11/12 mx-auto">
             {{-- Dia chi nguoi nhan--}}
@@ -101,7 +101,7 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($orderDetails as $key => $orderDetail)
 
-                                    <tr class="hover:bg-blue-50">
+                                    <tr class="hover:bg-blue-50 cursor-pointer" onclick="location.href='{{ route('user.products.show', ['product' => $orderDetail->product_id]) }}'">
 
                                         {{-- Image and product name --}}
                                         <td class="px-6 py-4 whitespace-nowrap">

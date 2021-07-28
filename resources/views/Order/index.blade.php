@@ -3,10 +3,11 @@
 
 @section('css')
     <style>
-        .pagination{
+        .pagination {
             display: flex;
             flex-direction: row;
         }
+
         .pagination li {
             background: white;
             padding: 5px 15px;
@@ -43,37 +44,36 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($orders as $key => $order)
-                                <tr class="hover:bg-blue-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-blue-600">
-                                                    <a href="{{ route('orders.oderDetails.index', ['id' => $order->id]) }}"
-                                                       class="underline">{{ $order->id }}</a>
+                                    <tr class="hover:bg-blue-50 cursor-pointer" onclick="location.href='{{ route('orders.oderDetails.index', ['id' => $order->id]) }}'">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-blue-600">
+                                                        {{ $order->custom_order_id }}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        @php
-                                            $order_at = \Carbon\Carbon::parse($order->created_at)->format('\N\g\à\y d \T\h\á\n\g m \N\ă\m Y');
-                                        @endphp
-                                        <div class="text-sm text-gray-900">{{ $order_at }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-left">
-                                        {{ $order->total_price }}
-                                        <span class="underline">đ</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        @if($order->status === \App\Models\Order::PENDING_STATUS)
-                                            <p class="text-yellow-400">{{__('Đang đợi kiểm duyệt')}}</p>
-                                        @elseif($order->status === \App\Models\Order::SENDING_STATUS)
-                                            <p class="text-blue-600">{{__('Đang bàn giao')}}</p>
-                                        @elseif($order->status === \App\Models\Order::FINISH_STATUS)
-                                            <p class="text-green-600">{{__('Giao hàng thành công')}}</p>
-                                        @endif
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            @php
+                                                $order_at = \Carbon\Carbon::parse($order->created_at)->format('\N\g\à\y d \T\h\á\n\g m \N\ă\m Y');
+                                            @endphp
+                                            <div class="text-sm text-gray-900">{{ $order_at }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-left">
+                                            {{ $order->total_price }}
+                                            <span class="underline">đ</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            @if($order->status === \App\Models\Order::PENDING_STATUS)
+                                                <p class="text-yellow-400">{{__('Đang đợi kiểm duyệt')}}</p>
+                                            @elseif($order->status === \App\Models\Order::SENDING_STATUS)
+                                                <p class="text-blue-600">{{__('Đang bàn giao')}}</p>
+                                            @elseif($order->status === \App\Models\Order::FINISH_STATUS)
+                                                <p class="text-green-600">{{__('Giao hàng thành công')}}</p>
+                                            @endif
+                                        </td>
+                                    </tr>
                             @endforeach
                             </tbody>
                         </table>

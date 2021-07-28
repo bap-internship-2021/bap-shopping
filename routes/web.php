@@ -48,3 +48,4 @@ Route::middleware('auth')->group(function () {
     Route::resource('orders', OrderController::class);
     Route::get('orders/{id}/order-details', [\App\Http\Controllers\Order\OrderDetailController::class, 'getOrderDetail'])->name('orders.oderDetails.index');
 });
+
