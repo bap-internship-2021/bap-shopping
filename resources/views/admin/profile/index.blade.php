@@ -10,7 +10,7 @@
                 @endforeach
             </ul>
         </div>
-        
+
     @endif
 
     <div class="card-body">
@@ -46,7 +46,7 @@
         <!-- ============================================================== -->
         <!-- Row -->
         <div class="row">
-        
+
             <!-- Column -->
             <div class="col-lg-4 col-xlg-3 col-md-5">
                 <div class="card">
@@ -81,7 +81,7 @@
             <div class="col-lg-8 col-xlg-9 col-md-7">
                 <div class="card">
                     <div class="card-body">
-                    <form action="{{route('profile.update', [Auth::id()])}}" class="form-horizontal form-material" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('profiles.update', [Auth::id()])}}" class="form-horizontal form-material" method="POST" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
                             <div class="form-group">
@@ -121,12 +121,12 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="col-md-12">Choose File</label>
                                 <input type="file" name="file" value="{{Auth::user()->profile_photo_path}}" class="form-control-file">
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-success">Update Profile</button>

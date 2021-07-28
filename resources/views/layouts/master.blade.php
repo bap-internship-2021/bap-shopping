@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
@@ -15,24 +16,27 @@
 
     {{-- Custom CSS --}}
     @yield('css')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ asset('css/my-custom.css') }}">
     <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/inficons/512/apple.png" type="image/gif"
           sizes="16x16">
 
     <!-- TailwindCSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <title>BAP Shopping @yield('title', '')</title>
 </head>
 
 <body>
 
 <!-- Start top nav -->
-<div class="w-screen h-24 flex" style="background-color: #1A94FF">
+<div class="w-screen h-24 flex" style="background-color: #0c3254">
 
     <!-- Start Logo -->
     <div class="text-gray-700 p-8 w-1/6">
-        <a href="{{ route('/') }}" class="text-white w-1/6 text-xl" style="font-family: 'Zen Tokyo Zoo', cursive;">BAP
-            SHOPPING</a>
+        <a href="{{ route('/') }}" class="text-white w-1/6 text-xl" style="font-family: 'Zen Tokyo Zoo', cursive;">
+            <img src="https://bap.bemo.cloud/web/image/website/1/logo/Bemo?unique=44aea3b" class="" alt="">
+            BAP SHOPPING
+        </a>
     </div>
     <!-- End Logo -->
 
@@ -45,7 +49,7 @@
                 <input type="text"
                        class=" bg-purple-white  shadow-lg rounded p-2 w-4/6"
                        placeholder="Tìm kiếm sản phẩm">
-                <button style="background-color: #0D5CB6" class="p-2 ml-2 rounded shadow-lg text-black font-medium"><i
+                <button style="background-color: #fff" class="p-2 ml-2 rounded shadow-lg text-black font-medium"><i
                         class="fas fa-search"></i>
                     Tìm Kiếm
                 </button>
@@ -56,31 +60,60 @@
         <div class="w-1/2">
             <ul class="flex justify-end">
                 @if(Auth::check())
-
-                    <li>
-                        <a class="text-white rounded text-sm" href=""><i
-                                class="fas fa-user text-3xl"></i> {{ !empty(Auth()->user()->name) ? Auth()->user()->name : '' }}
+                    <li class="pr-3">
+                        <a class="text-white rounded" href="{{ route('carts.index') }}">
+                            <span class="font-semibold">
+                                <i class="fas fa-shopping-cart pr-1"></i></span>Giỏ
+                            hàng
                         </a>
-                        <ul class="hidden">
-                            <li>
-                                <a href="">Chỉnh sửa thông tin cá nhân</a>
-                            </li>
-                            <li>
-                            </li>
-                        </ul>
                     </li>
+                    <li class="pr-2">
+                        <div class="">
+                            <div class="dropdown inline-block relative">
+                                <button
+                                    class="text-white font-semibold rounded inline-flex items-center">
+                                    <span class=""><i class="fas fa-user"></i> {{ !empty(Auth()->user()->name) ? Auth()->user()->name : '' }}</span>
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu absolute hidden text-black pt-1 z-50">
+                                    <div class="divide-y divide-gray-100 cursor-pointer">
+                                        @if(Auth::user()->role_id == \App\Models\User::AMIN_ROLE)
+                                            <li class=""><a
+                                                    class="rounded-t bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                                    href="#">Quản lý hệ thống</a>
+                                            </li>
+                                            <li class=""><a
+                                                    class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                                    href="{{ route('profiles.show', ['profile' => Auth::id()]) }}">Cập nhật thông tin cá nhân</a>
+                                            </li>
+                                        @else
+                                            <li class=""><a
+                                                    class="rounded-t bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                                    href="{{ route('profiles.show', ['profile' => Auth::id()]) }}">Cập nhật thông tin cá nhân</a>
+                                            </li>
+                                        @endif
 
-                    <li class="pr-3"><a class="text-white rounded text-sm" href="{{ route('carts.index') }}"><span><i class="fas fa-shopping-cart text-3xl"></i></span>Giỏ
-                            hàng</a></li>
-
-{{--                    <li>--}}
-{{--                        <form action="{{ route('logout') }}" method="post">--}}
-{{--                            @csrf--}}
-{{--                            <button class="text-white text-sm" type="submit" title="Click to logout"><i--}}
-{{--                                    class="fas fa-sign-out-alt text-xl"></i>Đăng xuất--}}
-{{--                            </button>--}}
-{{--                        </form>--}}
-{{--                    </li>--}}
+                                        <li class=""><a
+                                                class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                                href="#">Do something</a>
+                                        </li>
+                                        <li class="">
+                                            <form action="{{ route('logout') }}" method="post">
+                                                @csrf
+                                                <input type="submit"
+                                                       class="w-full rounded-b bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap cursor-pointer"
+                                                       value="Đăng xuất">
+                                            </form>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
                 @else
                     <li><a class="text-white rounded text-sm" href=""><i class="fas fa-user text-white text-xl"></i>
                             Đăng

@@ -136,7 +136,6 @@
                                         @csrf
                                         <label for="name">Tên người nhận</label>
                                         <input type="text"
-                                               id="voucher-code-input"
                                                class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
                                                placeholder="Nhập tên người nhận"
                                                value="{{ old('name') }}"
@@ -146,7 +145,6 @@
                                         @endif
                                         <label for="phone">Số điện thoại người nhận</label>
                                         <input type="text"
-                                               id="voucher-code-input"
                                                class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
                                                placeholder="Nhập số điện thoại"
                                                value="{{ old('phone') }}"
@@ -156,7 +154,6 @@
                                         @endif
                                         <label for="">Địa chị người nhận</label>
                                         <input type="text"
-                                               id="voucher-code-input"
                                                class="border border-blue-400 rounded w-full ring:none focus:outline-none focus:ring-2  focus:ring-blue-400 p-1"
                                                placeholder="Nhập địa chỉ người nhận"
                                                value="{{ old('address') }}"
@@ -179,6 +176,29 @@
                         </div>
                     </div>
                     <! -- End form change new address -->
+
+
+
+                    <!-- Start count price total and voucher price -->
+                    <div class="">
+                        <div class="font-light bg-white p-2 rounded mt-5">
+                            <div class="flex justify-between">
+                                <div>
+                                    <p>Tạm tính</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">
+                                        <span>{{ number_format($subTotal, 0, '', ',') }}</span>
+                                        <span class="underline">đ</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Divide  -->
+                        <div class="h-px"></div>
+                        <!-- End divide -->
+                    </div>
+                    <!-- End count price total and voucher price -->
 
                     <!-- Form enter voucher code -->
                     <div class="bg-gray-100 mt-5">
@@ -203,27 +223,6 @@
                         </div>
                     </div>
                     <!-- End form enter voucher code -->
-
-                    <!-- Start count price total and voucher price -->
-                    <div class="">
-                        <div class="font-light bg-white p-2 rounded mt-5">
-                            <div class="flex justify-between">
-                                <div>
-                                    <p>Tạm tính</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold">
-                                        <span>{{ number_format($subTotal, 0, '', ',') }}</span>
-                                        <span class="underline">đ</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Divide  -->
-                        <div class="h-px"></div>
-                        <!-- End divide -->
-                    </div>
-                    <!-- End count price total and voucher price -->
 
                     <!-- Start form click to buy -->
                     <div>
