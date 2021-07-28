@@ -25,7 +25,7 @@ class ProfileController extends Controller
 
         if ($image) {
             $imageName = time() . $image->getClientOriginalName();
-            
+
             $data['profile_photo_path'] = $imageName;
         }
 

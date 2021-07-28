@@ -46,6 +46,10 @@
                         {{__('Đang đợi kiểm duyệt')}}
                     @elseif($order->status === \App\Models\Order::SENDING_STATUS)
                         {{__('Đang vận chuyển đơn hàng')}}
+                        @php
+                            $date_start = \Carbon\Carbon::parse($order->date_start)->format('\n\g\à\y d \t\h\á\n\g m \n\ă\m Y');
+                        @endphp
+                        {{__('Ngày gửi hàng: ') . $date_start}}
                     @elseif($order->status === \App\Models\Order::FINISH_STATUS)
                         @php
                             $date_end = \Carbon\Carbon::parse($order->date_end)->format('\n\g\à\y d \t\h\á\n\g m \n\ă\m Y');
