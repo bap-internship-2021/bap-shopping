@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\SpecificationController;
 use App\Http\Controllers\Admin\UserController;
@@ -27,6 +28,16 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('users', [UserController::class, 'index'])->name('users');
     Route::resource('specification', SpecificationController::class);
     Route::resource('voucher', VoucherController::class);
+    Route::get('orders/pending', [OrderController::class , 'listOrderPending'])->name('admin.orderpending');
+    Route::get('orders/sending', [OrderController::class , 'listOrderSending'])->name('admin.ordersending');
+    Route::get('orders/finish', [OrderController::class , 'listOrderFinish'])->name('admin.orderfinish');
+    Route::get('orders/cancel', [OrderController::class , 'listOrderCancel'])->name('admin.ordercancel');
+    Route::get('orders/detail/{id}', [OrderController::class , 'detailOrder'])->name('admin.order.detail');
+    Route::get('orders/pending/accept/{id}', [OrderController::class, 'acceptOrder'])->name('admin.order.accept');
+    Route::get('orders/pending/acceptall', [OrderController::class, 'acceptAllOrder'])->name('admin.order.acceptall');
+    Route::get('orders/cancel/{id}', [OrderController::class, 'cancelOrderPage'])->name('admin.order.cancel');
+    Route::post('orders/confirmcancel/{id}', [OrderController::class, 'cancelOrder'])->name('admin.order.confirmcancel');
+    Route::get('order/sending/accept/{id}', [OrderController::class, 'finishOrder'])->name('admin.order.finish');
 });
 
 

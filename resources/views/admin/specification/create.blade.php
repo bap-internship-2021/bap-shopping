@@ -19,7 +19,9 @@
             </div>
         @endif
 <div>
-    <a href="{{route('specification.index')}}" class="btn btn-primary">Back</a>
+    @foreach($products as $product)
+    <a href="{{route('products.show', [$product->id])}}" class="btn btn-primary">Back</a>
+    @endforeach
 </div>
 <div class="page-breadcrumb">
     <div class="row">
