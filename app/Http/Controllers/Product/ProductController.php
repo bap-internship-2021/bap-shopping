@@ -18,7 +18,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product = Product::where('id', $product->id)->with('images')->get();
+        $product = Product::where('id', $product->id)->with(['images','specification'])->get();
         return view('product.show', compact('product'));
     }
 

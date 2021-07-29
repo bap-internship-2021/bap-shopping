@@ -61,7 +61,9 @@
                                 <p class="p-2 text-red-600">Hết hàng</p>
                             @endif
                             <div class="p-2">
-                                <button class="bg-blue-300 text-white p-3 rounded hover:bg-blue-400"><a href="{{ route('products.edit', $item->id) }}">Chỉnh sửa sản phẩm này</a></button>
+                                <button class="bg-blue-300 text-white p-3 rounded hover:bg-blue-400"><a
+                                        href="{{ route('products.edit', $item->id) }}">Chỉnh sửa sản phẩm này</a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -69,10 +71,66 @@
             @endforeach
         </div>
 
-        <div>
-            <div>Thông số kĩ thuật</div>
-            
-        </div>
+        @if($product->first()->specification != null)
+            <div>
+                <table class="table-fixed border">
+                    <caption>Thông tin chi tiết</caption>
+                    <tbody>
+                    <tr>
+                        <td class="pr-5 bg-gray-200">Màn hình</td>
+                        <td class="w-7/12">{{ $product->first()->specification->screen }}</td>
+                    </tr>
+                    <tr class="bg-emerald-200">
+                        <td class="pr-5 bg-gray-200">Camera</td>
+                        <td>{{ $product->first()->specification->camera }}</td>
+                    </tr>
+                    <tr class="bg-emerald-200">
+                        <td class="pr-5 bg-gray-200">Camera selfie</td>
+                        <td>{{ $product->first()->specification->camera_selfie }}</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-5 bg-gray-200">Dung lượng RAM</td>
+                        <td>{{ $product->first()->specification->ca }}</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-5 bg-gray-200">Bộ nhớ ROM</td>
+                        <td>{{ $product->first()->specification->screen }}</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-5 bg-gray-200">Cpu</td>
+                        <td>{{ $product->first()->specification->screen }}</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-5 bg-gray-200">GPU</td>
+                        <td>{{ $product->first()->specification->screen }}</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-5 bg-gray-200">Sim</td>
+                        <td>{{ $product->first()->specification->screen }}</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-5 bg-gray-200">Hệ điều hoành</td>
+                        <td>{{ $product->first()->specification->screen }}</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-5 bg-gray-200">Xuất xứ</td>
+                        <td>{{ $product->first()->specification->screen }}</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-5 bg-gray-200">Sản xuất năm</td>
+                        <td>{{ $product->first()->specification->release_time }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h1>Mô tả sản phẩm</h1>
+                <div class="bg-white rounded">
+                    <!-- content here -->
+                   {{ $product->first()->specification->description }}
+                </div>
+            </div>
+        @endif
     </div>
 @endsection
 
