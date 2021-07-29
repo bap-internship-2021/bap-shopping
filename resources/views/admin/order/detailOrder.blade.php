@@ -18,7 +18,17 @@
             </div>
         @endif
         <div>
+            @foreach ($order as $item)
+            
+            @if($item->status == 1)
             <a href="{{route('admin.orderpending')}}" class="btn btn-primary">Quay lại</a>
+            
+            @elseif($item->status == 2)
+            <a href="{{route('admin.ordersending')}}" class="btn btn-primary">Quay lại</a>
+            
+            @endif
+
+            @endforeach
         </div>
         <div class="page-breadcrumb">
             <div class="row">

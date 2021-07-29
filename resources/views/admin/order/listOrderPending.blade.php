@@ -21,8 +21,8 @@
 
         <div class="page-breadcrumb">
             <div class="row">
-                <div class="col-5 align-self-center pb-3">
-                    <h1>Quản Lí Đơn Hàng</h1>
+                <div class="col-6 align-self-center pb-3">
+                    <h1>Quản Lí Đơn Hàng (Đang chờ)</h1>
                 </div>
             </div>
             <div class="row pb-3">
@@ -69,13 +69,13 @@
                                     <a href="{{route('admin.order.detail', [$order->id])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-primary"><i class="fas fa-check-circle"></i></a>
+                                    <a href="{{route('admin.order.accept', [$order->id])}}" class="btn btn-primary"><i class="fas fa-check-circle"></i></a>
                                 </td>
                                 <td>
-                                    {{-- <form action="{{route('products.destroy', $pd->id)}}" method="POST">
-                                    @method('DELETE')
+                                    {{-- <form action="{{route('admin.order.accept', $order->id)}}" method="POST">
+                                    @method('PUT')
                                     @csrf
-                                        <button type="submit" onclick="return confirm('Bạn chắc chắn muốn xóa?');" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                     </form> --}}
                                 </td>
                             </tr>
