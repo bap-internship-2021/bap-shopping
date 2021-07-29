@@ -25,7 +25,13 @@
             
             @elseif($item->status == 2)
             <a href="{{route('admin.ordersending')}}" class="btn btn-primary">Quay lại</a>
+
+            @elseif($item->status == 3)
+            <a href="{{route('admin.orderfinish')}}" class="btn btn-primary">Quay lại</a>
             
+            @elseif($item->status == 4)
+            <a href="{{route('admin.ordercancel')}}" class="btn btn-primary">Quay lại</a>
+
             @endif
 
             @endforeach

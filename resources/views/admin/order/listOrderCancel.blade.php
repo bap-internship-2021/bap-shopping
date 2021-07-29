@@ -22,7 +22,7 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-6 align-self-center pb-3">
-                    <h1>Quản Lí Đơn Hàng (Đang giao)</h1>
+                    <h1>Quản Lí Đơn Hàng (Đã Hủy)</h1>
                 </div>
             </div>
             <div class="row pb-3">
@@ -59,7 +59,6 @@
                                 <th scope="col">Mã đơn hàng</th>
                                 <th scope="col">Chi tiết đơn hàng</th>
                                 <th scope="col">Tình trạng</th>
-                                <th scope="col">Xác nhận</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,22 +69,12 @@
                                     <a href="{{route('admin.order.detail', [$order->id])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td>
-                                    <span>Đang giao</span>
-                                    <i class="fas fa-truck"></i>
-                                </td>
-                                <td>
-                                    <a href="{{route('admin.order.finish', [$order->id])}}" class="btn btn-primary"><i class="fas fa-check-circle"></i></a>
+                                    <span>Đã Hủy</span>
+                                    <i class="fas fa-ban"></i>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
-                        {{-- <tfoot>
-                            <tr>
-                                <td colspan="8">
-                                    <a href=""><button class="btn btn-primary" style="margin-top:20px" id="button">Add Product</button></a>
-                                </td>
-                            </tr>
-                        </tfoot> --}}
                     </table>
                 </div>
         <div class="row">
@@ -93,5 +82,4 @@
                 {{ $orders->links() }}
             </div>
         </div>
-
 @endsection

@@ -22,6 +22,16 @@ class OrderController extends Controller
         return view('admin.order.listOrderSending', compact('orders'));
     }
 
+    public function listOrderFinish(){
+        $orders = Order::where('status', '3')->paginate(5);
+        return view('admin.order.listOrderFinish', compact('orders'));
+    }
+
+    public function listOrderCancel(){
+        $orders = Order::where('status', '4')->paginate(5);
+        return view('admin.order.listOrderCancel', compact('orders'));
+    }
+
     public function detailOrder($id){
         $order = Order::select('orders.*', 'products.name as productname', 'order_details.quantity')
         ->join('order_details', 'orders.id', '=', 'order_details.order_id')
@@ -118,6 +128,14 @@ class OrderController extends Controller
             });
 
             return back()->with('status', 'Hủy đơn hàng thành công');
+        }
+    }
+
+    public function finishOrder($id){
+        $order = DB::table('orders')->where('id', $id)->update(['status' => 3]);
+
+        if($order){
+            return back()->with('status', 'Đã hoàn thành đơn hàng');
         }
     }
 }

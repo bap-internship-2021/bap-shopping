@@ -30,11 +30,14 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::resource('voucher', VoucherController::class);
     Route::get('orders/pending', [OrderController::class , 'listOrderPending'])->name('admin.orderpending');
     Route::get('orders/sending', [OrderController::class , 'listOrderSending'])->name('admin.ordersending');
+    Route::get('orders/finish', [OrderController::class , 'listOrderFinish'])->name('admin.orderfinish');
+    Route::get('orders/cancel', [OrderController::class , 'listOrderCancel'])->name('admin.ordercancel');
     Route::get('orders/detail/{id}', [OrderController::class , 'detailOrder'])->name('admin.order.detail');
     Route::get('orders/pending/accept/{id}', [OrderController::class, 'acceptOrder'])->name('admin.order.accept');
     Route::get('orders/pending/acceptall', [OrderController::class, 'acceptAllOrder'])->name('admin.order.acceptall');
     Route::get('orders/cancel/{id}', [OrderController::class, 'cancelOrderPage'])->name('admin.order.cancel');
     Route::post('orders/confirmcancel/{id}', [OrderController::class, 'cancelOrder'])->name('admin.order.confirmcancel');
+    Route::get('order/sending/accept/{id}', [OrderController::class, 'finishOrder'])->name('admin.order.finish');
 });
 
 Route::get('profile', [ProfileController::class, 'index'])->name('profiles.show');

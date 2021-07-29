@@ -36,10 +36,10 @@
                                 <a class="nav-link" href="{{route('admin.ordersending')}}">Đang giao</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Hoàn thành</a>
+                                <a class="nav-link" href="{{route('admin.orderfinish')}}">Hoàn thành</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Đã Hủy</a>
+                                <a class="nav-link" href="{{route('admin.ordercancel')}}">Đã Hủy</a>
                             </li>
                         </ul>
                       <form class="form-inline my-2 my-lg-0">
