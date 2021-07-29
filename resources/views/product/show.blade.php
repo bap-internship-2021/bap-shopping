@@ -73,10 +73,10 @@
 
         @if($product->first()->specification != null)
             <div>
-                <table class="table-fixed border">
+                <table class="table-fixed border bg-white">
                     <caption>Thông tin chi tiết</caption>
-                    <tbody>
-                    <tr>
+                    <tbody class="">
+                    <tr class="">
                         <td class="pr-5 bg-gray-200">Màn hình</td>
                         <td class="w-7/12">{{ $product->first()->specification->screen }}</td>
                     </tr>
@@ -125,9 +125,11 @@
             </div>
             <div>
                 <h1>Mô tả sản phẩm</h1>
-                <div class="bg-white rounded">
-                    <!-- content here -->
-                   {{ $product->first()->specification->description }}
+                <div class="bg-white rounded p-5 w-4/5" id="productDescription">
+                    <div>
+                        <!-- content here -->
+                        {!! $product->first()->specification->description !!}
+                    </div>
                 </div>
             </div>
         @endif
@@ -150,4 +152,9 @@
         window.csrf_token = "{{ csrf_token() }}"
     </script>
     <script src="{{ mix('js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ asset('js/readmore.min.js') }}"></script>
+    <script>
+        $('#productDescription').readmore();
+    </script>
 @endsection

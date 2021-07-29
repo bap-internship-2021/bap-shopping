@@ -88,7 +88,7 @@
                                         @if(Auth::user()->role_id == \App\Models\User::AMIN_ROLE)
                                             <li class=""><a
                                                     class="rounded-t bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                                                    href="#">Quản lý hệ thống</a>
+                                                    href="{{ route('admin.dashboard') }}">Quản lý hệ thống</a>
                                             </li>
                                             <li class=""><a
                                                     class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
@@ -111,12 +111,6 @@
                                             </li>
                                         @endif
                                     <!--  -->
-
-
-                                        {{--                                        <li class=""><a--}}
-                                        {{--                                                class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"--}}
-                                        {{--                                                href="#">Do something</a>--}}
-                                        {{--                                        </li>--}}
 
                                         <li class="">
                                             <form action="{{ route('logout') }}" method="post">
