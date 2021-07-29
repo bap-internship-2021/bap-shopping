@@ -55,8 +55,8 @@
                             <tr>
                                 <th scope="col">Mã đơn hàng</th>
                                 <th scope="col">Chi tiết đơn hàng</th>
-                                <th scope="col">Duyệt đơn hàng</th>
-                                <th scope="col">Hủy đơn hàng</th>
+                                <th scope="col">Tình trạng</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -69,15 +69,10 @@
                                     <a href="{{route('admin.order.detail', [$order->id])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.order.accept', [$order->id])}}" class="btn btn-primary"><i class="fas fa-check-circle"></i></a>
+                                    <span>Đang giao</span>
+                                    <i class="fas fa-truck"></i>
                                 </td>
-                                <td>
-                                    {{-- <form action="{{route('admin.order.accept', $order->id)}}" method="POST">
-                                    @method('PUT')
-                                    @csrf
-                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form> --}}
-                                </td>
+                                
                             </tr>
                             <?php } ?>
                         </tbody>

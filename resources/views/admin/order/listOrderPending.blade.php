@@ -81,13 +81,13 @@
                             </tr>
                             <?php } ?>
                         </tbody>
-                        {{-- <tfoot>
+                        <tfoot>
                             <tr>
                                 <td colspan="8">
-                                    <a href=""><button class="btn btn-primary" style="margin-top:20px" id="button">Add Product</button></a>
+                                    <a href="{{route('admin.order.acceptall')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Duyệt tất cả</button></a>
                                 </td>
                             </tr>
-                        </tfoot> --}}
+                        </tfoot>
                     </table>
                 </div>
         <div class="row">

@@ -32,6 +32,7 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('orders/sending', [OrderController::class , 'listOrderSending'])->name('admin.ordersending');
     Route::get('orders/detail/{id}', [OrderController::class , 'detailOrder'])->name('admin.order.detail');
     Route::get('orders/pending/accept/{id}', [OrderController::class, 'acceptOrder'])->name('admin.order.accept');
+    Route::get('orders/pending/acceptall', [OrderController::class, 'acceptAllOrder'])->name('admin.order.acceptall');
 });
 
 Route::get('profile', [ProfileController::class, 'index'])->name('profiles.show');

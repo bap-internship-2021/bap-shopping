@@ -60,6 +60,32 @@ class OrderController extends Controller
             return back()->with('status', 'Duyệt đơn hàng thành công');
         }
 
-        
+    }
+
+    public function acceptAllOrder(){
+        $orders = DB::table('orders')->where('status', 1)->update(['status' => 2]);
+
+        if($orders){
+            $userorder = DB::table('orders')
+            ->join('users', 'users.id', '=', 'orders.user_id')
+            ->get();
+
+            foreach($userorder as $item){
+                $userEmail = $item->email;
+                $details = [
+                    'title' => 'Thông báo đơn hàng từ BAP',
+                    'body' => 'Đơn hàng của bạn đã được phê duyệt. Chúng tôi sẽ giao hàng cho bạn trong vòng 5-7 ngày.',
+                    'userEmail' => $userEmail
+                ];
+
+                Mail::send('emails.admin.admin_notifyOrder', $details, function($message) use ($userEmail) {
+                    $message->to($userEmail)
+                    ->subject('BAP SHOP thông báo đơn hàng');
+                    $message->from('quangdt1603@gmail.com','BAP SHOP');
+                });
+            };
+
+            return back()->with('status', 'Duyệt tất cả đơn hàng thành công');
+        }
     }
 }
