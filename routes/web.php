@@ -43,7 +43,7 @@ Route::middleware(['auth', 'is.user'])->namespace('Cart')->group(function () {
     Route::delete('carts', [CartController::class, 'destroy'])->name('carts.destroy'); // Delete cart
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'is.user')->group(function () {
     Route::post('orders/confirmation', [OrderController::class, 'confirmation'])->name('orders.confirmation');
     Route::resource('orders', OrderController::class);
     Route::get('orders/{id}/order-details', [\App\Http\Controllers\Order\OrderDetailController::class, 'getOrderDetail'])->name('orders.oderDetails.index');

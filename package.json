@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "clipboard": "^2.0.8",
+        "readmore-js": "^2.2.1",
         "tiny-slider": "^2.9.3",
         "vue": "^2.6.14"
     }
