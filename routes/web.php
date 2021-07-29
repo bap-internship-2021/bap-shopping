@@ -35,7 +35,7 @@ Route::namespace('Product')->group(function () {
     Route::get('products/{product}', [ProductController::class, 'show'])->name('user.products.show');
 });
 
-Route::middleware(['auth'])->namespace('Cart')->group(function () {
+Route::middleware(['auth', 'is.user'])->namespace('Cart')->group(function () {
     Route::get('checkout/cart', [CartController::class, 'index'])->name('carts.index');
     Route::post('checkout/shipping', [CartController::class, 'changeAddressShipped'])->name('carts.changeShipping');
     Route::post('carts', [CartController::class, 'store']); // API store item to cart

@@ -60,19 +60,23 @@
         <div class="w-1/2">
             <ul class="flex justify-end">
                 @if(Auth::check())
-                    <li class="pr-3">
-                        <a class="text-white rounded" href="{{ route('carts.index') }}">
+                    @if(Auth::user()->role_id == \App\Models\User::USER_ROLE)
+                        <li class="pr-3">
+                            <a class="text-white rounded" href="{{ route('carts.index') }}">
                             <span class="font-semibold">
                                 <i class="fas fa-shopping-cart pr-1"></i></span>Giỏ
-                            hàng
-                        </a>
-                    </li>
+                                hàng
+                            </a>
+                        </li>
+                    @endif
                     <li class="pr-2">
                         <div class="">
                             <div class="dropdown inline-block relative">
                                 <button
                                     class="text-white font-semibold rounded inline-flex items-center">
-                                    <span class="flex"><img class="rounded-full" src="{{ asset("admin\\images\\avatar\\") . Auth()->user()->profile_photo_path }}" alt="" style="width: 30px; height: 30px"> {{ !empty(Auth()->user()->name) ? Auth()->user()->name : '' }}</span>
+                                    <span class="flex"><img class="rounded-full"
+                                                            src="{{ asset("admin\\images\\avatar\\") . Auth()->user()->profile_photo_path }}"
+                                                            alt="" style="width: 30px; height: 30px"> {{ !empty(Auth()->user()->name) ? Auth()->user()->name : '' }}</span>
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                          viewBox="0 0 20 20">
                                         <path
@@ -88,20 +92,32 @@
                                             </li>
                                             <li class=""><a
                                                     class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                                                    href="{{ route('profiles.show', ['profile' => Auth::id()]) }}">Cập nhật thông tin cá nhân</a>
+                                                    href="{{ route('profiles.show', ['profile' => Auth::id()]) }}">Tài
+                                                    khoản của tôi</a>
                                             </li>
                                         @else
-                                            <!-- User Profile -->
+                                        <!-- User Profile -->
                                             <li class=""><a
                                                     class="rounded-t bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
                                                     href="{{ route('users.profiles.show') }}">Tài khoản của tôi</a>
                                             </li>
                                         @endif
 
-                                        <li class=""><a
-                                                class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                                                href="#">Do something</a>
-                                        </li>
+                                    <!-- Show link to verify email for user not verified -->
+                                        @if(Auth::user()->email_verified_at == null)
+                                            <li class=""><a
+                                                    class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                                    href="{{ route('verification.notice') }}">Xác thực tài khoản</a>
+                                            </li>
+                                        @endif
+                                    <!--  -->
+
+
+                                        {{--                                        <li class=""><a--}}
+                                        {{--                                                class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"--}}
+                                        {{--                                                href="#">Do something</a>--}}
+                                        {{--                                        </li>--}}
+
                                         <li class="">
                                             <form action="{{ route('logout') }}" method="post">
                                                 @csrf
@@ -142,10 +158,10 @@
                                 class="fas fa-tags fill-current text-blue-400"></i> Xem voucher</a>
                     </li>
                     @if(Auth::user()->role_id === \App\Models\User::USER_ROLE)
-                    <li class="cursor-pointer transition hover:text-red-500">
-                        <a href="{{ route('orders.index') }}"><i
-                                class="fas fa-shopping-basket fill-current text-blue-400"></i> Đơn hàng của tôi</a>
-                    </li>
+                        <li class="cursor-pointer transition hover:text-red-500">
+                            <a href="{{ route('orders.index') }}"><i
+                                    class="fas fa-shopping-basket fill-current text-blue-400"></i> Đơn hàng của tôi</a>
+                        </li>
                     @endif
                     <li class="cursor-pointer transition hover:text-red-500">
                         <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::IPHONE]) }}"><i
