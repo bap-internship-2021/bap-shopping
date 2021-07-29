@@ -28,17 +28,20 @@
             <div class="row pb-3">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                      <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                          <a class="nav-link" href="{{route('admin.orderpending')}}">Đang chờ</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="{{route('admin.ordersending')}}">Đang giao</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Hoàn thành</a>
-                        </li>
-                      </ul>
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.orderpending')}}">Đang chờ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.ordersending')}}">Đang giao</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Hoàn thành</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Đã Hủy</a>
+                            </li>
+                        </ul>
                       <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -72,11 +75,7 @@
                                     <a href="{{route('admin.order.accept', [$order->id])}}" class="btn btn-primary"><i class="fas fa-check-circle"></i></a>
                                 </td>
                                 <td>
-                                    {{-- <form action="{{route('admin.order.accept', $order->id)}}" method="POST">
-                                    @method('PUT')
-                                    @csrf
-                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                    </form> --}}
+                                    <a href="{{route('admin.order.cancel', [$order->id])}}" class="btn btn-danger"><i class="fas fa-window-close"></i></a>
                                 </td>
                             </tr>
                             <?php } ?>
