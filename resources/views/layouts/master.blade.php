@@ -44,16 +44,17 @@
     {{--  start 2 child  --}}
     <div class="pt-8 flex w-5/6">
         <!-- START SEARCH BAR -->
-        <div class="w-1/2">
-            <form action="" method="GET" class="flex">
-                <input type="text"
-                       class="bg-purple-white shadow-lg rounded p-2 w-4/6 placeholder-black placeholder-opacity-90"
-                       placeholder="Tìm kiếm sản phẩm">
-                <button style="background-color: #fff" class="p-2 ml-2 rounded shadow-lg text-black font-medium"><i
-                        class="fas fa-search"></i>
-                    Tìm Kiếm
-                </button>
-            </form>
+        <div class="w-1/2 relative">
+
+            <input type="text"
+                   id="search-text"
+                   name="search"
+                   class="bg-purple-white shadow-lg rounded p-2 w-4/6 placeholder-black placeholder-opacity-90"
+                   placeholder="Tìm kiếm sản phẩm">
+            <div class="w-5/6 h-96 bg-white absolute z-50 mt-1 rounded" id="show-result">
+                <ul>
+                </ul>
+            </div>
         </div>
         <!-- END SEARCH BAR -->
 
@@ -109,7 +110,7 @@
                                                     class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
                                                     href="{{ route('verification.notice') }}">Xác thực tài khoản</a>
                                             </li>
-                                        @endif
+                                    @endif
                                     <!--  -->
 
                                         <li class="">
@@ -202,4 +203,6 @@
 
 </body>
 @yield('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ asset('js/search-product.js') }}"></script>
 </html>
