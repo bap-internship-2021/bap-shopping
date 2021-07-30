@@ -18,7 +18,23 @@
             </div>
         @endif
         <div>
-            <a href="#" class="btn btn-primary" id="back">Back</a>
+            @foreach ($order as $item)
+            
+            @if($item->status == \App\Models\Order::PENDING_STATUS)
+            <a href="{{route('admin.order.status', \App\Models\Order::PENDING_STATUS)}}" class="btn btn-primary">Quay lại</a>
+            
+            @elseif($item->status == \App\Models\Order::SENDING_STATUS)
+            <a href="{{route('admin.order.status', \App\Models\Order::SENDING_STATUS)}}" class="btn btn-primary">Quay lại</a>
+
+            @elseif($item->status == \App\Models\Order::FINISH_STATUS)
+            <a href="{{route('admin.order.status', \App\Models\Order::FINISH_STATUS)}}" class="btn btn-primary">Quay lại</a>
+            
+            @elseif($item->status == \App\Models\Order::CANCEL_STATUS)
+            <a href="{{route('admin.order.status', \App\Models\Order::CANCEL_STATUS)}}" class="btn btn-primary">Quay lại</a>
+
+            @endif
+
+            @endforeach
         </div>
         <div class="page-breadcrumb">
             <div class="row">
@@ -81,24 +97,14 @@
                 </div>
                 <div class="pl-4">
                     @if($value->status == \App\Models\Order::PENDING_STATUS)
-                    <h4 class="page-title">Xác nhận đơn hàng<a href="{{route('admin.order.accept', [$value->status])}}" class="btn btn-primary ml-2"><i class="fas fa-check-circle"></i></a></h4>
-                    <h4 class="page-title">Hủy đơn hàng<a href="{{route('admin.order.cancel', [$value->status])}}" class="btn btn-danger ml-2"><i class="fas fa-window-close"></i></a></h4>
+                    <h4 class="page-title">Xác nhận đơn hàng<a href="{{route('admin.order.accept', [$value->id])}}" class="btn btn-primary"><i class="fas fa-check-circle"></i></a></h4>
+                    <h4 class="page-title">Hủy đơn hàng<a href="{{route('admin.order.cancel', [$value->id])}}" class="btn btn-danger ml-2"><i class="fas fa-window-close"></i></a></h4>
                     @elseif($value->status == \App\Models\Order::SENDING_STATUS)
-                    <h4 class="page-title">Xác nhận hoàn thành<a href="{{route('admin.order.cancel', [$value->status])}}" class="btn btn-danger"><i class="fas fa-window-close"></i></a></h4>
+                    <h4 class="page-title">Xác nhận hoàn thành<a href="{{route('admin.order.finish', [$value->id])}}" class="btn btn-primary"><i class="fas fa-check-circle"></i></a></h4>
                     @endif
                 </div>
                 @endforeach
             </div>
         </div>
     </div>
-@endsection
-
-@section('js')
-<script>
-    $(function(){
-        $("#back").on("click", function(){
-            window.history.back();
-        });
-    })
-</script>
 @endsection

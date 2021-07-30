@@ -6,6 +6,9 @@
     <div class="pb-5">
         <a href="#" class="btn btn-primary" id="back">Back</a>
     </div>
+    @if(count($orders) == 0)
+    <h1>NOT FOUND</h1>
+    @else 
     <h1>Số lượng({{count($orders)}})</h1>
     <div class="row">
         <div class="col-6 card re-card st-card">
@@ -23,6 +26,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 {{ $orders->links() }}
 @endsection()

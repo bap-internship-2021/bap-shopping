@@ -35,11 +35,11 @@ class OrderController extends Controller
         return view('admin.order.listOrderByStatus', compact('orders'));
     }
 
-    public function detailOrder($status){
+    public function detailOrder($id){
         $order = Order::select('orders.*', 'products.name as productname', 'order_details.quantity')
         ->join('order_details', 'orders.id', '=', 'order_details.order_id')
         ->join('products', 'order_details.product_id', '=', 'products.id')
-        ->where('orders.status', $status)
+        ->where('orders.id', $id)
         ->get();
         return view('admin.order.detailOrder', compact('order'));
     }

@@ -18,7 +18,7 @@
             </div>
         @endif
         <div>
-            <a href="{{route('admin.order.status', \App\Models\Order::CANCEL_STATUS)}}" class="btn btn-primary">Quay lại</a>
+            <a href="#" class="btn btn-primary" id="back">Back</a>
         </div>
         <div class="page-breadcrumb">
             <div class="row">
@@ -87,6 +87,14 @@
             </div>
         </div>
     </div>
-    
+@endsection
 
+@section('js')
+<script>
+    $(function(){
+        $("#back").on("click", function(){
+            window.history.back();
+        });
+    })
+</script>
 @endsection

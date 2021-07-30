@@ -21,9 +21,11 @@
 
         <div class="page-breadcrumb">
             <div class="row">
-                @foreach ($orders as $order)
+                
                 <div class="col-6 align-self-center">
+                    @foreach ($orders as $order)
                     @if($order->status == \App\Models\Order::PENDING_STATUS)
+                    
                     <h1>Đơn hàng đang chờ</h1>
                     @elseif($order->status == \App\Models\Order::SENDING_STATUS)
                     <h1>Đơn hàng đang giao</h1>
@@ -48,10 +50,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
-                    @foreach ($orders as $order)
-    
-                    @if($order->status == \App\Models\Order::PENDING_STATUS)
                     <table class="table table-striped">
+                        @if($order->status == \App\Models\Order::PENDING_STATUS)
                         <thead>
                             <tr>
                                 <th scope="col">Mã đơn hàng</th>
@@ -60,21 +60,21 @@
                                 <th scope="col">Hủy đơn hàng</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            
+                        <tbody>   
+                            @foreach($orders as $order)
                             <tr>
                                 <th scope="row">{{$order->custom_order_id}}</th>
                                 <td>
-                                    <a href="{{route('admin.order.detail', [$order->status])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                    <a href="{{route('admin.order.detail', [$order->id])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.order.accept', [$order->status])}}" class="btn btn-primary"><i class="fas fa-check-circle"></i></a>
+                                    <a href="{{route('admin.order.accept', [$order->id])}}" class="btn btn-primary"><i class="fas fa-check-circle"></i></a>
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.order.cancel', [$order->status])}}" class="btn btn-danger"><i class="fas fa-window-close"></i></a>
+                                    <a href="{{route('admin.order.cancel', [$order->id])}}" class="btn btn-danger"><i class="fas fa-window-close"></i></a>
                                 </td>
                             </tr>
-                            
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
@@ -83,10 +83,8 @@
                                 </td>
                             </tr>
                         </tfoot>
-                    </table>
-
-                    @elseif($order->status == \App\Models\Order::SENDING_STATUS)
-                    <table class="table table-striped">
+        
+                        @elseif($order->status == \App\Models\Order::SENDING_STATUS)
                         <thead>
                             <tr>
                                 <th scope="col">Mã đơn hàng</th>
@@ -96,10 +94,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($orders as $order)
                             <tr>
                                 <th scope="row">{{$order->custom_order_id}}</th>
                                 <td>
-                                    <a href="{{route('admin.order.detail', [$order->status])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                    <a href="{{route('admin.order.detail', [$order->id])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td>
                                     <span>Đang giao</span>
@@ -109,11 +108,10 @@
                                     <a href="{{route('admin.order.finish', [$order->id])}}" class="btn btn-primary"><i class="fas fa-check-circle"></i></a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
-                    </table>
 
                     @elseif($order->status == \App\Models\Order::FINISH_STATUS)
-                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Mã đơn hàng</th>
@@ -122,21 +120,22 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($orders as $order)
                             <tr>
+                                
                                 <th scope="row">{{$order->custom_order_id}}</th>
                                 <td>
-                                    <a href="{{route('admin.order.detail', [$order->status])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                    <a href="{{route('admin.order.detail', [$order->id])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td>
                                     <span>Đã hoàn thành</span>
                                     <i class="fas fa-check-circle"></i>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
-                    </table>
 
                     @elseif($order->status == \App\Models\Order::CANCEL_STATUS)
-                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Mã đơn hàng</th>
@@ -145,24 +144,24 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($orders as $order)
                             <tr>
+                                
                                 <th scope="row">{{$order->custom_order_id}}</th>
                                 <td>
-                                    <a href="{{route('admin.order.detail', [$order->status])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                    <a href="{{route('admin.order.detail', [$order->id])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                 </td>
                                 <td>
                                     <span>Đã Hủy</span>
                                     <i class="fas fa-ban"></i>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
-
                     @endif
-                    @endforeach
                 </div>
-        <div class="row">
-            <div class="col">
+
                 {{ $orders->links() }}
             </div>
         </div>
