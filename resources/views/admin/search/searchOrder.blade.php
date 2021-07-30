@@ -13,12 +13,11 @@
                 @foreach($orders as $value)
                 <table class="table table-striped table-dark">
                     <tbody>
-                        <tr>
+                        <tr onclick="location.href='{{route('admin.order.detail', [$value->status])}}';" style="cursor: pointer;">
                             <td>Mã đơn hàng</td>
                             <td><span>{{$value->custom_order_id}}</span></td>
                         </tr>
                     </tbody>
-                    
                 </table>
                 @endforeach
             </div>

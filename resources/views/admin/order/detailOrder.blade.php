@@ -18,23 +18,7 @@
             </div>
         @endif
         <div>
-            @foreach ($order as $item)
-            
-            @if($item->status == \App\Models\Order::PENDING_STATUS)
-            <a href="{{route('admin.order.status', \App\Models\Order::PENDING_STATUS)}}" class="btn btn-primary">Quay lại</a>
-            
-            @elseif($item->status == \App\Models\Order::SENDING_STATUS)
-            <a href="{{route('admin.order.status', \App\Models\Order::SENDING_STATUS)}}" class="btn btn-primary">Quay lại</a>
-
-            @elseif($item->status == \App\Models\Order::FINISH_STATUS)
-            <a href="{{route('admin.order.status', \App\Models\Order::FINISH_STATUS)}}" class="btn btn-primary">Quay lại</a>
-            
-            @elseif($item->status == \App\Models\Order::CANCEL_STATUS)
-            <a href="{{route('admin.order.status', \App\Models\Order::CANCEL_STATUS)}}" class="btn btn-primary">Quay lại</a>
-
-            @endif
-
-            @endforeach
+            <a href="#" class="btn btn-primary" id="back">Back</a>
         </div>
         <div class="page-breadcrumb">
             <div class="row">
@@ -107,6 +91,14 @@
             </div>
         </div>
     </div>
-    
+@endsection
 
+@section('js')
+<script>
+    $(function(){
+        $("#back").on("click", function(){
+            window.history.back();
+        });
+    })
+</script>
 @endsection
