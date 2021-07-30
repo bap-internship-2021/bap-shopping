@@ -51,7 +51,7 @@
                    name="search"
                    class="bg-purple-white shadow-lg rounded p-2 w-4/6 placeholder-black placeholder-opacity-90"
                    placeholder="Tìm kiếm sản phẩm">
-            <div class="w-5/6 h-96 bg-white absolute z-50 mt-1 rounded" id="show-result">
+            <div class="w-5/6 h-96 bg-white absolute z-50 mt-1 rounded overflow-scroll" id="show-result">
                 <ul>
                 </ul>
             </div>
