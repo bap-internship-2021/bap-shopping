@@ -12,31 +12,34 @@ use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
-    public function listOrderPending(){
-        $orders = Order::where('status', '1')->paginate(5);
-        return view('admin.order.listOrderPending', compact('orders'));
+    public function listAllOrder(){
+        $orders = DB::table('orders')
+             ->select(DB::raw('count(*) as soluong ,status as trangthai'))
+             ->groupBy('status')
+             ->get();
+        $orders = json_decode(json_encode($orders), true);
+        // dd($orders[0]['trangthai']);
+        return view('admin.order.listOrder', compact('orders'));
     }
 
-    public function listOrderSending(){
-        $orders = Order::where('status', '2')->paginate(5);
-        return view('admin.order.listOrderSending', compact('orders'));
+    public function listOrderByStatus($status){
+        if($status == Order::PENDING_STATUS){
+            $orders = Order::where('status', Order::PENDING_STATUS)->paginate(5);
+        }elseif($status == Order::SENDING_STATUS){
+            $orders = Order::where('status', Order::SENDING_STATUS)->paginate(5);
+        }elseif($status == Order::FINISH_STATUS){
+            $orders = Order::where('status', Order::FINISH_STATUS)->paginate(5);
+        }elseif($status == Order::CANCEL_STATUS){
+            $orders = Order::where('status', Order::CANCEL_STATUS)->paginate(5);
+        }
+        return view('admin.order.listOrderByStatus', compact('orders'));
     }
 
-    public function listOrderFinish(){
-        $orders = Order::where('status', '3')->paginate(5);
-        return view('admin.order.listOrderFinish', compact('orders'));
-    }
-
-    public function listOrderCancel(){
-        $orders = Order::where('status', '4')->paginate(5);
-        return view('admin.order.listOrderCancel', compact('orders'));
-    }
-
-    public function detailOrder($id){
+    public function detailOrder($status){
         $order = Order::select('orders.*', 'products.name as productname', 'order_details.quantity')
         ->join('order_details', 'orders.id', '=', 'order_details.order_id')
         ->join('products', 'order_details.product_id', '=', 'products.id')
-        ->where('orders.id', $id)
+        ->where('orders.status', $status)
         ->get();
         return view('admin.order.detailOrder', compact('order'));
     }

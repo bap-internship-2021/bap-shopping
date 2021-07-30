@@ -28,11 +28,9 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('users', [UserController::class, 'index'])->name('users');
     Route::resource('specification', SpecificationController::class);
     Route::resource('voucher', VoucherController::class);
-    Route::get('orders/pending', [OrderController::class , 'listOrderPending'])->name('admin.orderpending');
-    Route::get('orders/sending', [OrderController::class , 'listOrderSending'])->name('admin.ordersending');
-    Route::get('orders/finish', [OrderController::class , 'listOrderFinish'])->name('admin.orderfinish');
-    Route::get('orders/cancel', [OrderController::class , 'listOrderCancel'])->name('admin.ordercancel');
-    Route::get('orders/detail/{id}', [OrderController::class , 'detailOrder'])->name('admin.order.detail');
+    Route::get('orders/index', [OrderController::class, 'listAllOrder'])->name('admin.orders');
+    Route::get('orders/status/{status}', [OrderController::class , 'listOrderByStatus'])->name('admin.order.status');
+    Route::get('orders/detail/{status}', [OrderController::class , 'detailOrder'])->name('admin.order.detail');
     Route::get('orders/pending/accept/{id}', [OrderController::class, 'acceptOrder'])->name('admin.order.accept');
     Route::get('orders/pending/acceptall', [OrderController::class, 'acceptAllOrder'])->name('admin.order.acceptall');
     Route::get('orders/cancel/{id}', [OrderController::class, 'cancelOrderPage'])->name('admin.order.cancel');

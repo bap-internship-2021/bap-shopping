@@ -20,17 +20,17 @@
         <div>
             @foreach ($order as $item)
             
-            @if($item->status == 1)
-            <a href="{{route('admin.orderpending')}}" class="btn btn-primary">Quay lại</a>
+            @if($item->status == \App\Models\Order::PENDING_STATUS)
+            <a href="{{route('admin.order.status', \App\Models\Order::PENDING_STATUS)}}" class="btn btn-primary">Quay lại</a>
             
-            @elseif($item->status == 2)
-            <a href="{{route('admin.ordersending')}}" class="btn btn-primary">Quay lại</a>
+            @elseif($item->status == \App\Models\Order::SENDING_STATUS)
+            <a href="{{route('admin.order.status', \App\Models\Order::SENDING_STATUS)}}" class="btn btn-primary">Quay lại</a>
 
-            @elseif($item->status == 3)
-            <a href="{{route('admin.orderfinish')}}" class="btn btn-primary">Quay lại</a>
+            @elseif($item->status == \App\Models\Order::FINISH_STATUS)
+            <a href="{{route('admin.order.status', \App\Models\Order::FINISH_STATUS)}}" class="btn btn-primary">Quay lại</a>
             
-            @elseif($item->status == 4)
-            <a href="{{route('admin.ordercancel')}}" class="btn btn-primary">Quay lại</a>
+            @elseif($item->status == \App\Models\Order::CANCEL_STATUS)
+            <a href="{{route('admin.order.status', \App\Models\Order::CANCEL_STATUS)}}" class="btn btn-primary">Quay lại</a>
 
             @endif
 
