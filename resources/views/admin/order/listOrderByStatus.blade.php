@@ -21,8 +21,21 @@
 
         <div class="page-breadcrumb">
             <div class="row">
-                <div class="col-6 align-self-center pb-3">
+                @foreach ($orders as $order)
+                <div class="col-6 align-self-center">
+                    @if($order->status == \App\Models\Order::PENDING_STATUS)
+                    <h1>Đơn hàng đang chờ</h1>
+                    @elseif($order->status == \App\Models\Order::SENDING_STATUS)
                     <h1>Đơn hàng đang giao</h1>
+                    @elseif($order->status == \App\Models\Order::FINISH_STATUS)
+                    <h1>Đơn hàng hoàn thành</h1>
+                    @elseif($order->status == \App\Models\Order::CANCEL_STATUS)
+                    <h1>Đơn hàng đã hủy</h1>
+                    @endif
+                </div>
+                @endforeach
+                <div class="col-12">
+                    <h2>Số lượng ({{count($orders)}})</h2>
                 </div>
             </div>
             <div class="row pb-3">
