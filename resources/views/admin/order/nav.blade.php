@@ -14,9 +14,10 @@
                 <a class="nav-link" href="{{route('admin.order.status', [\App\Models\Order::CANCEL_STATUS])}}">Đã Hủy</a>
             </li>
         </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+        <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search.order.result')}}" method="GET">
+            <input class="form-control mr-sm-2" type="search" name="orderkey" id="orderkey" placeholder="Search" aria-label="Search" >
+            <div id="search_order"></div>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </div>
 </nav>

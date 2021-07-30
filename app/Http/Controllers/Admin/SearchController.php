@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Product;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
@@ -30,8 +31,36 @@ class SearchController extends Controller
         if($data && isset($data['keywords'])){
             $products = Product::with('images')->where('name', 'LIKE', '%'.$data['keywords'].'%')->paginate(5);
 
-            return view('admin.search.index')->with('products', $products);
+            return view('admin.search.searchProduct')->with('products', $products);
         }
-        return redirect('admin/products')->with('status', 'NOT FOUND');
+        return back()->with('status', 'NOT FOUND');
+    }
+
+    public function searchOrder(Request $request){
+        $data = $request->all();
+
+        if($data['orderkey']){
+            $orders = Order::where('custom_order_id', 'LIKE', '%'.$data['orderkey'].'%')->get();
+            $output = '<ul class="dropdown-menu" style="display:block; margin-left:330px;">';
+            foreach($orders as $value){
+                $output .= '<li class="li_search_order"><a href="#">'.$value->custom_order_id.'</a></li>';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
+
+    public function searchOrderResult(Request $request){
+        $data = $request->all();
+        
+        if($data && isset($data['orderkey'])){
+            $orders = Order::select('orders.*', 'products.name as productname', 'order_details.quantity')
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->where('orders.custom_order_id', 'LIKE', '%'.$data['orderkey'].'%')->paginate(5);
+
+            return view('admin.search.searchOrder')->with('orders', $orders);
+        }
+        return back()->with('status', 'NOT FOUND');
     }
 }

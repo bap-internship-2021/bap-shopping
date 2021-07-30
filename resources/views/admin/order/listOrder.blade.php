@@ -59,3 +59,37 @@
             </div>
         </div>
 @endsection
+
+@section('js')
+<script type="text/javascript">
+    $('#orderkey').keyup(function(){
+        var orderkey = $(this).val();
+
+        if(orderkey != '') {
+            // var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url:"{{URL('admin/search-orders')}}",
+                method:"POST",
+                data:{
+                    orderkey: orderkey, 
+                    _token: '{{csrf_token()}}'
+                    },
+                success:function(data) {
+                    console.log(data);
+                    $('#search_order').fadeIn();
+                    $('#search_order').html(data);
+                }
+            });
+
+        } else {
+            $('#search_order').fadeOut();
+        }
+    });
+
+    $(document).on('click', '.li_search_order', function(){
+        $('#orderkey').val( $(this).text() );
+        $('#search_order').fadeOut();
+    })
+</script>
+@endsection

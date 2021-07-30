@@ -36,6 +36,9 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('orders/cancel/{id}', [OrderController::class, 'cancelOrderPage'])->name('admin.order.cancel');
     Route::post('orders/confirmcancel/{id}', [OrderController::class, 'cancelOrder'])->name('admin.order.confirmcancel');
     Route::get('order/sending/accept/{id}', [OrderController::class, 'finishOrder'])->name('admin.order.finish');
+    Route::post('search-orders', [SearchController::class, 'searchOrder'])->name('search.order');
+    Route::get('search-order-result', [SearchController::class, 'searchOrderResult'])->name('search.order.result');
+
 });
 
 
