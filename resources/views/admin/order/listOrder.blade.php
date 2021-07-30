@@ -22,7 +22,7 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-6 align-self-center pb-3">
-                    <h1>Quản Lí Đơn Hàng (Đã Hủy)</h1>
+                <h1>Quản Lí Đơn Hàng</h1>
                 </div>
             </div>
             <div class="row pb-3">
@@ -32,33 +32,30 @@
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
+                    
+                        
+                    
                     <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">Mã đơn hàng</th>
-                                <th scope="col">Chi tiết đơn hàng</th>
-                                <th scope="col">Tình trạng</th>
-                            </tr>
-                        </thead>
+                        @foreach ($orders as $order)
                         <tbody>
-                            @foreach($orders as $order)
-                            <tr>
-                                <th scope="row">{{$order->custom_order_id}}</th>
+                            <tr onclick="location.href='{{route('admin.order.status', [$order['trangthai']])}}';" style="cursor: pointer;">
+                                @if($order['trangthai'] == 1)
+                                <th scope="row">Đang chờ</th>
+                                @elseif($order['trangthai'] == 2)
+                                <th scope="row">Đang giao</th>
+                                @elseif($order['trangthai'] == 3)
+                                <th scope="row">Hoàn thành</th>
+                                @elseif($order['trangthai'] == 4)
+                                <th scope="row">Đã hủy</th>
+                                @endif
                                 <td>
-                                    <a href="{{route('admin.order.detail', [$order->id])}}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                                </td>
-                                <td>
-                                    <span>Đã Hủy</span>
-                                    <i class="fas fa-ban"></i>
+                                    <span>{{$order['soluong']}} ( đơn hàng )</span>
                                 </td>
                             </tr>
-                            @endforeach
                         </tbody>
+                        @endforeach
                     </table>
                 </div>
-        <div class="row">
-            <div class="col">
-                {{ $orders->links() }}
             </div>
         </div>
 @endsection
