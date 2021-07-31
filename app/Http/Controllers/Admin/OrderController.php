@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\CancelOrderRequest;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,6 @@ class OrderController extends Controller
              ->groupBy('status')
              ->get();
         $orders = json_decode(json_encode($orders), true);
-        // dd($orders[0]['trangthai']);
         return view('admin.order.listOrder', compact('orders'));
     }
 
@@ -35,18 +35,18 @@ class OrderController extends Controller
         return view('admin.order.listOrderByStatus', compact('orders'));
     }
 
-    public function detailOrder($status){
+    public function detailOrder($id){
         $order = Order::select('orders.*', 'products.name as productname', 'order_details.quantity')
         ->join('order_details', 'orders.id', '=', 'order_details.order_id')
         ->join('products', 'order_details.product_id', '=', 'products.id')
-        ->where('orders.status', $status)
+        ->where('orders.id', $id)
         ->get();
         return view('admin.order.detailOrder', compact('order'));
     }
 
     public function acceptOrder($id){
 
-        $order = DB::table('orders')->where('id', $id)->update(['status' => 2]);
+        $order = DB::table('orders')->where('id', $id)->update(['status' => 2, 'date_start' => Carbon::now()]);
         
         if($order) {
             $userorder = DB::table('orders')
@@ -76,7 +76,7 @@ class OrderController extends Controller
     }
 
     public function acceptAllOrder(){
-        $orders = DB::table('orders')->where('status', 1)->update(['status' => 2]);
+        $orders = DB::table('orders')->where('status', 1)->update(['status' => 2, 'date_start' => Carbon::now()]);
 
         if($orders){
             $userorder = DB::table('orders')
@@ -135,7 +135,7 @@ class OrderController extends Controller
     }
 
     public function finishOrder($id){
-        $order = DB::table('orders')->where('id', $id)->update(['status' => 3]);
+        $order = DB::table('orders')->where('id', $id)->update(['status' => 3, 'date_end' => Carbon::now()]);
 
         if($order){
             return back()->with('status', 'Đã hoàn thành đơn hàng');
