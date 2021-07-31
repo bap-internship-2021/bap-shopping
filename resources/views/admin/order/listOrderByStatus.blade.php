@@ -22,36 +22,26 @@
         <div class="page-breadcrumb">
             <div class="row">
                 
-                <div class="col-6 align-self-center">
-                    @foreach ($orders as $order)
-                    @if($order->status == \App\Models\Order::PENDING_STATUS)
-                    
-                    <h1>Đơn hàng đang chờ</h1>
-                    @elseif($order->status == \App\Models\Order::SENDING_STATUS)
-                    <h1>Đơn hàng đang giao</h1>
-                    @elseif($order->status == \App\Models\Order::FINISH_STATUS)
-                    <h1>Đơn hàng hoàn thành</h1>
-                    @elseif($order->status == \App\Models\Order::CANCEL_STATUS)
-                    <h1>Đơn hàng đã hủy</h1>
-                    @endif
+                <div class="col-12 align-self-center">
+                    <h1>Danh sách đơn hàng</h1>
                 </div>
-                @endforeach
-                <div class="col-12">
-                    <h2>Số lượng ({{count($orders)}})</h2>
-                </div>
+                
+                
             </div>
-            <div class="row pb-3">
+            <div class="row pb-2">
                 @include('admin.order.nav')
             </div>
+            <div class="col-12">
+                <h2>Số lượng ({{count($orders)}})</h2>
+            </div>
         </div>
-        @if($orders->count() == 0)
-        <h3>Không có đơn hàng nào</h3>
-        @endif
+        @foreach ($orders as $order)
+        @endforeach
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
                     <table class="table table-striped">
-                        @if($order->status == \App\Models\Order::PENDING_STATUS)
+                        @if($orders->count() > 0 && $order->status == \App\Models\Order::PENDING_STATUS)
                         <thead>
                             <tr>
                                 <th scope="col">Mã đơn hàng</th>
@@ -82,9 +72,9 @@
                                     <a href="{{route('admin.order.acceptall')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Duyệt tất cả</button></a>
                                 </td>
                             </tr>
-                        </tfoot>
+                        </tfoot>    
         
-                        @elseif($order->status == \App\Models\Order::SENDING_STATUS)
+                        @elseif($orders->count() > 0 && $order->status == \App\Models\Order::SENDING_STATUS)
                         <thead>
                             <tr>
                                 <th scope="col">Mã đơn hàng</th>
@@ -111,7 +101,7 @@
                             @endforeach
                         </tbody>
 
-                    @elseif($order->status == \App\Models\Order::FINISH_STATUS)
+                    @elseif($orders->count() > 0 && $order->status == \App\Models\Order::FINISH_STATUS)
                         <thead>
                             <tr>
                                 <th scope="col">Mã đơn hàng</th>
@@ -135,7 +125,7 @@
                             @endforeach
                         </tbody>
 
-                    @elseif($order->status == \App\Models\Order::CANCEL_STATUS)
+                    @elseif($orders->count() > 0 && $order->status == \App\Models\Order::CANCEL_STATUS)
                         <thead>
                             <tr>
                                 <th scope="col">Mã đơn hàng</th>
