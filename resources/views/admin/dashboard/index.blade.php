@@ -8,7 +8,7 @@
 
 <div class="container-fluid">
     <div class="cardBox">
-        <div class="card" onclick="location.href='{{route('admin.statistical.product')}}';" style="cursor: pointer;">
+        <div class="card" onclick="location.href='{{route('admin.statistical.product')}}';" style="cursor: pointer; background-color: #2d972e">
             <div>
                 <div class="numbers text-center">Sản phẩm</div>
             </div>
@@ -17,32 +17,29 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="location.href='';" style="cursor: pointer; background-color: #ffa705">
             <div>
-                <div class="numbers">111</div>
-                <div class="cardName">ABC</div>
+                <div class="numbers text-center">111</div>
             </div>
-            <div class="iconBox">
+            <div class="iconBox text-center">
                 <i class="fas fa-eye" aria-hidden="true"></i>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="location.href='';" style="cursor: pointer; background-color: #9132bd">
             <div>
-                <div class="numbers">111</div>
-                <div class="cardName">ABC</div>
+                <div class="numbers text-center">111</div>
             </div>
-            <div class="iconBox">
+            <div class="iconBox text-center">
                 <i class="fas fa-eye" aria-hidden="true"></i>
             </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="location.href='';" style="cursor: pointer; background-color: #15a1fe">
             <div>
-                <div class="numbers">111</div>
-                <div class="cardName">ABC</div>
+                <div class="numbers text-center">111</div>
             </div>
-            <div class="iconBox">
+            <div class="iconBox text-center">
                 <i class="fas fa-eye" aria-hidden="true"></i>
             </div>
         </div>

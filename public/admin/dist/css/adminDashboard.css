@@ -9,24 +9,26 @@
 
 .cardBox .card{
     position: relative;
-    background: #fff;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+    border-radius: 10%;
 }
 
 .cardBox .card .numbers{
     position: relative;
-    font-size: 2em;
+    font-size: 2.5em;
     font-weight: 500;
-}
-
-.cardBox .card .cardName{
-    color: #999;
+    color: #fff;
 }
 
 .cardBox .card .iconBox{
     font-size: 2.5em;
     color: #03a9f4;
+}
+
+.cardBox .card .iconBox i{
+    font-size: 2.5em;
+    
 }
