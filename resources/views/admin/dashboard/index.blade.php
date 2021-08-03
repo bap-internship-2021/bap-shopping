@@ -17,12 +17,12 @@
             </div>
         </div>
 
-        <div class="card" onclick="location.href='';" style="cursor: pointer; background-color: #ffa705">
+        <div class="card" onclick="location.href='{{route('admin.statistical.sale')}}';" style="cursor: pointer; background-color: #ffa705">
             <div>
-                <div class="numbers text-center">111</div>
+                <div class="numbers text-center">Doanh thu</div>
             </div>
             <div class="iconBox text-center">
-                <i class="fas fa-eye" aria-hidden="true"></i>
+                <i class="fas fa-search-dollar" aria-hidden="true"></i>
             </div>
         </div>
 

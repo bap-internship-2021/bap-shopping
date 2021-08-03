@@ -141,4 +141,10 @@ class OrderController extends Controller
             return back()->with('status', 'Đã hoàn thành đơn hàng');
         }
     }
+
+    // public function countOrder(){
+    //     $orders = Order::where('status', Order::PENDING_STATUS)->get();
+    //     return response()->json($orders, 200);
+    // }
+
 }
