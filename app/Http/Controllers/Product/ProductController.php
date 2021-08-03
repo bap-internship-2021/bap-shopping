@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\User\Comment\CommentController;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -19,8 +20,10 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product = Product::where('id', $product->id)->with(['images', 'specification'])->get();
-        return view('product.show', compact('product'));
+        $productId = $product->id;
+        $product = Product::where('id', $productId)->with(['images', 'specification'])->get();
+        $comments = CommentController::listCommentsByProduct($productId);
+        return view('product.show', compact('product', 'comments'));
     }
 
     public function getProductQuantityAPI($id): \Illuminate\Http\JsonResponse

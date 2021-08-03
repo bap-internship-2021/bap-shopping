@@ -3,11 +3,11 @@
 
 @section('content')
 <div>
-    <div class="pl-10 font-bold text-2xl uppercase">
+    <div class="pl-10 font-bold text-2xl uppercase text-black">
         Xác nhận đơn hàng
     </div>
 </div>
-<div class="flex justify-between">
+<div class="flex justify-between text-black">
     <div class="w-3/6 pt-10 pl-10">
         <div>
             <div class="border border-white rounded bg-white mb-5">

@@ -12,8 +12,8 @@ class Voucher extends Model
 {
     use HasFactory;
 
-    const DUE_STATUS = 1;
-    const EXPIRED_STATUS = 2;
+    const DUE_STATUS = 1; // Con han
+    const EXPIRED_STATUS = 2; // Het han
 
     public $table = 'vouchers';
     protected $fillable = ['name', 'code', 'from', 'to', 'status', 'discount', 'min_price', 'quantity'];

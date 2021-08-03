@@ -14,7 +14,7 @@
 @endsection()
 @section('content')
     @isset($products)
-        <div class="grid grid-cols-3 gap-2 bg-gray-100">
+        <div class="grid grid-cols-3 gap-2 bg-gray-100 text-black">
             @foreach($products as $key => $product)
                 <a href="{{ route('user.products.show', ['product' => $product->id ]) }}">
                     <div class="flex flex-col group hover:shadow bg-white hover:bg-white">
