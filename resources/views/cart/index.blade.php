@@ -3,8 +3,8 @@
 
 @section('content')
     @if(!empty($data))
-        <div><p class="text-xl font-bold">GIỎ HÀNG</p></div>
-        <section class="flex flex-row">
+        <div><p class="text-xl font-bold text-black">GIỎ HÀNG</p></div>
+        <section class="flex flex-row text-black">
             <div class="w-3/6">
                 <div>
                     <div class="border border-white rounded bg-white mb-5">

@@ -4,7 +4,7 @@
 @section('content')
 <div class="pt-5">
     <div>
-        <div class="w-full flex justify-evenly">
+        <div class="w-full flex justify-evenly text-black">
             <form class="bg-white p-5 rounded w-3/6 text-left"
                 action="{{ route('users.profiles.update') }}" method="post" enctype="multipart/form-data">
                 @method('PUT')

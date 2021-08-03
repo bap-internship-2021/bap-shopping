@@ -26,7 +26,7 @@
     <title>@yield('title', 'BAP SHOPPING')</title>
 </head>
 
-<body>
+<body style="color: black">
 
 <!-- Start top nav -->
 <div class="w-screen h-24 flex" style="background-color: #0c3254">

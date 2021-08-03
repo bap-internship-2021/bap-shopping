@@ -55,6 +55,5 @@
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
     <script>
         var clipboard = new ClipboardJS('.btn');
-
     </script>
 @endsection

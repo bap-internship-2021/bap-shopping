@@ -29,7 +29,13 @@ class Product extends Model
         return $this->hasMany(Image::class);
     }
 
-    public function specification(){
+    public function specification()
+    {
         return $this->hasOne(Specification::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

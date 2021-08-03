@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-//     protected $namespace = 'App\\Http\\Controllers';
+    //     protected $namespace = 'App\\Http\\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -56,10 +56,15 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/users.php'));
 
-            // Sale router
+            // vouchers router
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/vouchers.php'));
+
+            // Comment router
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/comments.php'));
         });
     }
 
