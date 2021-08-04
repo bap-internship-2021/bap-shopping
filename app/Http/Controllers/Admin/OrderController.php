@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\CancelOrderRequest;
 use App\Models\Order;
+use App\Models\Statistical;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -135,9 +134,40 @@ class OrderController extends Controller
     }
 
     public function finishOrder($id){
-        $order = DB::table('orders')->where('id', $id)->update(['status' => 3, 'date_end' => Carbon::now('Asia/Ho_Chi_Minh')]);
-
+        $order = DB::table('orders')->where('id', $id)->update(['status' => 3, 'date_end' => now()]);
+        
         if($order){
+            
+            $result = Order::join('order_details', 'orders.id', '=', 'order_details.order_id')
+                ->select('orders.*', 'order_details.quantity')
+                ->where('orders.id', $id)
+                ->get();
+
+            $date_finish = Carbon::parse($result[0]['date_end'])->format('Y-m-d');
+            $statistical = Statistical::where('order_date', $date_finish)->get();
+            $sales = $profit = $quantity = $total_order = 0;
+
+            if(count($statistical) == 0){
+                $sales = $result[0]['total_price'];
+                $profit = $sales - 1000000;
+                $quantity = $result[0]['quantity'];
+                $total_order = 1;
+                
+                Statistical::create([
+                    'order_date' => $date_finish,
+                    'sales' => $sales,
+                    'profit' => $profit,
+                    'quantity' => $quantity,
+                    'total_order' => $total_order
+                ]);
+            } else{
+                Statistical::where('order_date', $date_finish)->update([
+                    'sales' => $statistical[0]['sales'] + $result[0]['total_price'],
+                    'profit' => $statistical[0]['sales'] + $result[0]['total_price'] - 1000000,
+                    'quantity' => $statistical[0]['quantity'] + $result[0]['quantity'],
+                    'total_order' => $statistical[0]['total_order'] + 1
+                ]);        
+            }
             return back()->with('status', 'Đã hoàn thành đơn hàng');
         }
     }
