@@ -23,8 +23,9 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('dashboard/product', [DashboardController::class, 'statisticalProduct'])->name('admin.statistical.product');
     Route::get('dashboard/product/{id}', [DashboardController::class, 'statisticalProductByCategory'])->name('admin.statistical.productByCategory');
     Route::get('dashboard/sale', [DashboardController::class, 'statisticalSale'])->name('admin.statistical.sale');
-    Route::post('dashboard/sale/search-by-date', [DashboardController::class, 'searchSaleByDate'])->name('admin.searchByDate');
-    Route::post('dashboard/sale/select-by-option', [DashboardController::class, 'selectByOption'])->name('admin.selectByOption');
+    Route::post('dashboard/sale/search-by-date', [DashboardController::class, 'searchSaleByDate']);
+    Route::post('dashboard/sale/select-by-option', [DashboardController::class, 'selectByOption']);
+    Route::post('dashboard/sale/chart-default', [DashboardController::class, 'chartDefault']);
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profiles.show');
     Route::put('profile/{id}', [ProfileController::class, 'handleUpdateProfile'])->name('profiles.update');

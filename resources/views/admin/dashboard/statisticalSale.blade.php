@@ -58,6 +58,8 @@
     <script type="text/javascript">
     $(document).ready(function () {
 
+        chartDefault();
+
         var chart = new Morris.Area({
             element: 'myfirstchart',
             lineColors: ['#819c79', '#fc8710', '#FF6541', '#A4ADD3', '#766B56'],
@@ -74,6 +76,22 @@
 
             labels: ['đơn hàng', 'doanh số', 'lợi nhuận', 'số lượng']
         });
+
+        function chartDefault(){
+            var token = $("input[name='_token']").val();
+
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/admin/dashboard/sale/chart-default",
+                data: {
+                    '_token': token
+                },
+                dataType: "json",
+                success: function (data) {
+                    chart.setData(data);
+                },
+            });
+        }
         
         $("#datepicker").datepicker({
             prevText: "Tháng trước",

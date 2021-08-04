@@ -85,4 +85,21 @@ class DashboardController extends Controller
         }
         echo $data = json_encode($chart_data);
     }
+
+    public function chartDefault(){
+        $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(30)->toDateString();
+        $getNow = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        $get = Statistical::whereBetween('order_date', [$sub30days, $getNow])->orderBy('order_date', 'ASC')->get();
+
+        foreach($get as $key => $value){
+            $chart_data[] = array(
+                'period' => $value->order_date,
+                'order' => $value->total_order,
+                'sales' => $value->sales,
+                'profit' => $value->profit,
+                'price' => $value->quantity
+            );
+        }
+        echo $data = json_encode($chart_data);
+    }
 }
