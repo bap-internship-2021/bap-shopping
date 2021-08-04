@@ -49,7 +49,7 @@ class DashboardController extends Controller
                 'price' => $value->quantity
             );
         }
-        $data = json_encode($chart_data);
-        return response()->json(['data' => $data], 200);
+        echo $data = json_encode($chart_data);
+        // return response()->json(['data' => $data], 200);
     }
 }
