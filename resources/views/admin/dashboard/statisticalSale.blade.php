@@ -21,18 +21,21 @@
         </div>
         <div class="row">
             
-            <form autocomplete="off" action="{{route('admin.searchByDate')}}" class="border rounded" method="get" id="frm-sales">
+            <form autocomplete="off" class="col-6 border rounded" method="post" id="frm-sales">
                 @csrf
                 <div class="form-row">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <p class="h5 pt-1">Từ ngày: <input type="text" id="datepicker" class="form-control border rounded"></p>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <p class="h5 pt-1">Đến ngày: <input type="text" id="datepicker2" class="form-control border rounded"></p>
                     </div>
+                    {{-- <div class="col-md-4">
+                        <p class="h5 pt-1">Lọc theo: <input type="text" id="datepicker2" class="form-control border rounded"></p>
+                    </div> --}}
                     
                 </div>
-                <button type="submit" id="btn-dashboard-filter" class="btn btn-primary btn-sm">Lọc kết quả</button>
+                <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả">
             </form>
             <div class="col-md-12 pt-2">
                 <div id="myfirstchart" style="height: 230px;"></div>
@@ -59,7 +62,7 @@
             parseTime: false,
 
             xkey: 'period',
-            ykeys: ['order', 'sale', 'profit', 'quantity'],
+            ykeys: ['order', 'sales', 'profit', 'quantity'],
 
             behaveLikeLine: true,
 
@@ -111,7 +114,7 @@
         // })
 
         
-        $("#frm-sales").submit(function (e) {
+        $("#btn-dashboard-filter").click(function (e) {
             e.preventDefault();
             var url = $(this).attr('action');
             var from_date = $('#datepicker').val();
@@ -119,8 +122,8 @@
             var token = $("input[name='_token']").val();
 
             $.ajax({
-                type: "GET",
-                url: url,
+                type: "POST",
+                url: "http://127.0.0.1:8000/admin/dashboard/sale/search-by-date",
                 data: {
                     'from_date': from_date,
                     'to_date': to_date,
