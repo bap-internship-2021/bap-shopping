@@ -51,7 +51,7 @@
                    name="search"
                    class="bg-purple-white shadow-lg rounded p-2 w-4/6 placeholder-black placeholder-opacity-90"
                    placeholder="Tìm kiếm sản phẩm">
-            <div class="w-5/6 h-96 bg-white absolute z-50 mt-1 rounded overflow-scroll" id="show-result">
+            <div class="w-4/6 h-96 bg-white absolute z-50 mt-1 rounded overflow-scroll" id="show-result">
                 <ul>
                 </ul>
             </div>
@@ -70,7 +70,7 @@
                             </a>
                         </li>
                     @endif
-                    <li class="pr-2">
+                    <li class="pr-10">
                         <div class="">
                             <div class="dropdown inline-block relative">
                                 <button
@@ -146,7 +146,7 @@
 
         {{--    START LEFT NAV --}}
         <div class="w-1/6 h-96">
-            <nav class="bg-blue-200 shadow-sm h-full">
+            <nav class="bg-gray-200 shadow-inner h-full">
                 <ul class="px-4 py-2">
                     <li class="animate-bounce transition hover:text-red-500  cursor-pointer">
                         <a href="{{ route('user.vouchers.index') }}"><i

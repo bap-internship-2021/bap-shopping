@@ -190,7 +190,6 @@
                                         <div class="w-4/12 flex flex-row">
                                             <!-- user parent image comment-->
                                             @php
-                                                $key += 1;
                                                 $user = \App\Models\User::find($comment->user_id);
                                                 $userName = $user->name;
                                                 $profile_photo_path = $user->profile_photo_path;
@@ -304,24 +303,28 @@
                                         <div class="w-4/12"></div>
                                         <div class="w-8/12">
                                             <p class="text-blue-900 cursor-pointer font-semibold hover:text-blue-700 flex"
+                                               id="btn-show-child-cmt-{{$key}}"
                                                onclick="showListChildComments({{$key}}); return false">
                                                 <span class="" onclick="showListChildComments({{$key}}); return false">
                                                     <img style="width: 20px; height: 20px; background-color: #FFF"
                                                          src="https://salt.tikicdn.com/ts/upload/46/4a/fc/c90b4ae516353f181f844ed98276e28b.png"
                                                          alt=""></span>
-                                                Xem
+                                                <span>Xem
                                                 thêm {{ App\Models\Comment::where('parent_comment_id', $comment->id)->get()->count() }}
                                                 câu trả lời
-                                            </p></div>
+                                                </span>
+                                            </p>
+                                        </div>
                                     </div>
                                     <!-- Script click to show list child-comment -->
                                     <script>
                                         function showListChildComments(key) {
-                                            var childCommentId = 'list-child-comments-' + key;
-
-                                            var y = document.getElementById(childCommentId);
+                                            let childCommentId = 'list-child-comments-' + key;
+                                            let btnShow = 'btn-show-child-cmt-' + key;
+                                            let y = document.getElementById(childCommentId);
                                             if (y.style.display === "none") {
                                                 y.style.display = "block";
+                                                document.getElementById(btnShow).remove();
                                             } else {
                                                 y.style.display = "none";
                                             }
@@ -331,7 +334,7 @@
                                          id="list-child-comments-{{$key}}">
                                     @foreach($childComments as $childComment)
                                         <!-- Sub comment -->
-                                            <div class="flex">
+                                            <div class="flex p-5">
                                                 <div class="w-4/12"></div>
                                                 <div class="w-8/12 p-5 border border-gray-200 rounded bg-gray-100 mb-5">
                                                     <div>

@@ -43,7 +43,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm pl-2 w-20 truncate text-blue-600 hover:underline"><a
-                                            href="{{ route('user.products.show', $item['name']) }}">{{ $item['name'] }}</a>
+                                            href="{{ route('user.products.show', $item['id']) }}">{{ $item['name'] }}</a>
                                     </p>
                                 </div>
                             </div>

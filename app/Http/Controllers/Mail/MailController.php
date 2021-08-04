@@ -9,13 +9,14 @@ use Mail;
 
 class MailController extends Controller
 {
-    public static function notifyOrder()
+    public static function notifyOrder($orderDetailLink)
     {
         $userEmail = Auth::user()->email;
         $details = [
             'title' => 'Thông báo đơn hàng từ BAP',
             'body' => 'Đơn hàng của bạn đang được kiểm duyệt, chúng tôi sẽ liên hệ với bạn sớm nhất để xác nhận đơn hàng.',
-            'userEmail' => $userEmail
+            'userEmail' => $userEmail,
+            'orderDetailLink' => $orderDetailLink
         ];
 
         Mail::send('emails.notifyOrder', $details, function($message) use ($userEmail) {

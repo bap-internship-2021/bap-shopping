@@ -17,6 +17,11 @@ use App\Helpers\CustomID;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['verified'])->only(['store']);
+    }
+
     public function index()
     {
         $orders = Order::where('user_id', Auth::id())->with(['orderDetails.product'])->paginate(6);
@@ -27,15 +32,18 @@ class OrderController extends Controller
     /**
      * Check order and caulator data to push order tables
      *
-     * @param  mixed $request
+     * @param mixed $request
      * @return void
      */
     public function confirmation(UserConfirmRequest $request)
     {
         $voucher = VoucherController::checkVoucherCodeIsExist($request->input('code'));
         if (session()->has('cart')) {
+
             if (!empty($request->input('code'))) { // If user request has voucher
+
                 if (count($voucher) > 0) {
+
                     if ($voucher->first()->min_price <= session()->get('subTotal')) {
                         $sale = VoucherController::checkVoucherCodeIsExist($request->input('code'));
                         $discount = $sale->first()->discount;  // Discount percent (%)
@@ -49,6 +57,7 @@ class OrderController extends Controller
                     } else {
                         return back()->with(['errorVoucherCode' => 'Đơn hàng không đủ điều kiện để sử dụng mã giảm giá'])->withInput();
                     }
+
                 } else { // if voucher code not found
                     return back()->with(['errorVoucherCode' => 'Mã giảm giá không tồn tại'])->withInput();
                 }
@@ -77,7 +86,7 @@ class OrderController extends Controller
             $cart = session()->get('cart');
             $userId = Auth::id();
             $custom_order_id = CustomID::IdGenerator(new Order, 'custom_order_id', 8, 'BAP');
-//            dd($custom_order_id);
+
             if (session()->has('userInfo')) {
                 $userOrder = [
                     'user_id' => $userId,
@@ -97,9 +106,10 @@ class OrderController extends Controller
                     'phone' => Auth()->user()->phone
                 ];
             }
-            $voucherPrice = session()->get('voucherPrice');
 
+            $voucherPrice = session()->get('voucherPrice');
             $orderDetails = [];
+
             foreach ($cart as $key => $item) {
                 $product = Product::where('id', $key)->get();
                 $productQuantity = $product->first()->quantity;
@@ -108,6 +118,7 @@ class OrderController extends Controller
                 $orderDetails[$key]['product_id'] = $key;
                 $orderDetails[$key]['quantity'] = $item['quantity'];
             }
+
             if ($voucherPrice > 0) {
                 $voucher = ['voucher_id' => session()->get('voucherId'), 'used_at' => now()];
                 $order = Order::create($userOrder);
@@ -121,11 +132,14 @@ class OrderController extends Controller
                 $order = Order::create($userOrder); // Insert record to 'orders' tables
                 $order->orderDetails()->createMany($orderDetails); // Insert record 'order_details' table with order id
             }
+
             DB::commit();
             // all good
+            $url = route('orders.oderDetails.index', $order->id);
             CartController::destroy(); //  delete cart
-            MailController::notifyOrder(); // send mail notify to user
+            MailController::notifyOrder($url); // send mail notify to user
             return redirect()->route('carts.index')->with(['notify-order' => 'Thanh toán thành công, cảm ơn quý khách.']);
+
         } catch (\Exception $e) {
             DB::rollback();
             // something went wrong
