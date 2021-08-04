@@ -46,7 +46,7 @@ class OrderController extends Controller
 
     public function acceptOrder($id){
 
-        $order = DB::table('orders')->where('id', $id)->update(['status' => 2, 'date_start' => Carbon::now()]);
+        $order = DB::table('orders')->where('id', $id)->update(['status' => 2, 'date_start' => Carbon::now('Asia/Ho_Chi_Minh')]);
         
         if($order) {
             $userorder = DB::table('orders')
@@ -76,7 +76,7 @@ class OrderController extends Controller
     }
 
     public function acceptAllOrder(){
-        $orders = DB::table('orders')->where('status', 1)->update(['status' => 2, 'date_start' => Carbon::now()]);
+        $orders = DB::table('orders')->where('status', 1)->update(['status' => 2, 'date_start' => Carbon::now('Asia/Ho_Chi_Minh')]);
 
         if($orders){
             $userorder = DB::table('orders')
@@ -135,7 +135,7 @@ class OrderController extends Controller
     }
 
     public function finishOrder($id){
-        $order = DB::table('orders')->where('id', $id)->update(['status' => 3, 'date_end' => Carbon::now()]);
+        $order = DB::table('orders')->where('id', $id)->update(['status' => 3, 'date_end' => Carbon::now('Asia/Ho_Chi_Minh')]);
 
         if($order){
             return back()->with('status', 'Đã hoàn thành đơn hàng');

@@ -9,7 +9,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="col-2">
-            <a href="{{route('products.index')}}" class="btn btn-primary">Back</a>
+            <a href="{{route('admin.dashboard')}}" class="btn btn-primary">Back</a>
         </div> 
         <div class="page-breadcrumb text-center">
             <div class="row">
@@ -20,8 +20,7 @@
             </div>
         </div>
         <div class="row">
-            
-            <form autocomplete="off" class="col-6 border rounded" method="post" id="frm-sales">
+            <form autocomplete="off" class="col-6 border rounded">
                 @csrf
                 <div class="form-row">
                     <div class="col-md-4">
@@ -30,10 +29,17 @@
                     <div class="col-md-4">
                         <p class="h5 pt-1">Đến ngày: <input type="text" id="datepicker2" class="form-control border rounded"></p>
                     </div>
-                    {{-- <div class="col-md-4">
-                        <p class="h5 pt-1">Lọc theo: <input type="text" id="datepicker2" class="form-control border rounded"></p>
-                    </div> --}}
-                    
+                    <div class="col-md-4">
+                        <p class="h5 pt-1">Lọc theo: 
+                        <select class="dashboard-select-option form-control">
+                            <option>--chọn--</option>
+                            <option value="7days">7 ngày qua</option>
+                            <option value="lastmonth">Tháng trước</option>
+                            <option value="thismonth">Tháng này</option>
+                            <option value="365days">365 ngày qua</option>
+                        </select>
+                        </p>
+                    </div>
                 </div>
                 <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả">
             </form>
@@ -46,9 +52,9 @@
 
 @section('js')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
 
@@ -84,36 +90,7 @@
             dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
             duration: "slow"
         });
-        
 
-        // $("#frm-sales").submit(function (e) {
-        //     e.preventDefault();
-        //     var from_date = $('#datepicker').val();
-        //     var to_date = $('#datepicker2').val();
-        //     var token = $("input[name='_token']").val();
-            
-        //     console.log('token:', token);
-        //     $.ajax({
-        //         URL: "http://127.0.0.1:8000/admin/dashboard/sale/search-by-date",
-        //         type: "GET",
-        //         dataType: "json",
-        //         data:{
-        //             'from_date': from_date, 
-        //             'to_date': to_date, 
-        //             '_token': token
-        //         },
-        //         success:function(data){
-        //             alert('ok');
-        //             console.log('success:', data);
-        //             // chart.setData(data);
-        //         },
-        //         error: function(e){
-        //             console.log('error: ', e);
-        //         }
-        //     })
-        // })
-
-        
         $("#btn-dashboard-filter").click(function (e) {
             e.preventDefault();
             var url = $(this).attr('action');
@@ -132,25 +109,29 @@
                 dataType: "json",
                 success: function (data) {
                     chart.setData(data);
-                    // var data = JSON.parse(response.data);
-                    // console.log(data);
                 },
+            });
+        });
 
-                // error: function (response) {
-                //     console.log('error: ', response);
-                //     $.each(err.error, function (key, value) {
-                //         if (key == 'email') {
-                //             $("#email-error").text(value[0]);
-                //         }
-
-                //         if (key == 'password') {
-                //             $("#password-error").text(value[0]);
-                //         }
-                //     });
-                // }
-
+        $(".dashboard-select-option").change(function(e){
+            e.preventDefault();
+            var dashboard_value = $(this).val();
+            var token = $("input[name='_token']").val();
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/admin/dashboard/sale/select-by-option",
+                data: {
+                    'dashboard_value': dashboard_value,
+                    '_token': token
+                },
+                dataType: "json",
+                success: function (data) {
+                    chart.setData(data);
+                },
             });
         });
     });
     </script>
+
+    
 @endsection
