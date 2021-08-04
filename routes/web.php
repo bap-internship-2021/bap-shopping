@@ -49,3 +49,4 @@ Route::middleware('auth', 'is.user')->group(function () {
     Route::get('orders/{id}/order-details', [\App\Http\Controllers\Order\OrderDetailController::class, 'getOrderDetail'])->name('orders.oderDetails.index');
 });
 
+

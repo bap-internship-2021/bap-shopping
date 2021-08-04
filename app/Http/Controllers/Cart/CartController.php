@@ -18,6 +18,7 @@ class CartController extends Controller
             $subTotal = 0;
             $data = [];
             foreach ($cart as $key => $item) {
+                $data[$key]['id'] = $key;
                 $data[$key]['name'] = $item['name'];
                 $data[$key]['image'] = $item['image'];
                 $data[$key]['quantity'] = $item['quantity'];
