@@ -35,29 +35,26 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
+                                
+                                <th scope="col">Tên</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Age</th>
-                                <th scope="col">Gender</th>
-                                <th scope="col">Phone</th>
-                                <th scope="col">Address</th>
+                                <th scope="col">Tuổi</th>
+                                <th scope="col">Giới tính</th>
+                                <th scope="col">Số điện thoại</th>
+                                <th scope="col">Địa chỉ</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                            foreach($users as $key => $user){
-                            ?>
+                            @foreach($users as $key => $user)
                             <tr>
-                                <th scope="row">{{$user->id}}</th>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->age}}</td>
-                                <td>{{$user->gender == '1' ? 'Male' : 'Female'}}</td>
+                                <td>{{$user->gender == '1' ? 'Nam' : 'Nữ'}}</td>
                                 <td>{{$user->phone}}</td>
                                 <td>{{$user->address}}</td>
                             </tr>
-                            <?php } ?>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

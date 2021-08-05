@@ -22,7 +22,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-5 align-self-center">
-            <h4 class="page-title">Category</h4>
+            <h4 class="page-title">Danh mục sản phẩm</h4>
         </div>
     </div>
 </div>
@@ -36,7 +36,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
+                                <th scope="col">Danh mục</th>
                                 <th scope="col" colspan="2">&nbsp</th>
                             </tr>
                         </thead>
@@ -63,7 +63,7 @@
                         <tfoot>
                             <tr>
                                 <td colspan="8">
-                                    <a href="{{route('category.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Add Category</button></a>
+                                    <a href="{{route('category.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Thêm danh mục</button></a>
                                 </td>
                             </tr>
                         </tfoot>
