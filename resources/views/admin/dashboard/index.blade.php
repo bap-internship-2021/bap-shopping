@@ -31,13 +31,13 @@
                 <div class="numbers text-center">Khách hàng</div>
             </div>
             <div class="iconBox text-center">
-                <i class="fas fa-eye" aria-hidden="true"></i>
+                <i class="fas fa-star" aria-hidden="true"></i>
             </div>
         </div>
 
-        <div class="card" onclick="location.href='';" style="cursor: pointer; background-color: #15a1fe">
+        <div class="card" onclick="location.href='{{route('admin.statistical.access')}}';" style="cursor: pointer; background-color: #15a1fe">
             <div>
-                <div class="numbers text-center">111</div>
+                <div class="numbers text-center">Truy cập</div>
             </div>
             <div class="iconBox text-center">
                 <i class="fas fa-eye" aria-hidden="true"></i>

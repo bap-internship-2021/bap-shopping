@@ -7,6 +7,9 @@
         <div class="col-4 p-3">
             <a href="{{route('admin.dashboard')}}" class="btn btn-primary">Quay lại</a>
         </div>
+        @if(count($users) == 0)
+        <h1 class="pl-5">Chưa có khách hàng VIP</h1>
+        @else
       <h1 class="pl-5">Khách hàng VIP</h1>
       <div class="col-8 card re-card st-card">
         <div class="card-body">
@@ -31,7 +34,8 @@
           </table>
         </div>
       </div>
+      @endif
     </div>
   </div>
-
+  {{$users->links()}}
 @endsection

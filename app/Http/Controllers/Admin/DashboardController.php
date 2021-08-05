@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Statistical;
+use App\Models\Visitor;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -116,11 +117,44 @@ class DashboardController extends Controller
         $users = Order::select('orders.name' ,Order::raw('count(user_id) as soluong'))
         ->where('status', 3)
         ->groupBy('name')
+        ->having('soluong', '>', 5)
         ->orderBy('soluong', 'DESC')
-        ->get();
+        ->paginate(5);
         // dd($users);
         return view('admin.dashboard.statisticalUsers', compact('users'));
     }
 
+    public function statisticalAccess(Request $request){
+        $user_ip_address = $request->ip();
+        $early_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString(); //đầu tháng trước
+        $end_of_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString(); //cuối tháng trước
+        $early_this_month = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString(); // đầu tháng này
+        $oneyear = Carbon::now('Asia/Ho_Chi_Minh')->subDays(365)->toDateString(); // 365 ngày qua
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        $visitor_of_last_month = Visitor::whereBetween('date', [$early_last_month, $end_of_last_month])->get();
+        $visitor_last_month_count = $visitor_of_last_month->count();
+
+        $visitor_of_this_month = Visitor::whereBetween('date', [$early_this_month, $now])->get();
+        $visitor_this_month_count = $visitor_of_this_month->count();
+
+        $visitor_of_year = Visitor::whereBetween('date', [$oneyear, $now])->get();
+        $visitor_of_year_count = $visitor_of_year->count();
+
+        $visitor_current = Visitor::where('ip_address', $user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+
+        if($visitor_count < 1){
+            $visitor = new Visitor();
+            $visitor->ip_address = $user_ip_address;
+            $visitor->date = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        $visitors = Visitor::all();
+        $visitors_total = $visitors->count();
+
+        return view('admin.dashboard.statisticalAccess', compact(['visitors_total', 'visitor_count', 'visitor_last_month_count', 'visitor_this_month_count', 'visitor_of_year_count']));
+    }
     
 }

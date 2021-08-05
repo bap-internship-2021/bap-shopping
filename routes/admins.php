@@ -30,7 +30,8 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::post('dashboard/sale/chart-default', [DashboardController::class, 'chartDefault']);
 
     Route::get('dashboard/users', [DashboardController::class, 'usersVip'])->name('admin.statistical.user');
-
+    
+    Route::get('dashboard/access', [DashboardController::class, 'statisticalAccess'])->name('admin.statistical.access');
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profiles.show');
     Route::put('profile/{id}', [ProfileController::class, 'handleUpdateProfile'])->name('profiles.update');
