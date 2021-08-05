@@ -17,15 +17,20 @@ use App\Http\Controllers\Error\ErrorController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::middleware(['is.admin'])->prefix('admin')->group(function() {
-    Route::get('home', [HomeController::class, 'index']);
+    Route::get('home', [HomeController::class, 'index'])->name('admin.home');
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    
     Route::get('dashboard/product', [DashboardController::class, 'statisticalProduct'])->name('admin.statistical.product');
     Route::get('dashboard/product/{id}', [DashboardController::class, 'statisticalProductByCategory'])->name('admin.statistical.productByCategory');
+    
     Route::get('dashboard/sale', [DashboardController::class, 'statisticalSale'])->name('admin.statistical.sale');
     Route::post('dashboard/sale/search-by-date', [DashboardController::class, 'searchSaleByDate']);
     Route::post('dashboard/sale/select-by-option', [DashboardController::class, 'selectByOption']);
     Route::post('dashboard/sale/chart-default', [DashboardController::class, 'chartDefault']);
+
+    Route::get('dashboard/users', [DashboardController::class, 'usersVip'])->name('admin.statistical.user');
+
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profiles.show');
     Route::put('profile/{id}', [ProfileController::class, 'handleUpdateProfile'])->name('profiles.update');

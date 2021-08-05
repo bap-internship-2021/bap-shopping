@@ -19,12 +19,12 @@
             </div>
         @endif
 <div>
-    <a href="{{route('category.index')}}" class="btn btn-primary">Back</a>
+    <a href="{{route('category.index')}}" class="btn btn-primary">Quay lại</a>
 </div>
 <div class="page-breadcrumb">
     <div class="row">
-        <div class="col-3 align-self-center">
-            <h4 class="page-title">Update Category</h4>
+        <div class="col-4 align-self-center">
+            <h4 class="page-title">Cập nhật danh mục sản phẩm</h4>
         </div>
         
     </div>
@@ -36,10 +36,10 @@
     @method('PUT')
     @csrf
     <div class="form-group">
-        <label for="exampleInputct">Category Name</label>
+        <label for="exampleInputct">Tên danh mục sản phẩm</label>
         <input type="text" value="{{$category->name}}" name="name" class="form-control" id="exampleInputct" aria-describedby="emailHelp">
     </div>
-    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
 </form>   
 </div> 
 @endsection()

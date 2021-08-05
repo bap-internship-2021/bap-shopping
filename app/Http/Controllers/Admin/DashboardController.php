@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Statistical;
 use Illuminate\Http\Request;
@@ -17,8 +18,16 @@ class DashboardController extends Controller
     }
 
     public function statisticalProduct(){
+        $products = OrderDetail::select('products.name', OrderDetail::raw('SUM(order_details.quantity) as soluong'))
+            ->join('products', 'products.id', '=', 'order_details.product_id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', 3)
+            ->groupBy('products.name')
+            ->orderBy('soluong', 'DESC')
+            ->limit(3)
+            ->get();
         $categories = Category::all();
-        return view('admin.dashboard.statisticalProduct', compact('categories'));
+        return view('admin.dashboard.tableProducts', compact(['categories', 'products']));
     }
 
     public function statisticalProductByCategory($id){
@@ -102,4 +111,16 @@ class DashboardController extends Controller
         }
         echo $data = json_encode($chart_data);
     }
+
+    public function usersVip(){
+        $users = Order::select('orders.name' ,Order::raw('count(user_id) as soluong'))
+        ->where('status', 3)
+        ->groupBy('name')
+        ->orderBy('soluong', 'DESC')
+        ->get();
+        // dd($users);
+        return view('admin.dashboard.statisticalUsers', compact('users'));
+    }
+
+    
 }

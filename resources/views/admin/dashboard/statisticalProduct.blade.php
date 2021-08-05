@@ -24,7 +24,7 @@
         </div>
       </nav>
     </div>
-</div>
+  </div>
 </div>
 
 @yield('dashboard')
