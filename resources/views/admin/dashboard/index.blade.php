@@ -7,6 +7,7 @@
 @section('content')
 
 <div class="container-fluid">
+    <h1 class="text-center">Số liệu thống kê</h1>
     <div class="cardBox">
         <div class="card" onclick="location.href='{{route('admin.statistical.product')}}';" style="cursor: pointer; background-color: #2d972e">
             <div>
@@ -35,7 +36,7 @@
             </div>
         </div>
 
-        <div class="card" onclick="location.href='{{route('admin.statistical.access')}}';" style="cursor: pointer; background-color: #15a1fe">
+        <div class="card" onclick="location.href='{{route('admin.statistical.access')}}';" style="cursor: pointer; background-color: #fc7b03">
             <div>
                 <div class="numbers text-center">Truy cập</div>
             </div>

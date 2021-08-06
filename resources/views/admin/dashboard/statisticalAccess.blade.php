@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-12">
         <div class="col-4 p-3">
-            <a href="{{route('admin.dashboard')}}" class="btn btn-primary">Back</a>
+            <a href="{{route('admin.dashboard')}}" class="btn btn-primary">Quay lại</a>
         </div>
       <h1 class="pl-5">Thống kê truy cập</h1>
       <div class="col-8 card re-card st-card">
