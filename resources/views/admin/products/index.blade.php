@@ -50,7 +50,7 @@
                             foreach($products as $key => $pd){
                             ?>
                             <tr>
-                                <th scope="row">{{$pd->id}}</th>
+                                <th scope="row">{{$key+1}}</th>
                                 <td>{{$pd->name}}</td>
                                 <td><a href="{{route('products.show', [$pd->id])}}" class="btn btn-danger"><i class="fas fa-eye"></i></a></td>
                                 <td>

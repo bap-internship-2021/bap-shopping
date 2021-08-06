@@ -20,11 +20,8 @@
                     </b>
                     <!--End Logo icon -->
                     <!-- Logo text -->
-                    <span class="logo-text">
-                        <!-- dark Logo text -->
-                        <img src="{{URL::asset('admin/assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" />
-                        <!-- Light Logo text -->
-                        <img src="{{URL::asset('admin/assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" />
+                    <span class="logo-text text-white">
+                        {{Auth::user()->name}}
                     </span>
                 </a>
             </div>

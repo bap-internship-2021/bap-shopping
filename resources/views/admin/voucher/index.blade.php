@@ -40,10 +40,10 @@
                         </thead>
                         <tbody>
                             <?php 
-                            foreach($vouchers as $voucher){
+                            foreach($vouchers as $key => $voucher){
                             ?>
                             <tr>
-                                <th scope="row">{{$voucher->id}}</th>
+                                <th scope="row">{{$key+1}}</th>
                                 <td>{{$voucher->name}}</td>
                                 <td><a href="{{route('voucher.show', [$voucher->id])}}" class="btn btn-danger"><i class="fas fa-eye"></i></a></td>
                             </tr>

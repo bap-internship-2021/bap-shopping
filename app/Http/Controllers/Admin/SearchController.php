@@ -54,10 +54,7 @@ class SearchController extends Controller
         $data = $request->all();
         
         if($data && isset($data['orderkey'])){
-            $orders = Order::select('orders.*', 'products.name as productname', 'order_details.quantity')
-            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
-            ->join('products', 'order_details.product_id', '=', 'products.id')
-            ->where('orders.custom_order_id', 'LIKE', '%'.$data['orderkey'].'%')->paginate(5);
+            $orders = Order::where('orders.custom_order_id', 'LIKE', '%'.$data['orderkey'].'%')->paginate(5);
 
             return view('admin.search.searchOrder')->with('orders', $orders);
         }
