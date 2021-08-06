@@ -2,22 +2,27 @@
 @section('title', 'Products')
 @section('css')
     <style>
-        .pagination{
+        .pagination {
             display: flex;
             flex-direction: row;
         }
+
         .pagination li {
-            background: white;
+            background: #0c3254;
             padding: 5px 15px;
+            color: white;
+        }
+        #pagination > nav > ul > li.page-item.active {
+            cursor: not-allowed;
         }
     </style>
 @endsection()
 @section('content')
     @isset($products)
-        <div class="grid grid-cols-3 gap-2 bg-gray-100 text-black">
+        <div class="grid grid-cols-3 gap-2 bg-white text-black pt-5 px-5">
             @foreach($products as $key => $product)
                 <a href="{{ route('user.products.show', ['product' => $product->id ]) }}">
-                    <div class="flex flex-col group hover:shadow bg-white hover:bg-white">
+                    <div class="flex flex-col group bg-blue-50 shadow-inner transition duration-300 ease-in-out hover:shadow-lg rounded-lg">
                         <div class="pt-5">
                             <img class="object-cover h-48 w-full transition transform hover:-translate-y-2"
                                  src="{{ asset("admin\\images\\products\\") . $product->first()->images->first()->path }}"
@@ -35,7 +40,7 @@
             @endforeach
         </div>
         {{--  Paginate product --}}
-        <div>
+        <div id="pagination">
             {{ $products->links() }}
         </div>
     @endisset

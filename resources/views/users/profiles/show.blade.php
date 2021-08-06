@@ -84,7 +84,7 @@
                         <div>
                             <p>Email</p>
                         </div>
-                        <input class="border border-black p-1 w-7/12 rounded bg-gray-200" disabled
+                        <input class="border border-black p-1 w-7/12 rounded bg-gray-300 cursor-not-allowed" disabled
                                value="{{ Auth()->user()->email }}">
                     </div>
 
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                     @if (Auth()->user()->email_verified_at === null)
-                        <p class="text-red-600">Tài khoản chưa được xác thực, ấn vào link này để xác thực: <a
+                        <p class="text-red-600 text-center">Tài khoản của bạn chưa được xác thực để xử dụng các chức năng khác của hệ thống, ấn vào link này để xác thực: <a
                                 href="{{ route('verification.notice') }}"
                                 class="text-blue-800 underline hover:text-blue-900">Xác thực</a></p>
                     @endif

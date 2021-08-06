@@ -6,7 +6,6 @@ $(document).ready(function () {
             $("#show-result").hide();
         }
         var url = "http://127.0.0.1:8000/api/search/products?search=Iphone";
-        console.log('url1: ', url);
         $.ajax({
             type: "GET",
             url: url,
@@ -15,7 +14,6 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (response) {
-                console.log(response.product[0]);
                 var html = '';
                 html += '';
                 $.each(response.product, function (item, value) {
