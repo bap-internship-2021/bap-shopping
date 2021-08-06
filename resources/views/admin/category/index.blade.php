@@ -45,7 +45,7 @@
                             foreach($categories as $key => $ct){
                             ?>
                             <tr>
-                                <th scope="row">{{$ct->id}}</th>
+                                <th scope="row">{{$key+1}}</th>
                                 <td>{{$ct->name}}</td>
                                 <td>
                                     <a href="{{route('category.edit', [$ct->id])}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>

@@ -49,7 +49,7 @@
                             </tr>
                             <tr>
                                 <td>Min Price</td>
-                                <td><span>{{$voucher->min_price}}</span></td>
+                                <td><span>{{ number_format($voucher->min_price, 0, '', ',') }} VNĐ</span></td>
                             </tr>
                             <tr>
                                 <td>Quantity</td>

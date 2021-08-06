@@ -12,6 +12,7 @@ use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Product\CreateProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
+use App\Models\OrderDetail;
 use App\Models\Specification;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Support\Facades\DB;
@@ -179,24 +180,23 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        DB::beginTransaction();
+    {   
+        $product = OrderDetail::where('product_id', $id)->get();
 
-        try {
+        if(count($product) > 0){
+            return back()->with('status', 'Sản phẩm đang có trong đơn hàng, không thể xóa');
+        } else{
             $images = Image::where('product_id', $id)->get();
             foreach($images as $key => $image){
                 $imagePath = 'admin/images/products/' . $image->path;
                 File::delete($imagePath);
             }
             Image::where('product_id', $id)->delete();
+            Specification::where('product_id', $id)->delete();
             Product::destroy($id);
-            DB::commit();
-            // all good
-        } catch (\Exception $e) {
-            DB::rollback();
-            // something went wrong
+            return back()->with('status', 'Xóa sản phẩm thành công');
         }
-        return back()->with('status', 'delete success');
+        
     }
 
 }

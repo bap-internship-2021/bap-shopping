@@ -22,7 +22,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-5 align-self-center">
-            <h4 class="page-title">Users</h4>
+            <h4 class="page-title">Người dùng</h4>
         </div>
     </div>
 </div>
@@ -35,7 +35,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                
+                                <th scope="col">#</th>
                                 <th scope="col">Tên</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Tuổi</th>
@@ -47,6 +47,7 @@
                         <tbody>
                             @foreach($users as $key => $user)
                             <tr>
+                                <td>{{$key+1}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->age}}</td>

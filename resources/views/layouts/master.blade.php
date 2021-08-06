@@ -149,7 +149,7 @@
                                     @if(Auth::user()->role_id == \App\Models\User::AMIN_ROLE)
                                     <a
                                         class=""
-                                        href="{{ route('admin.dashboard') }}">Quản lý hệ thống</a>
+                                        href="{{ route('admin.home') }}">Quản lý hệ thống</a>
 
                                     <!-- Admin side -->
                                     <a

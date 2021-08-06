@@ -16,7 +16,7 @@
                 @foreach($orders as $value)
                 <table class="table table-striped table-dark">
                     <tbody>
-                        <tr onclick="location.href='{{route('admin.order.detail', [$value->status])}}';" style="cursor: pointer;">
+                        <tr onclick="location.href='{{route('admin.order.detail', [$value->id])}}';" style="cursor: pointer;">
                             <td>Mã đơn hàng</td>
                             <td><span>{{$value->custom_order_id}}</span></td>
                         </tr>
