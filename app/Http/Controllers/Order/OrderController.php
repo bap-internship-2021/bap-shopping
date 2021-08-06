@@ -37,6 +37,10 @@ class OrderController extends Controller
      */
     public function confirmation(UserConfirmRequest $request)
     {
+        if (Auth::user()->email_verified_at === null) {
+            return back()->with(['not-verify-email' => 'Email này chưa được verify']);
+        }
+
         $voucher = VoucherController::checkVoucherCodeIsExist($request->input('code'));
         if (session()->has('cart')) {
 

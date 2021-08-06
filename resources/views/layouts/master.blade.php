@@ -28,6 +28,31 @@
 
 <body>
 
+<!-- Alert verify email success -->
+@if(session()->has('email-verified'))
+<div id="verify-email-notification">
+    <div class="box bg-black w-screen h-full  absolute z-10 blur-3xl opacity-90">
+    </div>
+    <div class="alert absolute z-20 text-center"
+         style="position: absolute; top: 50%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%)">
+        <div class="flex-1">
+            <label class="mx-3">Bạn đã xác minh tài khoản thành công!</label>
+        </div>
+        <div class="flex-none">
+            <button onclick="closeAlert()" class="btn btn-sm btn-primary">Đóng</button>
+        </div>
+    </div>
+    <script>
+        document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
+        function closeAlert() {
+            document.getElementById("verify-email-notification").remove();
+            document.getElementsByTagName("BODY")[0].style.overflow = "initial";
+        }
+    </script>
+</div>
+@endif
+<!---->
+
 <!-- Start top nav -->
 <div class="w-screen h-24 flex" style="background-color: #0c3254">
 
@@ -60,80 +85,7 @@
         <!-- END SEARCH BAR -->
 
         <div class="w-1/2">
-            {{--            <ul class="flex justify-end">--}}
-            {{--                @if(Auth::check())--}}
-            {{--                    @if(Auth::user()->role_id == \App\Models\User::USER_ROLE)--}}
-            {{--                        <li class="pr-3">--}}
-            {{--                            <a class="text-white rounded" href="{{ route('carts.index') }}">--}}
-            {{--                            <span class="font-semibold">--}}
-            {{--                                <i class="fas fa-shopping-cart pr-1"></i></span>Giỏ--}}
-            {{--                                hàng--}}
-            {{--                            </a>--}}
-            {{--                        </li>--}}
-            {{--                    @endif--}}
-            {{--                    <li class="pr-10">--}}
-            {{--                        <div class="">--}}
-            {{--                            <div class="dropdown inline-block relative">--}}
-            {{--                                <button--}}
-            {{--                                    class="text-white font-semibold rounded inline-flex items-center">--}}
-            {{--                                    <span class="flex"><img class="rounded-full"--}}
-            {{--                                                            src="{{ asset("admin\\images\\avatar\\") . Auth()->user()->profile_photo_path }}"--}}
-            {{--                                                            alt="" style="width: 30px; height: 30px"> {{ !empty(Auth()->user()->name) ? Auth()->user()->name : '' }}</span>--}}
-            {{--                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"--}}
-            {{--                                         viewBox="0 0 20 20">--}}
-            {{--                                        <path--}}
-            {{--                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>--}}
-            {{--                                    </svg>--}}
-            {{--                                </button>--}}
-            {{--                                <ul class="dropdown-menu absolute hidden text-black pt-1 z-50">--}}
-            {{--                                    <div class="divide-y divide-gray-100 cursor-pointer">--}}
-            {{--                                        @if(Auth::user()->role_id == \App\Models\User::AMIN_ROLE)--}}
-            {{--                                            <li class=""><a--}}
-            {{--                                                    class="rounded-t bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"--}}
-            {{--                                                    href="{{ route('admin.dashboard') }}">Quản lý hệ thống</a>--}}
-            {{--                                            </li>--}}
-            {{--                                            <li class=""><a--}}
-            {{--                                                    class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"--}}
-            {{--                                                    href="{{ route('profiles.show', ['profile' => Auth::id()]) }}">Tài--}}
-            {{--                                                    khoản của tôi</a>--}}
-            {{--                                            </li>--}}
-            {{--                                        @else--}}
-            {{--                                        <!-- User Profile -->--}}
-            {{--                                            <li class=""><a--}}
-            {{--                                                    class="rounded-t bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"--}}
-            {{--                                                    href="{{ route('users.profiles.show') }}">Tài khoản của tôi</a>--}}
-            {{--                                            </li>--}}
-            {{--                                        @endif--}}
 
-            {{--                                    <!-- Show link to verify email for user not verified -->--}}
-            {{--                                        @if(Auth::user()->email_verified_at == null)--}}
-            {{--                                            <li class=""><a--}}
-            {{--                                                    class="bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"--}}
-            {{--                                                    href="{{ route('verification.notice') }}">Xác thực tài khoản</a>--}}
-            {{--                                            </li>--}}
-            {{--                                    @endif--}}
-            {{--                                    <!--  -->--}}
-
-            {{--                                        <li class="">--}}
-            {{--                                            <form action="{{ route('logout') }}" method="post">--}}
-            {{--                                                @csrf--}}
-            {{--                                                <input type="submit"--}}
-            {{--                                                       class="w-full rounded-b bg-white hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap cursor-pointer"--}}
-            {{--                                                       value="Đăng xuất">--}}
-            {{--                                            </form>--}}
-            {{--                                        </li>--}}
-            {{--                                    </div>--}}
-            {{--                                </ul>--}}
-            {{--                            </div>--}}
-            {{--                        </div>--}}
-            {{--                    </li>--}}
-            {{--                @else--}}
-            {{--                    <li><a class="text-white rounded text-sm" href=""><i class="fas fa-user text-white text-xl"></i>--}}
-            {{--                            Đăng--}}
-            {{--                            nhập</a>--}}
-            {{--                    </li>--}}
-            {{--                @endif--}}
-            {{--            </ul>--}}
             <div class="cursor-pointer">
                 <div class="user-image">
                     <div class="flex items-center justify-center">
@@ -147,16 +99,16 @@
                                 class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52 cursor-pointer">
                                 <li>
                                     @if(Auth::user()->role_id == \App\Models\User::AMIN_ROLE)
-                                    <a
-                                        class=""
-                                        href="{{ route('admin.home') }}">Quản lý hệ thống</a>
+                                        <a
+                                            class=""
+                                            href="{{ route('admin.dashboard') }}">Quản lý hệ thống</a>
 
-                                    <!-- Admin side -->
-                                    <a
-                                        class=""
-                                        href="{{ route('profiles.show', ['profile' => Auth::id()]) }}"><i
-                                            class="fas fa-user mr-1"></i>Tài
-                                        khoản của tôi</a>
+                                        <!-- Admin side -->
+                                        <a
+                                            class=""
+                                            href="{{ route('profiles.show', ['profile' => Auth::id()]) }}"><i
+                                                class="fas fa-user mr-1"></i>Tài
+                                            khoản của tôi</a>
 
                                     @else
                                     <!-- User Profile side -->
@@ -190,7 +142,6 @@
                         </div>
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -261,107 +212,6 @@
 </div>
 
 <div class="bg-white text-black">
-    {{--    START LEFT NAV --}}
-    {{--        <div class="w-1/6 h-full bg-white">--}}
-    {{--            --}}{{--            <nav class="bg-white shadow-inner h-screen">--}}
-    {{--            --}}{{--                <ul class="px-4 py-2">--}}
-    {{--            --}}{{--                    <li class="animate-bounce transition hover:text-red-500  cursor-pointer">--}}
-    {{--            --}}{{--                        <a href="{{ route('user.vouchers.index') }}"><i--}}
-    {{--            --}}{{--                                class="fas fa-tags fill-current text-blue-400"></i> Xem voucher</a>--}}
-    {{--            --}}{{--                    </li>--}}
-    {{--            --}}{{--                    @if(Auth::user()->role_id === \App\Models\User::USER_ROLE)--}}
-    {{--            --}}{{--                        <li class="cursor-pointer transition hover:text-red-500">--}}
-    {{--            --}}{{--                            <a href="{{ route('orders.index') }}"><i--}}
-    {{--            --}}{{--                                    class="fas fa-shopping-basket fill-current text-blue-400"></i> Đơn hàng của tôi</a>--}}
-    {{--            --}}{{--                        </li>--}}
-    {{--            --}}{{--                    @endif--}}
-    {{--            --}}{{--                    <li class="cursor-pointer transition hover:text-red-500">--}}
-    {{--            --}}{{--                        <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::IPHONE]) }}"><i--}}
-    {{--            --}}{{--                                class="fas fa-mobile fill-current text-blue-400"></i> Iphone</a>--}}
-    {{--            --}}{{--                    </li>--}}
-    {{--            --}}{{--                    <li class="cursor-pointer transition hover:text-red-500">--}}
-    {{--            --}}{{--                        <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::IPAD]) }}"><i--}}
-    {{--            --}}{{--                                class="fas fa-tablet fill-current text-blue-400"></i> Ipad</a>--}}
-    {{--            --}}{{--                    </li>--}}
-    {{--            --}}{{--                    <li class="cursor-pointer transition hover:text-red-500">--}}
-    {{--            --}}{{--                        <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::IMAC]) }}"><i--}}
-    {{--            --}}{{--                                class="fas fa-desktop fill-current text-blue-400"></i> Imac</a>--}}
-    {{--            --}}{{--                    </li>--}}
-    {{--            --}}{{--                    <li class="cursor-pointer transition hover:text-red-500">--}}
-    {{--            --}}{{--                        <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::MACBOOK]) }}"><i--}}
-    {{--            --}}{{--                                class="fas fa-laptop fill-current text-blue-400"></i> MacBook</a>--}}
-    {{--            --}}{{--                    </li>--}}
-    {{--            --}}{{--                    <li class="cursor-pointer transition hover:text-red-500">--}}
-    {{--            --}}{{--                        <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::APPLE_WATCH]) }}">--}}
-    {{--            --}}{{--                            <span class="iconify inline fill-current text-blue-400" data-icon="gg-apple-watch"--}}
-    {{--            --}}{{--                                  data-inline="false"></span>Apple Watch--}}
-    {{--            --}}{{--                        </a>--}}
-    {{--            --}}{{--                    </li>--}}
-    {{--            --}}{{--                    <li class="cursor-pointer transition hover:text-red-500">--}}
-    {{--            --}}{{--                        <a href="{{ route('categories.products.index', ['category'=> \App\Models\Category::AIR_POD]) }}">--}}
-    {{--            --}}{{--                            <span class="iconify inline fill-current text-blue-400" data-icon="akar-icons:airpods"--}}
-    {{--            --}}{{--                                  data-inline="false"></span>Air Pod--}}
-    {{--            --}}{{--                        </a>--}}
-    {{--            --}}{{--                    </li>--}}
-    {{--            --}}{{--                </ul>--}}
-    {{--            --}}{{--            </nav>--}}
-    {{--            <nav class="cursor-pointer">--}}
-    {{--                <ul>--}}
-    {{--                    <li>--}}
-    {{--                        <p class="">Danh mục sản phẩm</p>--}}
-    {{--                        <ul class="pl-5">--}}
-
-    {{--                            <li>--}}
-    {{--                                <a href="">Iphone</a>--}}
-    {{--                            </li>--}}
-
-    {{--                            <li>--}}
-    {{--                                <a href="">Ipad</a>--}}
-    {{--                            </li>--}}
-
-    {{--                            <li>--}}
-    {{--                                <a href="">Macbook</a>--}}
-    {{--                            </li>--}}
-
-    {{--                            <li>--}}
-    {{--                                <a href="">Imac</a>--}}
-    {{--                            </li>--}}
-
-    {{--                            <li>--}}
-    {{--                                <a href="">Air Pod</a>--}}
-
-    {{--                            </li>--}}
-
-    {{--                            <li>--}}
-    {{--                                <a href="">Apple Watch</a>--}}
-    {{--                            </li>--}}
-
-    {{--                            <li>--}}
-    {{--                                <a href="">Imac</a>--}}
-    {{--                            </li>--}}
-
-    {{--                        </ul>--}}
-    {{--                    </li>--}}
-    {{--                </ul>--}}
-    {{--            </nav>--}}
-
-    {{--            <div class="dropdown dropdown-hover w-100">--}}
-    {{--                <div tabindex="0" class="m-1 btn w-100">Danh mục sản phẩm</div>--}}
-    {{--                <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">--}}
-    {{--                    <li>--}}
-    {{--                        <a>Item 1</a>--}}
-    {{--                    </li>--}}
-    {{--                    <li>--}}
-    {{--                        <a>Item 2</a>--}}
-    {{--                    </li>--}}
-    {{--                    <li>--}}
-    {{--                        <a>Item 3</a>--}}
-    {{--                    </li>--}}
-    {{--                </ul>--}}
-    {{--            </div>--}}
-
-    {{--        </div>--}}
-    {{--    END LEFT NAV--}}
 
     {{-- Start content--}}
     <div class="w-screen h-full">

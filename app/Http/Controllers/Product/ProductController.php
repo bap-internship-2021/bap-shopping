@@ -49,7 +49,7 @@ class ProductController extends Controller
         if ($request->has('search')) {
             $search = $request->input('search');
 
-            $product = Product::where('name', 'like', "%$search%")->get();
+            $product = Product::with('images')->where('name', 'like', "%$search%")->get();
             return response()->json(['product' => $product], 200);
         }
         // TODO:: return default ??

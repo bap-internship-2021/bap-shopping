@@ -14,7 +14,7 @@
 @section('content')
 
     <div class="text-black pt-5 bg-gray-100">
-        <div class="flex flex-row w-11/12 mx-auto bg-white border-2 p-5 rounded-lg">
+        <div class="flex flex-row w-11/12 mx-auto bg-white shadow-lg p-5 rounded-lg">
             @foreach ($product as $key => $item)
                 {{-- Product detail --}}
                 <div class="w-1/2">
@@ -72,7 +72,7 @@
             @endforeach
         </div>
 
-        <div class="w-11/12 rounded bg-white mt-5 mx-auto">
+        <div class="w-11/12 rounded-lg bg-white shadow-lg mt-5 mx-auto">
             @if($product->first()->specification != null)
                 <div class="pl-5">
                     <table class="table-fixed border bg-white">
@@ -140,7 +140,7 @@
         <!-- Comment -->
         <div class="pt-1">
             <div class="w-11/12 mx-auto">
-                <p class="text-2xl py-2">Viết đánh giá</p>
+                <p class="text-2xl py-2">Viết bình luận</p>
                 <div class="">
                     <form action="{{ route('comments.store') }}" method="post">
                         @csrf
@@ -149,11 +149,11 @@
                                value="{{ $product->first()->id }}"
                         />
                         <div class="form-control pb-2">
-                            <textarea class="textarea h-24 textarea-bordered textarea-info" name="content" placeholder="Viết nhận xét ở đây"></textarea>
+                            <textarea class="textarea h-24 textarea-bordered textarea-info" name="content" placeholder="Viết bình luận ở đây"></textarea>
                         </div>
 
                         <div>
-                            <button type="submit" class="btn btn-outline btn-primary">Gửi đánh giá</button>
+                            <button type="submit" class="btn btn-outline btn-primary">Gửi bình luận</button>
                         </div>
                     </form>
                 </div>
@@ -161,8 +161,8 @@
 
             <div>
                 <div class="w-11/12 mx-auto pb-2">
-                    <h1 class="text-black text-2xl pt-2">
-                        ĐÁNH GIÁ - NHẬN XÉT TỪ KHÁCH HÀNG
+                    <h1 class="text-black text-2xl pt-2 text-uppercase">
+                        Bình luận của khách hàng
                     </h1>
                     <span class="text-base">
                             (Tổng cộng:
@@ -172,7 +172,7 @@
                 </div>
                 <div>
                     @if($comments->count() > 0)
-                        <div class="bg-white w-11/12 rounded-lg p-10 mx-auto">
+                        <div class="bg-white w-11/12 shadow-lg rounded-lg p-10 mx-auto">
                             <div>
                                 @foreach ($comments as $key => $comment)
                                     <div class="">
@@ -378,7 +378,7 @@
         <!-- Related products -->
         <div class="pt-5">
             @if($relatedProducts->count() > 0)
-                <div class="related-product mx-auto w-11/12 bg-white rounded-lg p-5">
+                <div class="related-product mx-auto w-11/12 bg-white shadow-lg rounded-lg p-5">
 
                     <div class="title">
                         <h1 class="text-center text-2xl">Sản phẩm tương tự</h1>
@@ -387,9 +387,9 @@
                     <div class="carousel rounded-box cursor-pointer">
                         @foreach($relatedProducts as $key => $relatedProduct)
 
-                            <div class="carousel-item mr-2">
+                            <div class="carousel-item mr-2 shadow-lg">
 
-                                <div class="w-52 h-80 bg-white border rounded"
+                                <div class="w-52 h-80 bg-white shadow-lg border border-black"
                                      onclick="location.href='{{ route('user.products.show', $relatedProduct->id) }}';">
                                     <img class="w-52 h-52"
                                          src="{{ asset("admin\\images\\products\\") . $relatedProduct->images()->inRandomOrder()->first()->path }}" alt="Image">
