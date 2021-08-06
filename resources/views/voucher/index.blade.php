@@ -22,9 +22,9 @@
         @if($vouchers->count() > 0)
             <div class="grid grid-cols-3 gap-2 pt-5 px-5">
                 @foreach($vouchers as $key => $voucher)
-                    <div class="bg-blue-50 shadow-inner transition duration-300 ease-in-out hover:shadow-lg rounded-lg">
-                        <div class="bg-green-400 rounded-t-lg">
-                            <p class="text-center p-2">{{ $voucher->name }}</p>
+                    <div class="bg-gray-50 shadow-inner transition duration-300 ease-in-out hover:shadow-lg rounded-lg">
+                        <div class="bg-green-400 rounded-t-lg" style="background-color: #0c3254">
+                            <p class="text-center text-white p-2">{{ $voucher->name }}</p>
                         </div>
                         <div class="p-3">
                             <p>Mã code: <span id="{{ 'code-' . $key }}">{{ $voucher->code }}</span></p>
@@ -48,7 +48,8 @@
                             <button
 
                                 data-clipboard-target="{{ '#code-' . $key }}"
-                                class="btn bg-blue-400 hover:bg-blue-500 p-2 w-full rounded ring:none focus:outline-none focus:ring-2 focus:ring-500-50">
+                                class="btn bg-blue-400 hover:bg-blue-500 p-2 w-full rounded ring:none focus:outline-none focus:ring-2 focus:ring-500-50"
+                                style="background-color: #0c3254">
                                 Sao chép
                             </button>
                         </div>

@@ -3,11 +3,40 @@
 
 @section('content')
     @if(!empty($data))
+        <!-- Check email verify -->
+        <div class="bg-gray-100 pt-5">
+            @if (Auth()->user()->email_verified_at === null)
+                <div class="alert alert-warning w-9/12 mx-auto">
+                    <div class="flex-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                             class="w-6 h-6 mx-2 stroke-current">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                        <label>
+                            <p class="text-red-600 text-center">
+                                Tài khoản của bạn chưa được xác thực để xử dụng
+                                các chức năng khác
+                                của hệ thống, ấn vào link này để xác thực:
+                                <a
+                                    href="{{ route('verification.notice') }}"
+                                    class="text-blue-600 font-semibold underline hover:text-blue-900">
+                                    Ấn vào đây!
+                                </a>
+                            </p>
+                        </label>
+                    </div>
+                </div>
+            @endif
+        </div>
+        <!-- -->
+
         <div class="bg-gray-100 h-screen">
             <div class="w-11/12 mx-auto">
                 <div class="py-5">
                     <p class="text-xl font-bold text-black">GIỎ HÀNG</p>
                 </div>
+
                 <section class="flex flex-row text-black">
                     <div class="w-4/6">
                         <div>
@@ -89,8 +118,7 @@
                                         <p class="font-semibold">Giao tới</p>
                                     </div>
                                     <div id="change-address">
-                                        <button onclick="showFormChangeAddress()">Thay đổi
-                                            <button>
+                                        <button onclick="showFormChangeAddress()">Thay đổi</button>
                                     </div>
                                 </div>
                                 <div>
@@ -248,13 +276,31 @@
                                 @endif
                             </div>
                             <!-- End form click to buy -->
+
+                            <!-- Display warning email verify -->
+                            <div>
+                                @if(session()->has('not-verify-email'))
+                                    <div class="alert alert-error mt-5">
+                                        <div class="flex-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                 class="w-6 h-6 mx-2 stroke-current">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                            </svg>
+                                            <label>Bạn chưa xác thực địa chỉ email!</label>
+                                        </div>
+                                    </div>
+
+                                @endif
+                            </div>
+                            <!-- -->
                         </div>
                     </div>
                 </section>
-                {{--    Display notification empty cart    --}}
             </div>
         </div>
     @else
+        {{--    Display notification empty cart    --}}
         <div>
             <img class="mt-5 mx-auto text-sm" src="https://salt.tikicdn.com/desktop/img/mascot@2x.png" alt="Image"
                  width="190px" height="auto">

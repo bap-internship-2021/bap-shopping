@@ -35,11 +35,11 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Detail</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
+                            <?php
                             foreach($vouchers as $voucher){
                             ?>
                             <tr>
