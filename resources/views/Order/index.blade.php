@@ -9,8 +9,12 @@
         }
 
         .pagination li {
-            background: white;
+            background: #0c3254;
             padding: 5px 15px;
+            color: white;
+        }
+        #pagination > nav > ul > li.page-item.active {
+            cursor: not-allowed;
         }
     </style>
 @endsection()
@@ -61,7 +65,7 @@
                                             <div class="text-sm text-gray-900">{{ $order_at }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-left">
-                                            {{ $order->total_price }}
+                                            {{ number_format($order->total_price, 0, '', ',') }}
                                             <span class="underline">đ</span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -80,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div id="pagination">
                 {{ $orders->links()}}
             </div>
         </div>

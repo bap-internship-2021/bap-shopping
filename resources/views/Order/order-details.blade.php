@@ -2,18 +2,23 @@
 @section('title', 'Chi tiết đơn hàng')
 @section('css')
     <style>
-        .pagination{
+        .pagination {
             display: flex;
             flex-direction: row;
         }
+
         .pagination li {
-            background: white;
-            padding: 5px;
+            background: #0c3254;
+            padding: 5px 15px;
+            color: white;
+        }
+        #pagination > nav > ul > li.page-item.active {
+            cursor: not-allowed;
         }
     </style>
 @endsection()
 @section('content')
-    <div class="">
+    <div class="bg-gray-50 h-screen">
         <div class="">
             <p class="text-2xl p-5 text-center">Chi tiết đơn hàng <span>#{{ $order->custom_order_id }}</span></p>
         </div>
@@ -23,7 +28,7 @@
                 <div class="pb-3">
                     <p>Địa chỉ người nhận</p>
                 </div>
-                <div class="p-5 rounded shadow-sm bg-white h-28">
+                <div class="p-5 rounded shadow-lg  bg-white h-28">
                     <div>
                         <p class="font-bold">{{ !empty(Auth::user()->name) ? Auth::user()->name : '' }}</p>
                     </div>
@@ -40,7 +45,7 @@
                 <div class="pb-3">
                     <p>Hình thức giao hàng</p>
                 </div>
-                <div class="p-5 rounded shadow-sm bg-white h-28">
+                <div class="p-5 rounded shadow-lg bg-white h-28">
                     <p>Giao hàng tiết kiệm</p>
                     @if($order->status === \App\Models\Order::PENDING_STATUS)
                         {{__('Đang đợi kiểm duyệt')}}
@@ -64,7 +69,7 @@
                 <div class="pb-3">
                     <p>Hình thức thanh toán</p>
                 </div>
-                <div class="p-5 rounded shadow-sm bg-white h-28">
+                <div class="p-5 rounded shadow-lg bg-white h-28">
                     <div>
                         <p>Thanh toán khi nhận hàng</p>
                     </div>
@@ -80,10 +85,10 @@
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                        <div class="shadow overflow-hidden border-b border-gray-200 rounded">
-                            <table class="table-fixed min-w-full divide-y divide-gray-200 cursor-default">
+                        <div class="shadow-inner overflow-hidden border-b border-gray-200 rounded">
+                            <table class="table-fixed min-w-full divide-y divide-gray-200 cursor-default text-black border-none">
                                 <thead class="bg-white">
-                                <tr class="hover:bg-blue-50">
+                                <tr class="bg-green-300">
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2/6">
                                         Sản phẩm
@@ -229,7 +234,7 @@
         </div>
         {{-- End table list products --}}
 
-        <div class="w-11/12 mx-auto">
+        <div id="pagination" class="w-11/12 mx-auto">
             {{ $orderDetails->links() }}
         </div>
     </div>

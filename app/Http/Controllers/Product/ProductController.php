@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\Comment\CommentController;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -18,15 +19,26 @@ class ProductController extends Controller
         return view('product.index', compact('products'));
     }
 
+    public function getRelatedProducts($productId, $categoryId)
+    {
+        return Product::where('category_id', $categoryId)
+            ->where('id', '<>', $productId) // Ignore current product
+            ->inRandomOrder()
+            ->limit(10)
+            ->get();
+    }
+
     public function show(Product $product)
     {
         $productId = $product->id;
         $product = Product::where('id', $productId)->with(['images', 'specification'])->get();
+        $categoryId = $product->first()->category_id;
+        $relatedProducts = $this->getRelatedProducts($productId, $categoryId);
         $comments = CommentController::listCommentsByProduct($productId);
-        return view('product.show', compact('product', 'comments'));
+        return view('product.show', compact(['product', 'comments', 'relatedProducts']));
     }
 
-    public function getProductQuantityAPI($id): \Illuminate\Http\JsonResponse
+    public function getProductQuantityAPI($id): JsonResponse
     {
         $product = Product::findOrFail($id);
         return response()->json($product);
@@ -40,5 +52,6 @@ class ProductController extends Controller
             $product = Product::where('name', 'like', "%$search%")->get();
             return response()->json(['product' => $product], 200);
         }
+        // TODO:: return default ??
     }
 }
