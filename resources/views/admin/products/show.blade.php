@@ -30,13 +30,6 @@
 <div>
     <a href="{{route('products.index')}}" class="btn btn-primary">Quay lại</a>
 </div>
-<div class="page-breadcrumb">
-    <div class="row">
-        <div class="col-2 p-3 align-self-center">
-            <h3 class="page-title text-white bg-dark rounded-circle p-3">Chi tiết</h3>
-        </div>
-    </div>
-</div>
 
 <div class="container-fluid">
     <div class="row">
@@ -61,7 +54,7 @@
                         </tr>
                         <tr>
                             <td class="col-3">Giá</td>
-                            <td>{{$value->price}}</td>
+                            <td>{{ number_format($value->price, 0, '', ',') }} VNĐ</td>
                         </tr>
                         <tr>
                             <td class="col-3">Số lượng</td>

@@ -1,5 +1,9 @@
 @extends('admin.layouts.layouts')
 
+@section('css')
+    <link href="{{URL::asset('admin/dist/css/adminDashboard.css')}}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     @if ($errors->any())
@@ -60,10 +64,43 @@
 
     <div class="form-group">
         <label for="exampleFormControlFile1">Product Image</label>
-        <input type="file" class="form-control-file" name="files[]" multiple id="exampleFormControlFile1">
+        <input type="file" class="form-control-file" name="files[]" multiple id="gallery-photo-add">
     </div>
 
     <button type="submit" class="btn btn-primary">Add</button>
-</form>   
+</form> 
+<div class="d-flex flex-row">
+    <div class="gallery"></div>  
+</div>
+
 </div> 
 @endsection()
+
+@section('js')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            var imagesPreview = function(input, placeToInsertImagePreview) {
+
+                if (input.files) {
+                    var filesAmount = input.files.length;
+
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        }
+
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+
+            };
+
+            $('#gallery-photo-add').on('change', function() {
+                imagesPreview(this, 'div.gallery');
+            });
+        });
+    </script>
+@endsection

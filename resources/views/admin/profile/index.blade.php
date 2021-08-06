@@ -1,5 +1,9 @@
 @extends('admin.layouts.layouts')
 
+@section('css')
+    <link href="{{URL::asset('admin/dist/css/adminDashboard.css')}}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     @if ($errors->any())
@@ -120,7 +124,11 @@
 
                             <div class="form-group">
                                 <label class="col-md-12">Ảnh đại diện</label>
-                                <input type="file" name="file" value="{{Auth::user()->profile_photo_path}}" class="form-control-file">
+                                <input type="file" name="file" value="{{Auth::user()->profile_photo_path}}" class="form-control-file" id="gallery-photo-add">
+                            </div>
+
+                            <div class="d-flex flex-row">
+                                <div class="gallery"></div>  
                             </div>
 
                             <div class="form-group">
@@ -129,6 +137,7 @@
                                 </div>
                             </div>
                         </form>
+                        
                     </div>
                 </div>
             </div>
@@ -147,4 +156,33 @@
         <!-- ============================================================== -->
     </div>
 
+@endsection
+
+@section('js')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            var imagesPreview = function(input, placeToInsertImagePreview) {
+
+                if (input.files) {
+                    var filesAmount = input.files.length;
+
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        }
+
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+
+            };
+
+            $('#gallery-photo-add').on('change', function() {
+                imagesPreview(this, 'div.gallery');
+            });
+        });
+    </script>
 @endsection
