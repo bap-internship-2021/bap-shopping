@@ -28,12 +28,12 @@
             </div>
         @endif
 <div>
-    <a href="{{route('products.index')}}" class="btn btn-primary">Back</a>
+    <a href="{{route('products.index')}}" class="btn btn-primary">Quay lại</a>
 </div>
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-2 p-3 align-self-center">
-            <h3 class="page-title text-white bg-dark rounded-circle p-2">Detail Product</h3>
+            <h3 class="page-title text-white bg-dark rounded-circle p-3">Chi tiết</h3>
         </div>
     </div>
 </div>
@@ -52,19 +52,19 @@
                 </div>
             </div>
             <div class="col-sm-5">
-                <h1>Detail</h1>
+                <h1>Chi tiết sản phẩm</h1>
                 <table class="table table-striped table-dark">
                     <tbody>
                         <tr>
-                            <td class="col-3">Category</td>
+                            <td class="col-3">Danh mục</td>
                             <td>{{$value->category}}</td>
                         </tr>
                         <tr>
-                            <td class="col-3">Price</td>
-                            <td>{{$value->price}}$</td>
+                            <td class="col-3">Giá</td>
+                            <td>{{$value->price}}</td>
                         </tr>
                         <tr>
-                            <td class="col-3">Quantity</td>
+                            <td class="col-3">Số lượng</td>
                             <td>{{$value->quantity}}</td>
                         </tr>
                     </tbody>
@@ -77,7 +77,7 @@
         @if(count($specification) == 0)
         <div class="col-5 p-3 align-self-center">
             <i class="fas fa-exclamation-triangle p-3"></i>
-            <h3 class="page-title text-dark">The product has no specifications. Please create now</br><a href="{{route('specification.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Create Now</button></a></h3>
+            <h3 class="page-title text-dark">Sản phẩm này chưa có thông số kĩ thuật. Vui lòng tạo thông số cho sản phẩm</br><a href="{{route('specification.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Tạo ngay</button></a></h3>
         </div>
         @else
         <div class="col-6 pt-5">

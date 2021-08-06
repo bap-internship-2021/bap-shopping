@@ -18,11 +18,6 @@
                 {{ session('status') }}
             </div>
         @endif
-<div>
-    @foreach($products as $product)
-    <a href="{{route('products.show', [$product->id])}}" class="btn btn-primary">Back</a>
-    @endforeach
-</div>
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-3 align-self-center">

@@ -30,7 +30,7 @@
             <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search')}}" method="GET">
                 <input class="form-control mr-sm-2" type="search" name="keywords" id="keywords" placeholder="Search" aria-label="Search" >
                 <div id="search_ajax"></div>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
             </form>
         </div>
         <div class="col-12">
@@ -40,8 +40,8 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Detail</th>
+                                <th scope="col">Tên sản phẩm</th>
+                                <th scope="col">Chi tiết</th>
                                 <th scope="col" colspan="2">&nbsp</th>
                             </tr>
                         </thead>
@@ -69,7 +69,7 @@
                         <tfoot>
                             <tr>
                                 <td colspan="8">
-                                    <a href="{{route('products.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Add Product</button></a>
+                                    <a href="{{route('products.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Thêm sản phẩm</button></a>
                                 </td>
                             </tr>
                         </tfoot>
