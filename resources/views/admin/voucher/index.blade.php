@@ -22,7 +22,7 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-5 align-self-center">
-                    <h4 class="page-title">Voucher</h4>
+                    <h4 class="page-title">Khuyến mãi</h4>
                 </div>
             </div>
         </div>
@@ -33,17 +33,17 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Detail</th>
-
+                                <th scope="col">Tên</th>
+                                <th scope="col">Chi tiết</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            foreach($vouchers as $voucher){
+                            <?php 
+                            foreach($vouchers as $key => $voucher){
                             ?>
                             <tr>
-                                <th scope="row">{{$voucher->id}}</th>
+                                <th scope="row">{{$key+1}}</th>
                                 <td>{{$voucher->name}}</td>
                                 <td><a href="{{route('voucher.show', [$voucher->id])}}" class="btn btn-danger"><i class="fas fa-eye"></i></a></td>
                             </tr>
@@ -52,7 +52,7 @@
                         <tfoot>
                             <tr>
                                 <td colspan="8">
-                                    <a href="{{route('voucher.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Add Voucher</button></a>
+                                    <a href="{{route('voucher.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Thêm khuyến mãi</button></a>
                                 </td>
                             </tr>
                         </tfoot>

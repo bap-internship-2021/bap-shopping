@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
 
 class HomeController extends Controller
 {
     //
     public function index(){
+        // $orders = Order::where('status', Order::PENDING_STATUS)->get();
+        // session('count-order', $orders);
+
         return view('admin.layouts.layouts');
     }
 }

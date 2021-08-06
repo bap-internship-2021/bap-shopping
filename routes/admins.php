@@ -17,17 +17,40 @@ use App\Http\Controllers\Error\ErrorController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::middleware(['is.admin'])->prefix('admin')->group(function() {
-    Route::get('home', [HomeController::class, 'index']);
+    Route::get('home', [HomeController::class, 'index'])->name('admin.home');
+
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    
+    Route::get('dashboard/product', [DashboardController::class, 'statisticalProduct'])->name('admin.statistical.product');
+    Route::get('dashboard/product/{id}', [DashboardController::class, 'statisticalProductByCategory'])->name('admin.statistical.productByCategory');
+    
+    Route::get('dashboard/sale', [DashboardController::class, 'statisticalSale'])->name('admin.statistical.sale');
+    Route::post('dashboard/sale/search-by-date', [DashboardController::class, 'searchSaleByDate']);
+    Route::post('dashboard/sale/select-by-option', [DashboardController::class, 'selectByOption']);
+    Route::post('dashboard/sale/chart-default', [DashboardController::class, 'chartDefault']);
+
+    Route::get('dashboard/users', [DashboardController::class, 'usersVip'])->name('admin.statistical.user');
+    
+    Route::get('dashboard/access', [DashboardController::class, 'statisticalAccess'])->name('admin.statistical.access');
+
     Route::get('profile', [ProfileController::class, 'index'])->name('profiles.show');
     Route::put('profile/{id}', [ProfileController::class, 'handleUpdateProfile'])->name('profiles.update');
+
     Route::resource('products', ProductController::class);
+
     Route::resource('category', CategoryController::class);
+
     Route::post('search-products', [SearchController::class, 'search'])->name('search.product');
     Route::get('search', [SearchController::class, 'index'])->name('search');
+    Route::post('search-orders', [SearchController::class, 'searchOrder'])->name('search.order');
+    Route::get('search-order-result', [SearchController::class, 'searchOrderResult'])->name('search.order.result');
+
     Route::get('users', [UserController::class, 'index'])->name('users');
+
     Route::resource('specification', SpecificationController::class);
+
     Route::resource('voucher', VoucherController::class);
+
     Route::get('orders/index', [OrderController::class, 'listAllOrder'])->name('admin.orders');
     Route::get('orders/status/{status}', [OrderController::class , 'listOrderByStatus'])->name('admin.order.status');
     Route::get('orders/detail/{status}', [OrderController::class , 'detailOrder'])->name('admin.order.detail');
@@ -36,9 +59,7 @@ Route::middleware(['is.admin'])->prefix('admin')->group(function() {
     Route::get('orders/cancel/{id}', [OrderController::class, 'cancelOrderPage'])->name('admin.order.cancel');
     Route::post('orders/confirmcancel/{id}', [OrderController::class, 'cancelOrder'])->name('admin.order.confirmcancel');
     Route::get('order/sending/accept/{id}', [OrderController::class, 'finishOrder'])->name('admin.order.finish');
-    Route::post('search-orders', [SearchController::class, 'searchOrder'])->name('search.order');
-    Route::get('search-order-result', [SearchController::class, 'searchOrderResult'])->name('search.order.result');
-
+    
 });
 
 

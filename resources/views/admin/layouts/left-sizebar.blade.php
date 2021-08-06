@@ -4,16 +4,25 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
+
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('admin.dashboard')}}" aria-expanded="false">
-                        <i class="mdi mdi-av-timer"></i>
-                        <span class="hide-menu">Dashboard</span>
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('/')}}" aria-expanded="false">
+                        <i class="fas fa-home"></i>
+                        <span class="hide-menu">Trang chủ</span>
                     </a>
                 </li>
+
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('profiles.show')}}" aria-expanded="false">
                         <i class="fas fa-address-card"></i>
                         <span class="hide-menu">Thông tin cá nhân</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('admin.dashboard')}}" aria-expanded="false">
+                        <i class="mdi mdi-av-timer"></i>
+                        <span class="hide-menu">Số liệu thống kê</span>
                     </a>
                 </li>
 
@@ -48,8 +57,15 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('admin.orders')}}" aria-expanded="false">
                         <i class="fas fa-shipping-fast"></i>
-                        <span class="hide-menu">Quản lí đơn hàng</span>
+                        <span class="hide-menu" id="count-product">Quản lí đơn hàng</span>
                     </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <input type="submit" style="width:110px;" class="sidebar-link waves-effect waves-dark sidebar-link pl-4" value="Đăng xuất">
+                    </form>
                 </li>
             </ul>
         </nav>
@@ -57,3 +73,26 @@
     </div>
     <!-- End Sidebar scroll-->
 </aside>
+
+@section('js')
+<script>
+$(function(){
+    $.ajax({
+      URL: "/api/product/count",
+      method: "GET",
+      contentType: "application/json; charset=utf-8",
+      dataType: "JSON",
+      data: {
+        _token: "{{ csrf_token() }}"
+      },
+      success: function(data){
+          console.log(data);
+        // $('#count-product').append('<span class="badge bg-important">6</span>');
+      },
+      error: function(e){
+          console.log(e)
+      }
+    })  
+})
+</script>
+@endsection
