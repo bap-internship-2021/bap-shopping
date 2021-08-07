@@ -4,9 +4,22 @@
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
     <style>
         #tns1-ow > button {
             display: none;
+        }
+
+        /*set a border on the images to prevent shifting*/
+        #gallery_01 img {
+            border: 2px solid white;
+        }
+
+        /*Change the colour*/
+        .active img {
+            border: 2px solid #333 !important;
         }
     </style>
 @endsection
@@ -18,16 +31,24 @@
             @foreach ($product as $key => $item)
                 {{-- Product detail --}}
                 <div class="w-1/2">
-                    {{-- List image product --}}
+
+                    {{-- List image product--}}
                     <div class="my-slider">
-                        @foreach($item->images as $image)
+                        @foreach($item->images as $key => $image)
                             <div>
-                                <img class="object-cover h-96 w-full shadow-sm"
+                                <img class="object-cover h-96 w-full shadow-sm zoom-img"
+                                     id="zoom_0{{ $key }}"
                                      src="{{ asset('admin/images/products/' . '/' . $image->path) }}" alt="">
                             </div>
                         @endforeach
                     </div>
-                    {{--   End list images product   --}}
+                    @foreach($item->images as $key => $image)
+                        <script>
+                            $("#zoom_0{{ $key }}").ezPlus();
+                        </script>
+                    @endforeach
+                    {{-- End list images product--}}
+
                 </div>
 
                 {{-- Product description --}}
@@ -51,6 +72,8 @@
                             <div id="app">
                                 <app></app>
                             </div>
+                            <!-- -->
+
                         </div>
                     @else
                         <div class="w-1/2">
@@ -150,10 +173,7 @@
                 <div class="">
                     <form action="{{ route('comments.store') }}" method="post">
                         @csrf
-                        <input type="hidden"
-                               name="product_id"
-                               value="{{ $product->first()->id }}"
-                        />
+                        <input type="hidden" name="product_id" value="{{ $product->first()->id }}"/>
                         <div class="form-control pb-2">
                             <textarea class="textarea h-24 textarea-bordered textarea-info" name="content"
                                       placeholder="Viết bình luận ở đây"></textarea>
@@ -172,10 +192,10 @@
                         Bình luận của khách hàng
                     </h1>
                     <span class="text-base">
-                            (Tổng cộng:
-                            @php echo \App\Models\Comment::where('product_id', $product->first()->id)->count(); @endphp
-                            bình luận)
-                        </span>
+                    (Tổng cộng:
+                    @php echo \App\Models\Comment::where('product_id', $product->first()->id)->count(); @endphp
+                    bình luận)
+                </span>
                 </div>
                 <div>
                     @if($comments->count() > 0)
@@ -305,14 +325,14 @@
                                                     <p class="text-blue-900 cursor-pointer font-semibold hover:text-blue-700 flex"
                                                        id="btn-show-child-cmt-{{$key}}"
                                                        onclick="showListChildComments({{$key}}); return false">
-                                                <span class="" onclick="showListChildComments({{$key}}); return false">
-                                                    <img style="width: 20px; height: 20px; background-color: #FFF"
-                                                         src="https://salt.tikicdn.com/ts/upload/46/4a/fc/c90b4ae516353f181f844ed98276e28b.png"
-                                                         alt=""></span>
+                                        <span class="" onclick="showListChildComments({{$key}}); return false">
+                                            <img style="width: 20px; height: 20px; background-color: #FFF"
+                                                 src="https://salt.tikicdn.com/ts/upload/46/4a/fc/c90b4ae516353f181f844ed98276e28b.png"
+                                                 alt=""></span>
                                                         <span>Xem
-                                                thêm {{ App\Models\Comment::where('parent_comment_id', $comment->id)->get()->count() }}
-                                                câu trả lời
-                                                </span>
+                                            thêm {{ App\Models\Comment::where('parent_comment_id', $comment->id)->get()->count() }}
+                                            câu trả lời
+                                        </span>
                                                     </p>
                                                 </div>
                                             </div>
@@ -330,8 +350,7 @@
                                                     }
                                                 }
                                             </script>
-                                            <div style="display: none;" class="mb-2"
-                                                 id="list-child-comments-{{$key}}">
+                                            <div style="display: none;" class="mb-2" id="list-child-comments-{{$key}}">
                                             @foreach($childComments as $childComment)
                                                 <!-- Sub comment -->
                                                     <div class="flex p-5">
