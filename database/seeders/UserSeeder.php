@@ -24,7 +24,8 @@ class UserSeeder extends Seeder
             'phone' => '0935234129',
             'address' => 'Da Nang',
             'role_id' => 1,
-            'profile_photo_path' => 'default.jpg'
+            'profile_photo_path' => 'default.jpg',
+            'email_verified_at' => now()
         ]);
     }
 }

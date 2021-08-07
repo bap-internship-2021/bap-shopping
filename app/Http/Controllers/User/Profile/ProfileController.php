@@ -36,7 +36,7 @@ class ProfileController extends Controller
                 }
             } else{
                 $user->update($data);
-                return back()->with('update-success', 'Cập nhật thành công');
+                return back()->with('update-success', 'Cập nhật thông tin cá nhân thành công!');
             }
 
         return back()->with('update-fail', 'Vui lòng thử lại!')->withInput();
