@@ -39,6 +39,36 @@
                     @endif
                 </div>
             </div>
+
+            <!-- Notification -->
+            @if(session()->has('update-success'))
+
+                <div id="update-profile-success-aleart" class="alert alert-success relative w-8/12 mx-auto mt-2">
+                    <div class="flex-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#009688"
+                             class="flex-shrink-0 w-6 h-6 mx-2">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                        </svg>
+                        <label>
+                            <h4>Thông báo</h4>
+                            <p class="text-sm text-base-content">
+                                {{ session()->get('update-success')}}
+                            </p>
+                        </label>
+                    </div>
+                    <div class="flex-none">
+                        <button class="btn btn-sm btn-primary" onclick="closeAlertProfileUpdate()">Đóng</button>
+                    </div>
+                </div>
+                <script>
+                    function closeAlertProfileUpdate() {
+                        document.getElementById("update-profile-success-aleart").remove();
+                    }
+                </script>
+        @endif
+        <!-- -->
+
             <div class="w-full flex justify-evenly text-black z-10 absolute pt-5">
                 <form class="bg-none border-2 border-white p-5 rounded w-3/6 text-left "
                       style="border-color: #0c3254"
@@ -97,11 +127,12 @@
                         <p class="text-red-600 text-center">{{$errors->first('address')}}</p>
                     @endif
                     <div class="text-center">
-                        <div>
+                        <div class="pb-2">
                             <p>Ảnh đại diện</p>
+                            <img class="mx-auto rounded-lg border-2 border-black border-dashed" id="frame" src="{{ asset("admin\\images\\avatar\\" . Auth::user()->profile_photo_path )  }}" width="100px" height="100px"/>
                         </div>
                         <div>
-                            <input class="border border-black p-1 w-7/12 rounded" type="file" name="file">
+                            <input class="border border-black p-1 w-7/12 rounded" onchange="preview()" type="file" name="file">
                         </div>
                     </div>
                     @if($errors->has('file'))
@@ -140,7 +171,8 @@
                         </div>
                     </div>
                     @if (Auth()->user()->email_verified_at === null)
-                        <p class="text-red-600 text-center">Tài khoản của bạn chưa được xác thực để xử dụng các chức năng khác của hệ thống, ấn vào link này để xác thực: <a
+                        <p class="text-red-600 text-center">Tài khoản của bạn chưa được xác thực để xử dụng các chức
+                            năng khác của hệ thống, ấn vào link này để xác thực: <a
                                 href="{{ route('verification.notice') }}"
                                 class="text-blue-800 underline hover:text-blue-900">Xác thực</a></p>
                     @endif
@@ -205,11 +237,9 @@
             </div>
         </div>
 
-
-        {{-- Notifacation --}}
-        {{--        @if(session()->has('update-success'))--}}
-        {{--            <p class="text-center text-green-500">{{ session()->get('update-success') }}</p>--}}
-        {{--        @endif--}}
+        <!-- Preview image -->
+        <div class="gallery absolute z-50 w-24 h-24" style="left: 45%; top: 450px"></div>
+        <!-- -->
 
         @if(session()->has('update-fail'))
             <p class="text-center text-red-500">{{ session()->get('update-fail') }}</p>
@@ -222,6 +252,9 @@
         @if(session()->has('change-pass-fail'))
             <p class="text-center text-red-500">{{ session()->get('change-pass-fail') }}</p>
         @endif
-
     </div>
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/profiles/previewImageProfile.js') }}"></script>
 @endsection

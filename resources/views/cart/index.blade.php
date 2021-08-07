@@ -98,8 +98,8 @@
                                             @csrf
                                             @method('DELETE')
                                             <input type="hidden" name="productId" value="{{ $key }}">
-                                            <button><i
-                                                    class="fas fa-trash-alt fill-current text-gray-500 hover:text-red-500"></i>
+                                            <button>
+                                                <i class="fas fa-trash-alt fill-current text-gray-500 hover:text-red-500"></i>
                                             </button>
                                         </form>
                                     </div>

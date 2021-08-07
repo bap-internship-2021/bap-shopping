@@ -31,43 +31,49 @@
                 </div>
 
                 {{-- Product description --}}
-                @if(Auth()->user()->role_id == \App\Models\User::USER_ROLE)
-                    <div class="w-1/2">
-                        <div class="pl-2">
-                            <p class="invisible"><span id="product-id">{{ $item->id }}</span></p>
-                            <p class="invisible"><span id="image-path">{{ $item->images->first()->path }}</span></p>
-                            <p class="p-2">{{__('Tên sản phẩm: ')}} <span id="product-name">{{ $item->name }}</span></p>
-                            <p id="product-price" class="invisible">{{ $item->price }}</p>
-                            <p class="p-2">{{__('Giá: ')}}
-                                <span id="" class="text-blue-900"> {{ number_format($item->price, 0, '', ',') }} </span>
-                                VND
-                            </p>
-                        </div>
+                @if(Auth::check())
+                    @if(Auth()->user()->role_id == \App\Models\User::USER_ROLE)
+                        <div class="w-1/2">
+                            <div class="pl-2">
+                                <p class="invisible"><span id="product-id">{{ $item->id }}</span></p>
+                                <p class="invisible"><span id="image-path">{{ $item->images->first()->path }}</span></p>
+                                <p class="p-2">{{__('Tên sản phẩm: ')}} <span id="product-name">{{ $item->name }}</span>
+                                </p>
+                                <p id="product-price" class="invisible">{{ $item->price }}</p>
+                                <p class="p-2">{{__('Giá: ')}}
+                                    <span id=""
+                                          class="text-blue-900"> {{ number_format($item->price, 0, '', ',') }} </span>
+                                    VND
+                                </p>
+                            </div>
 
-                        <!-- Add to cart form -->
-                        <div id="app">
-                            <app></app>
-                        </div>
-                    </div>
-                @else
-                    <div class="w-1/2">
-                        <div class="pl-2">
-                            <p class="p-2">{{__('Tên sản phẩm: ')}} <span id="product-name">{{ $item->name }}</span></p>
-                            <p class="p-2">{{__('Giá: ')}}
-                                <span id="" class="text-blue-900"> {{ number_format($item->price, 0, '', ',') }} </span>vnd
-                            </p>
-                            @if($item->quantity > 0)
-                                <p class="p-2">Số lượng còn lại: {{$item->quantity}}</p>
-                            @else
-                                <p class="p-2 text-red-600">Hết hàng</p>
-                            @endif
-                            <div class="p-2">
-                                <button class="bg-blue-300 text-white p-3 rounded hover:bg-blue-400"><a
-                                        href="{{ route('products.edit', $item->id) }}">Chỉnh sửa sản phẩm này</a>
-                                </button>
+                            <!-- Add to cart form -->
+                            <div id="app">
+                                <app></app>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="w-1/2">
+                            <div class="pl-2">
+                                <p class="p-2">{{__('Tên sản phẩm: ')}} <span id="product-name">{{ $item->name }}</span>
+                                </p>
+                                <p class="p-2">{{__('Giá: ')}}
+                                    <span id=""
+                                          class="text-blue-900"> {{ number_format($item->price, 0, '', ',') }} </span>vnd
+                                </p>
+                                @if($item->quantity > 0)
+                                    <p class="p-2">Số lượng còn lại: {{$item->quantity}}</p>
+                                @else
+                                    <p class="p-2 text-red-600">Hết hàng</p>
+                                @endif
+                                <div class="p-2">
+                                    <button class="bg-blue-300 text-white p-3 rounded hover:bg-blue-400"><a
+                                            href="{{ route('products.edit', $item->id) }}">Chỉnh sửa sản phẩm này</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 @endif
             @endforeach
         </div>
@@ -149,7 +155,8 @@
                                value="{{ $product->first()->id }}"
                         />
                         <div class="form-control pb-2">
-                            <textarea class="textarea h-24 textarea-bordered textarea-info" name="content" placeholder="Viết bình luận ở đây"></textarea>
+                            <textarea class="textarea h-24 textarea-bordered textarea-info" name="content"
+                                      placeholder="Viết bình luận ở đây"></textarea>
                         </div>
 
                         <div>
@@ -392,7 +399,8 @@
                                 <div class="w-52 h-80 bg-white shadow-lg border border-black"
                                      onclick="location.href='{{ route('user.products.show', $relatedProduct->id) }}';">
                                     <img class="w-52 h-52"
-                                         src="{{ asset("admin\\images\\products\\") . $relatedProduct->images()->inRandomOrder()->first()->path }}" alt="Image">
+                                         src="{{ asset("admin\\images\\products\\") . $relatedProduct->images()->inRandomOrder()->first()->path }}"
+                                         alt="Image">
                                     <div class="p-2">
                                         <p>{{ $relatedProduct->name }}</p>
                                         <p>Giá: {{ number_format($relatedProduct->price, 0, '', ',') }} <span
