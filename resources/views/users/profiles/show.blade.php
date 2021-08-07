@@ -127,11 +127,12 @@
                         <p class="text-red-600 text-center">{{$errors->first('address')}}</p>
                     @endif
                     <div class="text-center">
-                        <div>
+                        <div class="pb-2">
                             <p>Ảnh đại diện</p>
+                            <img class="mx-auto rounded-lg border-2 border-black border-dashed" id="frame" src="{{ asset("admin\\images\\avatar\\" . Auth::user()->profile_photo_path )  }}" width="100px" height="100px"/>
                         </div>
                         <div>
-                            <input class="border border-black p-1 w-7/12 rounded" type="file" name="file">
+                            <input class="border border-black p-1 w-7/12 rounded" onchange="preview()" type="file" name="file">
                         </div>
                     </div>
                     @if($errors->has('file'))
@@ -236,11 +237,9 @@
             </div>
         </div>
 
-
-        {{-- Notifacation --}}
-        {{--        @if(session()->has('update-success'))--}}
-        {{--            <p class="text-center text-green-500">{{ session()->get('update-success') }}</p>--}}
-        {{--        @endif--}}
+        <!-- Preview image -->
+        <div class="gallery absolute z-50 w-24 h-24" style="left: 45%; top: 450px"></div>
+        <!-- -->
 
         @if(session()->has('update-fail'))
             <p class="text-center text-red-500">{{ session()->get('update-fail') }}</p>
@@ -253,6 +252,9 @@
         @if(session()->has('change-pass-fail'))
             <p class="text-center text-red-500">{{ session()->get('change-pass-fail') }}</p>
         @endif
-
     </div>
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/profiles/previewImageProfile.js') }}"></script>
 @endsection
