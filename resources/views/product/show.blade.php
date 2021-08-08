@@ -27,7 +27,7 @@
 @section('content')
 
     <div class="text-black pt-5 bg-gray-100">
-        <div class="flex flex-row w-11/12 mx-auto bg-white shadow-lg p-5 rounded-lg">
+        <div class="flex flex-col w-11/12 mx-auto bg-white shadow-lg p-5 rounded-lg">
             @foreach ($product as $key => $item)
                 {{-- Product detail --}}
                 <div class="w-1/2">
@@ -54,7 +54,7 @@
                 {{-- Product description --}}
                 @if(Auth::check())
                     @if(Auth()->user()->role_id == \App\Models\User::USER_ROLE)
-                        <div class="w-1/2">
+                        <div class="w-1/2 bg-gray-100">
                             <div class="pl-2">
                                 <p class="invisible"><span id="product-id">{{ $item->id }}</span></p>
                                 <p class="invisible"><span id="image-path">{{ $item->images->first()->path }}</span></p>
@@ -330,7 +330,7 @@
                                                  src="https://salt.tikicdn.com/ts/upload/46/4a/fc/c90b4ae516353f181f844ed98276e28b.png"
                                                  alt=""></span>
                                                         <span>Xem
-                                            thêm {{ App\Models\Comment::where('parent_comment_id', $comment->id)->get()->count() }}
+                                            thêm {{ App\Models\Comment::where('parent_comment_id', $comment->id)->get()->skip(1)->count() }}
                                             câu trả lời
                                         </span>
                                                     </p>
