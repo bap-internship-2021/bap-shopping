@@ -6,8 +6,8 @@
 
 @section('content')
 
-<div class="container-fluid">
-    <h1 class="text-center">Số liệu thống kê</h1>
+<div class="container-fluid" style="background-image: url('https://media.istockphoto.com/vectors/data-stream-background-vector-id491219352'); background-size:cover;">
+    <h1 class="text-center" style="color: #fff">Số liệu thống kê</h1>
     <div class="cardBox">
         <div class="card" onclick="location.href='{{route('admin.statistical.product')}}';" style="cursor: pointer; background-color: #2d972e">
             <div>

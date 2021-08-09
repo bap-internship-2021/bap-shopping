@@ -17,6 +17,7 @@
     <!-- Custom CSS -->
     <link href="{{URL::asset('admin/dist/css/style.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('admin/dist/css/admin.css')}}" rel="stylesheet">
+    
     @yield('css')
     
     <link rel="stylesheet" href="{{URL::asset('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')}}">
