@@ -22,13 +22,13 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-5 align-self-center">
-                    <h4 class="page-title">Products</h4>
+                    <h4 class="page-title">Sản phẩm</h4>
                 </div>
             </div>
         </div>
         <div class="col-md-12 p-2">
             <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search')}}" method="GET">
-                <input class="form-control mr-sm-2" type="search" name="keywords" id="keywords" placeholder="Search" aria-label="Search" >
+                <input class="form-control mr-sm-2" type="search" name="keywords" id="keywords" placeholder="Nhập vào đây..." aria-label="Search" >
                 <div id="search_ajax"></div>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
             </form>

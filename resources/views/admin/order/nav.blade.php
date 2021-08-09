@@ -15,9 +15,9 @@
             </li>
         </ul>
         <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('search.order.result')}}" method="GET">
-            <input class="form-control mr-sm-2" type="search" name="orderkey" id="orderkey" placeholder="Search" aria-label="Search" >
+            <input class="form-control mr-sm-2" type="search" name="orderkey" id="orderkey" placeholder="Nhập vào đây..." aria-label="Search" >
             <div id="search_order"></div>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm Kiếm</button>
         </form>
     </div>
 </nav>

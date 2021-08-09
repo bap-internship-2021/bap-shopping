@@ -4,10 +4,10 @@
 
 <div class="container-fluid">
     <div class="pb-5">
-        <a href="#" class="btn btn-primary" id="back">Back</a>
+        <a href="#" class="btn btn-primary" id="back">Quay lại</a>
     </div>
     @if(count($orders) == 0)
-    <h1>NOT FOUND</h1>
+    <h1>Không tìm thấy sản phẩm</h1>
     @else 
     <h1>Số lượng({{count($orders)}})</h1>
     <div class="row">

@@ -72,7 +72,7 @@
             </div>
         </div>
     </div>
-    
+    {{ $categories->links() }}
 </div>
 
 @endsection

@@ -57,7 +57,7 @@
                     <div class="card-body">
                         <center class="m-t-30"><img src="{{asset('admin/images/avatar/' . Auth::user()->profile_photo_path ) }}" class="rounded-circle" width="200" height="250">
                             <h4 class="card-title m-t-10">{{Auth::user()->name}}</h4>
-                            <h6 class="card-subtitle">Tài khoản Admin Bap-Shop</h6>
+                            <h6 class="card-subtitle">Tài khoản Admin BIP-STORE</h6>
                         </center>
                     </div>
                     <div>

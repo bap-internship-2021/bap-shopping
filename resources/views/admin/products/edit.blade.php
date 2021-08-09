@@ -23,12 +23,12 @@
             </div>
         @endif
 <div>
-    <a href="{{route('products.index')}}" class="btn btn-primary">Back</a>
+    <a href="{{route('products.index')}}" class="btn btn-primary">Quay lại</a>
 </div>
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-3 align-self-center">
-            <h4 class="page-title">Update Product</h4>
+            <h4 class="page-title">Chỉnh sửa sản phẩm</h4>
         </div>
         
     </div>

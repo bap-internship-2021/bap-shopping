@@ -86,10 +86,10 @@ class ProductController extends Controller
             // something went wrong
             DB::rollback();
             // return redirect back with session error
-            return back()->with('status', 'create fail');
+            return back()->with('status', 'Có lỗi xảy ra');
         }
         // return route manager room with session 'create success'
-        return back()->with('status', 'create success');
+        return back()->with('status', 'Thêm sản phẩm thành công');
     }
 
     /**
@@ -167,10 +167,10 @@ class ProductController extends Controller
             // all good
         } catch (\Exception $e) {
             DB::rollback();
-            return back()->with('status', 'update fail');
+            return back()->with('status', 'Có lỗi xảy ra');
             // something went wrong
         }
-        return back()->with('status', 'update success');
+        return back()->with('status', 'Cập nhật thành công');
     }
 
     /**

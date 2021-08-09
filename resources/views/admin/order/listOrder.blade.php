@@ -32,10 +32,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
-                    
-                        
-                    
-                    <table class="table table-striped">
+                    <table class="table">
                         @foreach ($orders as $order)
                         <tbody>
                             <tr onclick="location.href='{{route('admin.order.status', [$order['trangthai']])}}';" style="cursor: pointer;">
