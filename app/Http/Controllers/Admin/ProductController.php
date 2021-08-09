@@ -72,13 +72,13 @@ class ProductController extends Controller
                     $array[$key]['updated_at'] = now();
                     $array[$key]['product_id'] = $product->id;
                 }
-
+                $specification = $request->except(['_method', '_token', 'name', 'price', 'quantity', 'category_id']);
                 $product->images()->insert($array);
+                $product->specification()->create($specification);
                 // dd($array);
                 DB::commit();
             }
             // Insert new resource in images table with data = $array by using relationship
-
 
             // All OK then commit
 
@@ -102,7 +102,7 @@ class ProductController extends Controller
     {
         $product = Product::with('images')->select('products.*', 'categories.name as category')
             ->join('categories', 'products.category_id', '=', 'categories.id')
-            ->where('products.id', $id)->get();
+            ->where('products.id', $id)->first();
         $specification = Specification::where('product_id', $id)->get();
         return view('admin.products.show', compact(['product', 'specification']));
     }
@@ -115,10 +115,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        $images = Image::where('product_id', $id)->get();
+        $product = Product::with(['specification', 'images', 'category'])
+                            ->where('id', $id)->first();
         $categories = Category::all();
-        return view('admin.products.edit', compact(['product', 'categories', 'images']));
+        // dd($product->toArray());
+        return view('admin.products.edit', compact(['product', 'categories']));
     }
 
     /**
@@ -135,8 +136,7 @@ class ProductController extends Controller
         try {
             $product = Product::find($id);
 
-            if($request->hasFile('files')){
-
+            if($request->hasFile('files')) {
                 $images = Image::where('product_id', $id)->get();
                 foreach($images as $key => $image){
                     $imagePath = 'admin/images/products/' . $image->path;
@@ -159,14 +159,17 @@ class ProductController extends Controller
                         $array[$key]['product_id'] = $product->id;
                     }
                     $product->images()->insert($array);
+                    $product->specification()->update($request->except(['name','files', 'price', 'quantity', 'category_id', '_method', '_token']));
                 }
             } else {
                 $product->update($request->only(['name', 'price', 'quantity', 'category_id']));
+                $product->specification()->update($request->except(['name', 'price', 'quantity', 'category_id', '_method', '_token']));
             }
             DB::commit();
             // all good
         } catch (\Exception $e) {
             DB::rollback();
+            dd($e->getMessage());
             return back()->with('status', 'Có lỗi xảy ra');
             // something went wrong
         }
