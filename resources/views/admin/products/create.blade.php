@@ -70,6 +70,12 @@
                     <input type="file" class="form-control-file" name="files[]" multiple id="gallery-photo-add">
                 </div>
 
+                <div class="form-group">
+                    <div class="d-flex flex-row">
+                        <div class="gallery"></div>  
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Thêm</button>
             </div>
             
@@ -141,9 +147,7 @@
             </div>
         </div>
     </form> 
-    <div class="d-flex flex-row">
-        <div class="gallery"></div>  
-    </div>
+    
 </div> 
 @endsection()
 
