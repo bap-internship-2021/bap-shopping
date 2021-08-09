@@ -28,55 +28,66 @@
             </div>
         @endif
 <div>
-    <a href="{{route('products.index')}}" class="btn btn-primary">Quay lại</a>
+    <a href="{{route('products.index')}}" class="btn btn-primary mb-2">Quay lại</a>
 </div>
 
 <div class="container-fluid">
     <div class="row">
-        @foreach($product as $key => $value)
-            <div class="col-sm-6">
-                <h1>{{$value->name}}</h1>
-                <div class="my-slider">
-                    @foreach($value->images as $image)
-                    <div>
-                        <img src="{{asset('admin/images/products/'.$image->path)}}" style="width:250px; height: 300px;">
+        <div class="col-6">
+            <div id="carouselExampleControls" class="carousel slide col-8" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src="{{asset('admin/images/products/'.$product->images->first()->path)}}" style="width:250px; height: 300px;" class="d-block w-100" alt="...">
                     </div>
+                    @foreach($product->images as $key => $image)
+                    @if($key > 0)
+                    <div class="carousel-item">
+                    <img src="{{asset('admin/images/products/'.$image->path)}}" style="width:250px; height: 300px;" class="d-block w-100" alt="...">
+                    </div>
+                    @endif
                     @endforeach
                 </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <div class="col-sm-5">
-                <h1>Chi tiết sản phẩm</h1>
-                <table class="table table-striped table-dark">
-                    <tbody>
-                        <tr>
-                            <td class="col-3">Danh mục</td>
-                            <td>{{$value->category}}</td>
-                        </tr>
-                        <tr>
-                            <td class="col-3">Giá</td>
-                            <td>{{ number_format($value->price, 0, '', ',') }} VNĐ</td>
-                        </tr>
-                        <tr>
-                            <td class="col-3">Số lượng</td>
-                            <td>{{$value->quantity}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        @endforeach
-    </div>
-    <div class="row">
-
-        @if(count($specification) == 0)
-        <div class="col-5 p-3 align-self-center">
-            <i class="fas fa-exclamation-triangle p-3"></i>
-            <h3 class="page-title text-dark">Sản phẩm này chưa có thông số kĩ thuật. Vui lòng tạo thông số cho sản phẩm</br><a href="{{route('specification.create')}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Tạo ngay</button></a></h3>
         </div>
-        @else
+        
+        <div class="col-6">
+            <h1>Chi tiết sản phẩm</h1>
+            <table class="table table-striped table-dark">
+                <tbody>
+                    <tr>
+                        <td class="col-3">Tên sản phẩm</td>
+                        <td>{{$product->name}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-3">Danh mục</td>
+                        <td>{{$product->category}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-3">Giá</td>
+                        <td>{{ number_format($product->price, 0, '', ',') }} VNĐ</td>
+                    </tr>
+                    <tr>
+                        <td class="col-3">Số lượng</td>
+                        <td>{{$product->quantity}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-6 pt-5">
             <div class="card re-card st-card">
                 <div class="card-body">
-                    <h2 class="card-title text-center">Description</h2>
+                    <h2 class="card-title text-center">Mô tả</h2>
                     <div class="card-body">
                         @foreach ($specification as $value)
                         {!! $value->description !!}
@@ -87,7 +98,7 @@
         </div>  
         <div class="col-6 pt-5">
             <div class="card re-card st-card">
-                <h2 class="card-title p-3 text-center">Specification</h2>
+                <h2 class="card-title p-3 text-center">Thông số kĩ thuật</h2>
                 <div class="card-body">
                     <table class="table table-striped table-dark">
                         @foreach ($specification as $value)
@@ -141,19 +152,11 @@
                                 <td><span>{{$value->release_time}}</span></td>
                             </tr>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="8">
-                                    <a href="{{route('specification.edit', [$value->id])}}"><button class="btn btn-primary" style="margin-top:20px" id="button">Edit Specification</button></a>
-                                </td>
-                            </tr>
-                        </tfoot>
                         @endforeach
                     </table>
                 </div>
             </div>
-        </div>  
-        @endif  
+        </div>    
     </div>
 </div>
 
