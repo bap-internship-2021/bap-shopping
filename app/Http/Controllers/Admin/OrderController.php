@@ -56,11 +56,12 @@ class OrderController extends Controller
             foreach($userorder as $item){
                 $userEmail = $item->email;
             }
-
+            $url = route('orders.oderDetails.index', $id);
             $details = [
                 'title' => 'Thông báo đơn hàng từ BAP',
                 'body' => 'Đơn hàng của bạn đã được phê duyệt. Chúng tôi sẽ giao hàng cho bạn trong vòng 5-7 ngày.',
-                'userEmail' => $userEmail
+                'userEmail' => $userEmail,
+                'url' => $url
             ];
 
             Mail::send('emails.admin.admin_notifyOrder', $details, function($message) use ($userEmail) {
