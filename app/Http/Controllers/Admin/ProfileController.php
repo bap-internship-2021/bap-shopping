@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Profile\UpdateProfileRequest;
 
@@ -16,26 +17,23 @@ class ProfileController extends Controller
     }
 
     public function handleUpdateProfile(UpdateProfileRequest $request ) {
-        $userid = Auth::id();
-        $user = User::findOrFail($userid);
+        $data = $request->except(['_method', '_token', 'file']);
+        $user = User::find(Auth::id());
 
-        $data = $request->except(['_method', '_token']);
-
-        $image = $request->file('file');
-
-        if ($image) {
-            $imageName = time() . $image->getClientOriginalName();
-
-            $data['profile_photo_path'] = $imageName;
-        }
-
-        if($user->update($data)){
-            if($image){
-                $image->move('admin/images/avatar', $imageName);
+            if ($request->hasFile('file')) {
+                $image = $request->file('file');
+                $imageName = time() . $image->getClientOriginalName();
+                $data['profile_photo_path'] = $imageName;
+                if($image->move('admin/images/avatar', $imageName)){
+                    File::delete(public_path('admin/images/avatar/' . auth()->user()->profile_photo_path)); // delete current profile image
+                    $user->update($data);
+                    return back()->with('status', 'Cập nhật thành công');
+                }
+            } else{
+                $user->update($data);
+                return back()->with('status', 'Cập nhật thông tin cá nhân thành công!');
             }
-            return back()->with('status', 'update success');
-        } else {
-            return back()->with('status', 'update error');
-        }
+
+        return back()->with('update-fail', 'Vui lòng thử lại!')->withInput();
     }
 }

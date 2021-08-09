@@ -124,7 +124,8 @@
 
                             <div class="form-group">
                                 <label class="col-md-12">Ảnh đại diện</label>
-                                <input type="file" name="file" value="{{Auth::user()->profile_photo_path}}" class="form-control-file" id="gallery-photo-add">
+                                <input type="file" name="file" value="" class="form-control-file" onchange="preview()">
+                                <img id="frame" src="{{ asset('admin/images/avatar/'.Auth::user()->profile_photo_path) }}" width="150px", height="150px">
                             </div>
 
                             <div class="d-flex flex-row">
@@ -161,28 +162,8 @@
 @section('js')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
-        $(function() {
-            var imagesPreview = function(input, placeToInsertImagePreview) {
-
-                if (input.files) {
-                    var filesAmount = input.files.length;
-
-                    for (i = 0; i < filesAmount; i++) {
-                        var reader = new FileReader();
-
-                        reader.onload = function(event) {
-                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                        }
-
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-
-            };
-
-            $('#gallery-photo-add').on('change', function() {
-                imagesPreview(this, 'div.gallery');
-            });
-        });
+        function preview(){
+            frame.src=URL.createObjectURL(event.target.files[0]);
+        }
     </script>
 @endsection
