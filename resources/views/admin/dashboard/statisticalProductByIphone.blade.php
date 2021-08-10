@@ -4,7 +4,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 text-center pt-3">
-            <h1>Số lượng sản phẩm tồn kho ( iPhone )</h1>
+            <h1>Số lượng sản phẩm tồn kho</h1>
         </div>
     </div>
     <div>
