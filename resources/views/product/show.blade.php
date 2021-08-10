@@ -64,7 +64,7 @@
                                 <p class="p-2">{{__('Giá: ')}}
                                     <span id=""
                                           class="text-blue-900"> {{ number_format($item->price, 0, '', ',') }} </span>
-                                    VND
+                                    <span class="underline">đ</span>
                                 </p>
                             </div>
 

@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index(Category $category)
     {
         $products = Product::with(['images'])->where('category_id', $category->id)
-            ->paginate(10);
+            ->paginate(12);
 
         return view('product.index', compact('products'));
     }
