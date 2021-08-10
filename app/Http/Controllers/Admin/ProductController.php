@@ -85,7 +85,6 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             // something went wrong
             DB::rollback();
-            dd($e->getMessage());
             // return redirect back with session error
             return back()->with('status', 'Vui lòng thêm điền đầy đủ các trường yêu cầu!');
         }
