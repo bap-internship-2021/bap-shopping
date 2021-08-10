@@ -34,6 +34,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-6">
+            <h1>Hình ảnh sản phẩm</h1>
             <div id="carouselExampleControls" class="carousel slide col-8" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -79,6 +80,13 @@
                         <td>{{$product->quantity}}</td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <a href="{{route('products.edit', [$product->id])}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -87,7 +95,7 @@
         <div class="col-6 pt-5">
             <div class="card re-card st-card">
                 <div class="card-body">
-                    <h2 class="card-title text-center">Mô tả</h2>
+                    <h2 class="card-title text-center">Mô tả sản phẩm</h2>
                     <div class="card-body">
                         @foreach ($specification as $value)
                         {!! $value->description !!}
