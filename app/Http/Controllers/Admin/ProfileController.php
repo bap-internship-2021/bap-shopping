@@ -21,9 +21,11 @@ class ProfileController extends Controller
         $user = User::find(Auth::id());
 
             if ($request->hasFile('file')) {
+                dd('ok');
                 $image = $request->file('file');
                 $imageName = time() . $image->getClientOriginalName();
                 $data['profile_photo_path'] = $imageName;
+                dd($data);
                 if($image->move('admin/images/avatar', $imageName)){
                     File::delete(public_path('admin/images/avatar/' . auth()->user()->profile_photo_path)); // delete current profile image
                     $user->update($data);

@@ -28,7 +28,7 @@ class UpdateProfileRequest extends FormRequest
             'phone' => ['required', 'regex:/(09|03|07|08|05)+([0-9]{8})\b/'],
             'address' => ['required'],
             'gender' => ['required'],
-            'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'file' => 'nullable|image|mimes:jpeg,png,jpg|max:5000'
         ];
     }
 
@@ -41,7 +41,8 @@ class UpdateProfileRequest extends FormRequest
             'phone.regex' => 'Số điện thoại không hợp lệ',
             'address.required' => 'Vui lòng nhập địa chỉ',
             'gender' => 'Vui lòng nhập mật khẩu',
-            'file.mimes' => 'File ảnh không đúng định dạng'
+            'file.image' => 'File ảnh không đúng định dạng',
+            'file.max' => 'File ảnh không dược quá 5 MB'
         ];
     }
 }
