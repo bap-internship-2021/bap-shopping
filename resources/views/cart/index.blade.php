@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Chi tiết sản phẩm')
+@section('title', 'Giỏ hàng')
 
 @section('content')
     @if(!empty($data))

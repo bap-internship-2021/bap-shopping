@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Products')
+@section('title', 'Sản phẩm')
 @section('css')
     <style>
         .pagination {
