@@ -50,7 +50,8 @@
                     @if($order->status === \App\Models\Order::PENDING_STATUS)
                         {{__('Đang đợi kiểm duyệt')}}
                     @elseif($order->status === \App\Models\Order::SENDING_STATUS)
-                        {{__('Đang vận chuyển đơn hàng')}}
+                        {{__('Đang vận chuyển đơn hàng.')}}
+                        <div></div>
                         @php
                             $date_start = \Carbon\Carbon::parse($order->date_start)->format('\n\g\à\y d \t\h\á\n\g m \n\ă\m Y');
                         @endphp
@@ -73,6 +74,9 @@
                     <div>
                         <p>Thanh toán khi nhận hàng</p>
                     </div>
+                    @if($order->status === \App\Models\Order::FINISH_STATUS)
+                        <p class="text-sm text-yellow-400">Thanh toán thành công</p>
+                    @endif
                     @if($order->status === \App\Models\Order::FINISH_STATUS)
                         <p class="text-sm text-yellow-400">Thanh toán thành công</p>
                     @endif
