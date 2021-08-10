@@ -52,6 +52,5 @@ class ProductController extends Controller
             $product = Product::with('images')->where('name', 'like', "%$search%")->get();
             return response()->json(['product' => $product], 200);
         }
-        // TODO:: return default ??
     }
 }

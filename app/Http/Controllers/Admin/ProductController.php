@@ -85,8 +85,9 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             // something went wrong
             DB::rollback();
+            dd($e->getMessage());
             // return redirect back with session error
-            return back()->with('status', 'Có lỗi xảy ra');
+            return back()->with('status', 'Vui lòng thêm điền đầy đủ các trường yêu cầu!');
         }
         // return route manager room with session 'create success'
         return back()->with('status', 'Thêm sản phẩm thành công');
@@ -183,7 +184,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
+    {
         $product = OrderDetail::where('product_id', $id)->get();
 
         if(count($product) > 0){
@@ -199,7 +200,7 @@ class ProductController extends Controller
             Product::destroy($id);
             return back()->with('status', 'Xóa sản phẩm thành công');
         }
-        
+
     }
 
 }
