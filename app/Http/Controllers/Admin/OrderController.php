@@ -56,11 +56,12 @@ class OrderController extends Controller
             foreach($userorder as $item){
                 $userEmail = $item->email;
             }
-
+            $url = route('orders.oderDetails.index', $id);
             $details = [
-                'title' => 'Thông báo đơn hàng từ BAP',
+                'title' => 'Thông báo đơn hàng từ BIP-STORE',
                 'body' => 'Đơn hàng của bạn đã được phê duyệt. Chúng tôi sẽ giao hàng cho bạn trong vòng 5-7 ngày.',
-                'userEmail' => $userEmail
+                'userEmail' => $userEmail,
+                'url' => $url
             ];
 
             Mail::send('emails.admin.admin_notifyOrder', $details, function($message) use ($userEmail) {
@@ -85,7 +86,7 @@ class OrderController extends Controller
             foreach($userorder as $item){
                 $userEmail = $item->email;
                 $details = [
-                    'title' => 'Thông báo đơn hàng từ BAP',
+                    'title' => 'Thông báo đơn hàng từ BIP-STORE',
                     'body' => 'Đơn hàng của bạn đã được phê duyệt. Chúng tôi sẽ giao hàng cho bạn trong vòng 5-7 ngày.',
                     'userEmail' => $userEmail
                 ];
@@ -118,12 +119,12 @@ class OrderController extends Controller
 
         if($order){
             $details = [
-                'title' => 'Thông báo đơn hàng từ BAP',
+                'title' => 'Thông báo đơn hàng đã bị hủy từ BIP-Store',
                 'body' => $content,
                 'userEmail' => $email
             ];
 
-            Mail::send('emails.admin.admin_notifyOrder', $details, function($message) use ($email) {
+            Mail::send('emails.admin.admin_cancelOrder', $details, function($message) use ($email) {
                 $message->to($email)
                 ->subject('BAP SHOP thông báo đơn hàng');
                 $message->from('quangdt1603@gmail.com','BAP SHOP');
