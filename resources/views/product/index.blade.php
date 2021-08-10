@@ -25,7 +25,7 @@
                     <div class="flex flex-col group bg-blue-50 shadow-inner transition duration-300 ease-in-out hover:shadow-lg rounded-lg">
                         <div class="pt-5">
                             <img class="object-cover h-48 w-full transition transform hover:-translate-y-2"
-                                 src="{{ asset("admin\\images\\products\\") . $product->first()->images->first()->path }}"
+                                 src="{{ asset('admin/images/products/') . '/' . $product->images->first()->path }}"
                                  alt="Product">
                         </div>
                         <div>
