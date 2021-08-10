@@ -117,7 +117,7 @@ class DashboardController extends Controller
         $users = Order::select('orders.name' ,Order::raw('count(user_id) as soluong'))
         ->where('status', 3)
         ->groupBy('name')
-        ->having('soluong', '>', 5)
+        ->having('soluong', '>=', 5)
         ->orderBy('soluong', 'DESC')
         ->paginate(5);
         // dd($users);
