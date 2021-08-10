@@ -19,16 +19,16 @@
         @endif
         <div>
             @foreach ($order as $item)
-            
+
             @if($item->status == \App\Models\Order::PENDING_STATUS)
             <a href="{{route('admin.order.status', \App\Models\Order::PENDING_STATUS)}}" class="btn btn-primary">Quay lại</a>
-            
+
             @elseif($item->status == \App\Models\Order::SENDING_STATUS)
             <a href="{{route('admin.order.status', \App\Models\Order::SENDING_STATUS)}}" class="btn btn-primary">Quay lại</a>
 
             @elseif($item->status == \App\Models\Order::FINISH_STATUS)
             <a href="{{route('admin.order.status', \App\Models\Order::FINISH_STATUS)}}" class="btn btn-primary">Quay lại</a>
-            
+
             @elseif($item->status == \App\Models\Order::CANCEL_STATUS)
             <a href="{{route('admin.order.status', \App\Models\Order::CANCEL_STATUS)}}" class="btn btn-primary">Quay lại</a>
 
@@ -90,7 +90,7 @@
                             </tr>
                             <tr>
                                 <td>Tổng tiền</td>
-                                <td><span>{{$value->total_price}}$</span></td>
+                                <td><span>{{ number_format($value->total_price, 0, '', ',') }}</span> <span style="text-decoration: underline;">đ</span></td>
                             </tr>
                         </tbody>
                     </table>
